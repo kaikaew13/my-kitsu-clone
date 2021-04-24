@@ -34,6 +34,18 @@ const animeSchema = new Schema({
     ],
     required: true,
   },
+  status: {
+    type: String,
+    enum: [
+      'trending',
+      'top airing',
+      'top upcoming',
+      'highest rated',
+      'most popular',
+      'none',
+    ],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Anime', animeSchema);

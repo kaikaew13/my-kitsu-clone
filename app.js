@@ -12,6 +12,13 @@ app.use(express.json());
 
 app.use('/admin', adminRouter);
 
+app.use((err, req, res, next) => {
+  console.log(err);
+  const message = err.message;
+  const data = err.data;
+  res.status(err.statusCode).json({ message: message, data: data });
+});
+
 const dbConnect = async () => {
   try {
     await mongoose.connect(

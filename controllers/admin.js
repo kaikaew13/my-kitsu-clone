@@ -10,10 +10,24 @@ exports.postAnime = async (req, res, next) => {
     description: description,
     score: 10,
     genre: ['comedy'],
+    status: 'none',
   });
   try {
     const res = await anime.save();
-    console.log(res);
+    console.log('added new anime to the db');
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
+
+exports.getAnime = async (req, res, next) => {
+  try {
+    const animelist = await Anime.find();
+    console.log('fetched animelist successfully');
+    res.status(200).json({
+      message: 'fetched successfully',
+      animelist: animelist,
+    });
   } catch (err) {
     errorHandler(err, next);
   }
