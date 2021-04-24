@@ -32,3 +32,18 @@ exports.getAnime = async (req, res, next) => {
     errorHandler(err, next);
   }
 };
+
+exports.getSingleAnime = async (req, res, next) => {
+  const animeId = req.params.animeId;
+  try {
+    const anime = await Anime.findById(animeId);
+    if (!anime) {
+      const err = new Error('invalid anime id');
+      err.statusCode = 404;
+      throw err;
+    }
+    res.status(200).json({ message: 'fetched successfully', anime: anime });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
