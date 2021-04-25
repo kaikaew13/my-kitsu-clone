@@ -13,13 +13,14 @@ exports.signup = async (req, res, next) => {
   }
   const { email, password, username } = req.body;
   const role = req.body.role ? req.body.role : 'user';
-  const user = new User({
-    email: email,
-    password: password,
-    username: username,
-    role: role,
-  });
   try {
+    const hasedPassword = await bcrypt.hash(password, 12);
+    const user = new User({
+      email: email,
+      password: hasedPassword,
+      username: username,
+      role: role,
+    });
     await user.save();
     const message = 'signed up successfully';
     console.log(message);
