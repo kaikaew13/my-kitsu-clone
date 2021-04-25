@@ -10,10 +10,9 @@ exports.postAnime = async (req, res, next) => {
     description: description,
     score: 10,
     genre: ['comedy'],
-    status: 'none',
   });
   try {
-    const res = await anime.save();
+    await anime.save();
     console.log('added new anime to the db');
   } catch (err) {
     errorHandler(err, next);

@@ -44,7 +44,7 @@ const animeSchema = new Schema({
       'most popular',
       'none',
     ],
-    required: true,
+    default: 'none',
   },
 });
 
