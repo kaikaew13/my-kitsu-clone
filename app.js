@@ -23,7 +23,8 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   console.log(err.message);
   const message = err.message;
-  res.status(err.statusCode).json({ message: message });
+  const data = err.data;
+  res.status(err.statusCode).json({ message: message, data: data });
 });
 
 (async () => {

@@ -1,9 +1,16 @@
 const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
 
 const { errorHandler } = require('../helper');
 const User = require('../models/user');
 
 exports.signup = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const err = new Error('invalid input');
+    err.data = errors.array();
+    return errorHandler(err, next);
+  }
   const { email, password, username } = req.body;
   const role = req.body.role ? req.body.role : 'user';
   const user = new User({

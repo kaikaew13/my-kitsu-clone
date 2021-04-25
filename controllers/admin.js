@@ -13,7 +13,9 @@ exports.postAnime = async (req, res, next) => {
   });
   try {
     await anime.save();
-    console.log('added new anime to the db');
+    const message = 'added new anime to the db';
+    console.log(message);
+    res.status(201).json({ message: message });
   } catch (err) {
     errorHandler(err, next);
   }
