@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import DropdownContent from './dropdown-content/dropdown-content';
+import Backdrop from '../UI/backdrop';
 
 //dropdown, dropdownList, buttonClass
 
@@ -16,9 +17,7 @@ const EachNav = (props) => {
 
   return props.dropdown ? (
     <React.Fragment>
-      {dropdown ? (
-        <div className="dropdown-backdrop" onClick={dropdownHandler}></div>
-      ) : null}
+      {dropdown ? <Backdrop clicked={dropdownHandler} /> : null}
 
       <div className="nav-a dropdown">
         <button
