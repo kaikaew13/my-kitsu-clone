@@ -1,36 +1,47 @@
 import React, { useState } from 'react';
 
+import DropdownContent from './dropdown-content/dropdown-content';
+
 //dropdown, dropdownList, buttonClass
 
 const EachNav = (props) => {
   const [dropdown, setDropdown] = useState(false);
 
+  const dropdownHandler = () => {
+    setDropdown((prevState) => !prevState);
+  };
+
   let btnClass = 'drop-btn';
   if (dropdown) btnClass += ' dropdown-content-show';
 
   return props.dropdown ? (
-    <div className="nav-a dropdown">
-      <button
-        onClick={() => setDropdown((prevState) => !prevState)}
-        className={btnClass}
-        id="drop-btn-browse"
-      >
-        {props.children}
-      </button>
-      <div className="dropdown-content">
-        <a href="/" className="dropdown-content-items">
-          anime
-        </a>
-        <a href="/" className="dropdown-content-items">
-          manga
-        </a>
+    <React.Fragment>
+      {dropdown ? (
+        <div className="dropdown-backdrop" onClick={dropdownHandler}></div>
+      ) : null}
+
+      <div className="nav-a dropdown">
+        <button
+          onClick={dropdownHandler}
+          className={btnClass}
+          id="drop-btn-browse"
+        >
+          {props.children}
+        </button>
+        <div className="dropdown-content">
+          {props.dropdownList.map((each, index) => {
+            return (
+              <DropdownContent key={index} href={each.to}>
+                {each.name}
+              </DropdownContent>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   ) : (
     <div className="nav-a">
-      <button onClick className={btnClass}>
-        {props.children}
-      </button>
+      <button className={btnClass}>{props.children}</button>
     </div>
   );
 };

@@ -11,10 +11,26 @@ const NavSection = (props) =>
     </nav>
   ) : (
     <nav className={props.navClass}>
-      <EachNav dropdown={true} dropdownList={['anime', 'manga']}>
+      <EachNav
+        dropdown={true}
+        dropdownList={[
+          { name: 'anime', to: '/' },
+          { name: 'manga', to: '/' },
+        ]}
+      >
         Browse
       </EachNav>
       <EachNav dropdown={false}>Groups</EachNav>
+      <EachNav
+        dropdown={true}
+        dropdownList={[
+          { name: '/', to: '/' },
+          { name: '/', to: '/' },
+          { name: '/', to: '/' },
+        ]}
+      >
+        Feedback
+      </EachNav>
     </nav>
   );
 
