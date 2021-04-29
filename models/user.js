@@ -19,8 +19,20 @@ const userSchema = new Schema(
     animelist: {
       type: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'Anime',
+          animeId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Anime',
+          },
+          status: {
+            type: String,
+            enum: [
+              'currently watching',
+              'completed',
+              'want to watch',
+              'dropped',
+            ],
+            required: true,
+          },
         },
       ],
       default: [],

@@ -37,14 +37,18 @@ const animeSchema = new Schema({
   status: {
     type: String,
     enum: [
-      'trending',
-      'top airing',
-      'top upcoming',
-      'highest rated',
-      'most popular',
+      'trending this week',
+      'top airing anime',
+      'top upcoming anime',
+      'highest rated anime',
+      'most popular anime',
       'none',
     ],
     default: 'none',
+  },
+  imageUrl: {
+    type: String,
+    required: true,
   },
 });
 
