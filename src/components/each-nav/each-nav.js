@@ -12,6 +12,13 @@ const EachNav = (props) => {
     setDropdown((prevState) => !prevState);
   };
 
+  if (props.children === 'circle')
+    return (
+      <div className="nav-a">
+        <button className={props.children}></button>
+      </div>
+    );
+
   let btnClass = 'drop-btn';
   if (dropdown) btnClass += ' dropdown-content-show';
 
