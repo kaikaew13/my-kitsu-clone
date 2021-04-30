@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import NavContainer from './containers/navigation/nav-container';
@@ -8,17 +8,12 @@ import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 
 function App(props) {
-  // const [showModal, setShowModal] = useState(true);
-  // const toggleModal = () => {
-  //   setShowModal((prevState) => !prevState);
-  // };
-  console.log(props.showModal);
   return (
     <div className="App">
       {props.showModal ? (
         <React.Fragment>
           <Modal />
-          <Backdrop class="backdrop-dark" />
+          <Backdrop class="backdrop-dark" clicked={props.toggleShowModal} />
         </React.Fragment>
       ) : null}
 
@@ -35,4 +30,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleShowModal: () => dispatch({ type: 'CLOSE_MODAL' }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
