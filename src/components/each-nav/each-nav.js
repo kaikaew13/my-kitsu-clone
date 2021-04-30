@@ -28,7 +28,9 @@ const EachNav = (props) => {
 
   return props.dropdown ? (
     <React.Fragment>
-      {dropdown ? <Backdrop clicked={dropdownHandler} /> : null}
+      {dropdown ? (
+        <Backdrop class="backdrop" clicked={dropdownHandler} />
+      ) : null}
 
       <div className="nav-a dropdown">
         <button
