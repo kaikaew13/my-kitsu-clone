@@ -114,13 +114,19 @@ ul {
     overflow-y: hidden; */
 }
 .section-items {
-  height: 205px;
+  /* height: 205px; */
   margin: 0 3.5px;
-  width: 150px;
+  /* width: 150px; */
   background: url(../images/Mob_anime.png);
   background-position: center;
   border-radius: 4px;
   flex: 0 0 auto;
+}
+
+.section-items-img {
+  height: 205px;
+  width: 150px;
+  overflow: hidden;
 }
 
 .search-bar-wrapper {
