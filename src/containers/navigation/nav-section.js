@@ -2,7 +2,6 @@ import React from 'react';
 
 import EachNav from '../../components/each-nav/each-nav';
 
-// navClass
 const NavSection = (props) =>
   props.navClass === 'nav-right' ? (
     <nav className={props.navClass}>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Section from './section';
 import SearchBar from '../../components/each-section/search-bar';
 
-const URL = 'http://localhost:6969';
+const URL = process.env.REACT_APP_URL;
 
 const SectionContainer = (props) => {
   const [imageUrlArr, setImageUrlArr] = useState([]);

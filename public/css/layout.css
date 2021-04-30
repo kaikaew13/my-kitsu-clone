@@ -91,11 +91,16 @@ ul {
 .nav-a:hover {
   color: white;
 }
-.nav-logo {
-  text-align: center;
+
+.logo {
   height: 30px;
-  width: 50px;
+  width: 30px;
+  display: inline-block;
 }
+.logo:hover {
+  cursor: pointer;
+}
+
 .section-container-wrapper {
   margin-left: 160px;
   width: 60%;
