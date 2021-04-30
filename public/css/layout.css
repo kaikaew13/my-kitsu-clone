@@ -213,6 +213,12 @@ ul {
   font-weight: 600;
   line-height: 1.8;
 }
+.genre-items p {
+  font-family: 'Asap', sans-serif;
+}
+.genre-items p:hover {
+  cursor: pointer;
+}
 
 .dropdown {
   position: relative;
