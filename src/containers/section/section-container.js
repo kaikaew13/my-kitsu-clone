@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Section from './section';
+import SearchBar from '../../components/each-section/search-bar';
 
 const URL = 'http://localhost:6969';
 
@@ -24,6 +25,7 @@ const SectionContainer = (props) => {
   }, []);
   return (
     <div className="section-container-wrapper">
+      <SearchBar url={URL}>Explore Anime</SearchBar>
       <Section imageUrl={imageUrlArr}>Trending This Week</Section>
       <Section imageUrl={imageUrlArr}>Top Airing Anime</Section>
       <Section imageUrl={imageUrlArr}>Top Upcoming Anime</Section>
