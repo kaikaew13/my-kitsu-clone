@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const cors = require('cors');
 
 const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
@@ -25,7 +26,15 @@ const fileFilter = (req, file, cb) => {
   else cb(null, false);
 };
 
+const corsOptions = {
+  origin: '*',
+  method: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200,
+};
+
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );

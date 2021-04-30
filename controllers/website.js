@@ -9,6 +9,7 @@ exports.getHome = async (req, res, next) => {
       throw new Error('could not fetch from database');
     }
     const message = 'fetched anime from db successfully';
+    console.log(animeList);
     res.status(200).json({ message: message, animeList: animeList });
   } catch (err) {
     errorHandler(err, next);
