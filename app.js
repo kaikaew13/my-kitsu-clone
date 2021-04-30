@@ -6,6 +6,7 @@ const multer = require('multer');
 
 const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
+const websiteRouter = require('./routes/website');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/admin', adminRouter);
 app.use('/auth', authRouter);
+app.use(websiteRouter);
 
 app.use((req, res, next) => {
   const err = new Error('invalid url');

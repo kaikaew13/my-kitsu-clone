@@ -10,6 +10,7 @@ exports.postAnime = async (req, res, next) => {
     description: description,
     score: 10,
     genre: ['comedy'],
+    imageUrl: '/images/violet.jpeg',
   });
   try {
     await anime.save();
