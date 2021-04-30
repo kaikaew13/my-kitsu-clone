@@ -6,7 +6,7 @@ const GenreList = (props) =>
   props.favourite ? (
     <div className="genre-fav-categories">
       <h5 className="categories-head">{props.children.toUpperCase()}</h5>
-      <ul class="genre-list">
+      <ul className="genre-list">
         Favoriting categories will improve your recommendations.
       </ul>
     </div>

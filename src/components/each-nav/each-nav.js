@@ -52,7 +52,7 @@ const EachNav = (props) => {
       </div>
     </React.Fragment>
   ) : (
-    <div className="nav-a">
+    <div className="nav-a" onClick={props.clicked}>
       <button className={btnClass}>{props.children}</button>
     </div>
   );

@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import EachNav from '../../components/each-nav/each-nav';
 
 const NavSection = (props) =>
   props.navClass === 'nav-right' ? (
     <nav className={props.navClass}>
-      <EachNav dropdown={false}>Sign Up</EachNav>
+      <EachNav dropdown={false} clicked={props.toggleShowModal}>
+        Sign Up
+      </EachNav>
       <EachNav dropdown={false}>Sign In</EachNav>
     </nav>
   ) : (
@@ -34,4 +37,10 @@ const NavSection = (props) =>
     </nav>
   );
 
-export default NavSection;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleShowModal: () => dispatch({ type: 'OPEN_MODAL' }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NavSection);
