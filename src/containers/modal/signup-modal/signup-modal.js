@@ -2,7 +2,7 @@ import React from 'react';
 
 const URL = process.env.REACT_APP_URL;
 
-const AuthOptionModal = (props) => (
+const SignupModal = (props) => (
   <React.Fragment>
     <div
       className="modal-bg-img"
@@ -14,9 +14,8 @@ const AuthOptionModal = (props) => (
         uniquely social way.
       </p>
       <div className="facebook-btn">
-        <button>Continue with Facebook</button>
+        <button>Sign up</button>
       </div>
-
       <div className="modal-auth-option-a">
         <a href="/">Sign up with email</a>
         <p>
@@ -39,4 +38,4 @@ const AuthOptionModal = (props) => (
   </React.Fragment>
 );
 
-export default AuthOptionModal;
+export default SignupModal;

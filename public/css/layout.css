@@ -329,8 +329,16 @@ ul {
   padding: 10px 15px;
   margin-bottom: 10px;
 }
-.facebook-btn:hover {
+.facebook-btn:hover,
+.facebook-btn button:hover {
   cursor: pointer;
+}
+.facebook-btn button {
+  text-align: left;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  font-family: sans-serif;
+  padding: 10px;
 }
 .modal-auth-option-a {
   display: flex;

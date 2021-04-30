@@ -6,10 +6,18 @@ import EachNav from '../../components/each-nav/each-nav';
 const NavSection = (props) =>
   props.navClass === 'nav-right' ? (
     <nav className={props.navClass}>
-      <EachNav dropdown={false} clicked={props.toggleShowModal}>
+      <EachNav
+        dropdown={false}
+        clicked={() => props.toggleShowModal('auth-option-modal')}
+      >
         Sign Up
       </EachNav>
-      <EachNav dropdown={false}>Sign In</EachNav>
+      <EachNav
+        dropdown={false}
+        clicked={() => props.toggleShowModal('signup-modal')}
+      >
+        Sign In
+      </EachNav>
     </nav>
   ) : (
     <nav className={props.navClass}>
@@ -39,7 +47,7 @@ const NavSection = (props) =>
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleShowModal: () => dispatch({ type: 'OPEN_MODAL' }),
+    toggleShowModal: (which) => dispatch({ type: 'OPEN_MODAL', which: which }),
   };
 };
 
