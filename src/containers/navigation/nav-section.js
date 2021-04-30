@@ -10,7 +10,7 @@ const NavSection = (props) =>
     </nav>
   ) : (
     <nav className={props.navClass}>
-      <EachNav dropdown={false}>circle</EachNav>
+      <EachNav dropdown={false}>logo</EachNav>
       <EachNav
         dropdown={true}
         dropdownList={[

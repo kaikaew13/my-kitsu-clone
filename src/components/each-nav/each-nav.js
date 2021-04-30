@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropdownContent from './dropdown-content/dropdown-content';
 import Backdrop from '../UI/backdrop';
 
-//dropdown, dropdownList, buttonClass
+const URL = process.env.REACT_APP_URL;
 
 const EachNav = (props) => {
   const [dropdown, setDropdown] = useState(false);
@@ -12,10 +12,14 @@ const EachNav = (props) => {
     setDropdown((prevState) => !prevState);
   };
 
-  if (props.children === 'circle')
+  if (props.children === 'logo')
     return (
       <div className="nav-a">
-        <button className={props.children}></button>
+        <img
+          className={props.children}
+          src={URL + '/images/logo.png'}
+          alt="/images/logo.png"
+        />
       </div>
     );
 

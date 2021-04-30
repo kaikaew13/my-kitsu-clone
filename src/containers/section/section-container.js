@@ -7,7 +7,6 @@ const URL = process.env.REACT_APP_URL;
 
 const SectionContainer = (props) => {
   const [imageUrlArr, setImageUrlArr] = useState([]);
-  console.log(imageUrlArr);
   useEffect(() => {
     fetch(URL + '/get-home', {
       headers: {
