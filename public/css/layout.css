@@ -302,7 +302,6 @@ ul {
   z-index: 10;
 }
 .modal-bg-img {
-  background: url(../images/bg-modal.png);
   height: 235px;
   z-index: 12;
 }
