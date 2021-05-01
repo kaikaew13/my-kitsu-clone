@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './auth-option-modal.css';
+
 const URL = process.env.REACT_APP_URL;
 
 const AuthOptionModal = (props) => (

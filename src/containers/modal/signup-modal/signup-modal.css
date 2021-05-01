@@ -1,0 +1,40 @@
+.modal-signup {
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.modal-signup-items {
+  width: 100%;
+}
+.modal-signup-items p {
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 16px;
+}
+
+.modal-signup-items input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  color: rgb(85, 89, 92);
+  font-size: 16px;
+  overflow-x: visible;
+}
+.modal-signup-items input:focus {
+  border-bottom: 1px solid rgb(102, 175, 233);
+}
+.modal-signup-items * {
+  margin-bottom: 10px;
+}
+.modal-signup-submit {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 4px;
+  color: rgb(70, 70, 70);
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 15px;
+}

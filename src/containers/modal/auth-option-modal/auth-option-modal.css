@@ -1,0 +1,53 @@
+.modal-bg-img {
+  height: 235px;
+  z-index: 12;
+}
+.modal-auth-option {
+  height: 365px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.modal-auth-option p {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 15px;
+}
+.modal-auth-option a {
+  color: #f75239;
+  font-family: sans-serif;
+  font-weight: 200;
+}
+.facebook-btn {
+  height: 60px;
+  background: rgb(59, 89, 152);
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+.facebook-btn:hover {
+  cursor: pointer;
+}
+.facebook-btn button {
+  text-align: left;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  font-family: sans-serif;
+  padding: 10px;
+}
+.modal-auth-option-a {
+  display: flex;
+  justify-content: space-between;
+}
+.small-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.small-text p {
+  font-size: 12px;
+  font-family: sans-serif;
+  line-height: 18px;
+  color: rgb(121, 121, 121);
+}
