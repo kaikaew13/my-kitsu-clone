@@ -36,3 +36,9 @@
 .genre-items p:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 1200px) {
+  .genre-container {
+    display: none;
+  }
+}
