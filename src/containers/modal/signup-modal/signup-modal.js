@@ -48,7 +48,7 @@ const SignupModal = (props) => {
       })
       .then((resData) => {
         // should bring up login modal
-        props.toggleModal();
+        props.switchToLogin();
       });
   };
 
@@ -166,7 +166,7 @@ const SignupModal = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleModal: () => dispatch({ type: 'CLOSE_MODAL' }),
+    switchToLogin: () => dispatch({ type: 'OPEN_MODAL', which: 'login-modal' }),
   };
 };
 
