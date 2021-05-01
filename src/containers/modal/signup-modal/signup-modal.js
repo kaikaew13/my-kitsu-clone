@@ -17,6 +17,17 @@ const SignupModal = (props) => {
     touched: false,
     validation: { minLength: 5, pass: false },
   });
+  let submitBtn = (
+    <button type="submit" className="modal-signup-submit" disabled>
+      Let's get some basic info first
+    </button>
+  );
+  if (password.val.length >= 5 && username.val.length >= 3)
+    submitBtn = (
+      <button type="submit" className="modal-signup-submit success">
+        Cool- Let's create that account
+      </button>
+    );
 
   const signupHandler = (e) => {
     e.preventDefault();
@@ -148,13 +159,7 @@ const SignupModal = (props) => {
           </div>
         )}
       </div>
-      <button
-        type="submit"
-        className="modal-signup-submit"
-        disabled={password.val.length < 5 || username.val.length < 3}
-      >
-        Let's get some basic info first
-      </button>
+      {submitBtn}
     </form>
   );
 };

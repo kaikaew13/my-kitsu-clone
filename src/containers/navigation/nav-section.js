@@ -13,7 +13,12 @@ const NavSection = (props) =>
       >
         Sign Up
       </EachNav>
-      <EachNav dropdown={false}>Sign In</EachNav>
+      <EachNav
+        dropdown={false}
+        clicked={() => props.toggleShowModal('login-modal')}
+      >
+        Sign In
+      </EachNav>
     </nav>
   ) : (
     <nav className={props.navClass}>

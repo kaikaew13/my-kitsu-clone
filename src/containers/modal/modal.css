@@ -1,11 +1,14 @@
 .modal {
   position: fixed;
-  top: 43%;
+  /* top: 43%; */
   left: 50%;
   width: 530px;
   height: 600px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 6%);
   border-radius: 2px;
   background: #f7f7f7;
   z-index: 10;
+}
+.login-modal-height {
+  height: 430px;
 }

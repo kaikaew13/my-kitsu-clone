@@ -38,6 +38,15 @@
   font-size: 16px;
   padding: 15px;
 }
+
 .modal-signup-submit:disabled {
   cursor: not-allowed;
+}
+
+.success {
+  background: rgb(24, 173, 144);
+  color: white;
+}
+.success:hover {
+  background: rgb(58, 189, 163);
 }
