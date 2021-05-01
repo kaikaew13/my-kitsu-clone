@@ -17,6 +17,13 @@ button {
 button:hover {
   cursor: pointer;
 }
+input {
+  outline: none;
+  border: none;
+  display: inline-block;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
 
 h6 {
   font-size: 16px;

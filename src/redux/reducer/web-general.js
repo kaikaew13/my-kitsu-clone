@@ -4,7 +4,6 @@ const initialState = {
 };
 
 export default function webGeneralReducer(state = initialState, action) {
-  console.log(state);
   switch (action.type) {
     case 'OPEN_MODAL':
       return { ...state, showModal: true, modalType: action.which };
