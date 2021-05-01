@@ -21,11 +21,20 @@ const AuthOptionModal = (props) => (
       </div>
 
       <div className="modal-auth-option-a">
-        <div onClick={props.switchToSignup} className="clickable-p">
+        <div
+          onClick={() => props.switchToSignup('signup-modal')}
+          className="clickable-p"
+        >
           Sign up with email
         </div>
         <p>
-          Have an account? <span className="clickable-p">Login</span>
+          Have an account?{' '}
+          <span
+            className="clickable-p"
+            onClick={() => props.switchToSignup('login-modal')}
+          >
+            Login
+          </span>
         </p>
       </div>
       <div className="small-text">
@@ -46,8 +55,8 @@ const AuthOptionModal = (props) => (
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    switchToSignup: () =>
-      dispatch({ type: 'OPEN_MODAL', which: 'signup-modal' }),
+    switchToSignup: (modalType) =>
+      dispatch({ type: 'OPEN_MODAL', which: modalType }),
   };
 };
 
