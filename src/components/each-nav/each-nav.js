@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import DropdownContent from './dropdown-content/dropdown-content';
 import Backdrop from '../UI/backdrop';
+import '../../containers/navigation/navigation.css';
 
 const URL = process.env.REACT_APP_URL;
 

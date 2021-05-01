@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import EachNav from '../../components/each-nav/each-nav';
+import './navigation.css';
 
 const NavSection = (props) =>
   props.navClass === 'nav-right' ? (

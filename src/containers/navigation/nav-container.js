@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NavSection from './nav-section';
+import './navigation.css';
 
 const NavContainer = (props) => (
   <div className="nav-container">
