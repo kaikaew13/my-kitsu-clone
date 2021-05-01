@@ -21,14 +21,11 @@ const AuthOptionModal = (props) => (
       </div>
 
       <div className="modal-auth-option-a">
-        <p onClick={props.switchToSignup} className="clickable-p">
+        <div onClick={props.switchToSignup} className="clickable-p">
           Sign up with email
-        </p>
+        </div>
         <p>
-          Have an account?{' '}
-          <p onClick={props.switchToSignup} className="clickable-p">
-            Login
-          </p>
+          Have an account? <span className="clickable-p">Login</span>
         </p>
       </div>
       <div className="small-text">

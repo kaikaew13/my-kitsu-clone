@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import './signup-modal.css';
 
@@ -17,8 +18,31 @@ const SignupModal = (props) => {
     validation: { minLength: 5, pass: false },
   });
 
+  const signupHandler = (e) => {
+    e.preventDefault();
+    fetch(URL + '/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username.val,
+        email: email,
+        password: password.val,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 201) throw new Error('failed to signup');
+        return res.json();
+      })
+      .then((resData) => {
+        // should bring up login modal
+        props.toggleModal();
+      });
+  };
+
   return (
-    <form className="modal-signup">
+    <form className="modal-signup" onSubmit={signupHandler}>
       <div className="modal-signup-items">
         <h6>What should we call you?</h6>
         <p>Your username should be original, being witty is optional.</p>
@@ -127,7 +151,7 @@ const SignupModal = (props) => {
       <button
         type="submit"
         className="modal-signup-submit"
-        disabled={password.length < 5 || username.length < 3}
+        disabled={password.val.length < 5 || username.val.length < 3}
       >
         Let's get some basic info first
       </button>
@@ -135,4 +159,10 @@ const SignupModal = (props) => {
   );
 };
 
-export default SignupModal;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleModal: () => dispatch({ type: 'CLOSE_MODAL' }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignupModal);
