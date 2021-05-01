@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './auth-option-modal.css';
 
@@ -20,9 +21,14 @@ const AuthOptionModal = (props) => (
       </div>
 
       <div className="modal-auth-option-a">
-        <a href="/">Sign up with email</a>
+        <p onClick={props.switchToSignup} className="clickable-p">
+          Sign up with email
+        </p>
         <p>
-          Have an account? <a href="/">Login</a>
+          Have an account?{' '}
+          <p onClick={props.switchToSignup} className="clickable-p">
+            Login
+          </p>
         </p>
       </div>
       <div className="small-text">
@@ -41,4 +47,11 @@ const AuthOptionModal = (props) => (
   </React.Fragment>
 );
 
-export default AuthOptionModal;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    switchToSignup: () =>
+      dispatch({ type: 'OPEN_MODAL', which: 'signup-modal' }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AuthOptionModal);
