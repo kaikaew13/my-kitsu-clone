@@ -1,6 +1,7 @@
 import React from 'react';
 
 import GenreList from './genre-list';
+import './genre.css';
 
 const GenreContainer = (props) => (
   <div className="genre-container">

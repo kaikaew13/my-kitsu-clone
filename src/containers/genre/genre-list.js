@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EachGenre from '../../components/each-genre/each-genre';
+import './genre.css';
 
 const GenreList = (props) =>
   props.favourite ? (

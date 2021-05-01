@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AuthOptionModal from './auth-option-modal/auth-option-modal';
 import SignupModal from './signup-modal/signup-modal';
+import './modal.css';
 
 const Modal = (props) => {
   const switchCaseHandler = () => {

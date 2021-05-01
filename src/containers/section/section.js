@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EachSection from '../../components/each-section/each-section';
+import './section.css';
 
 const Section = (props) => (
   <section>

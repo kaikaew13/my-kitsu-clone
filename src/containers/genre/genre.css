@@ -1,0 +1,38 @@
+.genre-container {
+  margin-right: 100px;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  height: 590px;
+  width: 300px;
+  border: 1px solid rgb(229, 229, 229);
+  border-radius: 4px;
+  background: white;
+  float: right;
+  clear: right;
+}
+
+.categories-head {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  margin-bottom: 10px;
+}
+
+.genre-list {
+  margin-bottom: 40px;
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+.genre-items {
+  width: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+.genre-items p {
+  font-family: 'Asap', sans-serif;
+}
+.genre-items p:hover {
+  cursor: pointer;
+}

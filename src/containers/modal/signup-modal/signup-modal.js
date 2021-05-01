@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
+import React, { useState } from 'react';
 import './signup-modal.css';
 
 const URL = process.env.REACT_APP_URL;

@@ -44,3 +44,51 @@
 .logo:hover {
   cursor: pointer;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.drop-btn {
+  height: 100%;
+  width: 100%;
+  color: rgb(153, 153, 153);
+  padding: 10px 0;
+}
+
+.drop-btn:hover,
+.drop-btn:focus {
+  color: white;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #f9f9f9;
+  box-shadow: 2px 2px 2px #ddd;
+  width: 160px;
+  border-radius: 4px;
+  z-index: 10;
+}
+.dropdown-content a {
+  height: 30px;
+  padding: 5px 20px;
+  text-align: left;
+}
+
+.dropdown-content-show + .dropdown-content {
+  display: block;
+}
+
+.dropdown-content-items {
+  display: block;
+  border-radius: 4px;
+  width: 100%;
+  height: 30px;
+}
+
+.dropdown-content-items:hover {
+  background: #eee;
+}
