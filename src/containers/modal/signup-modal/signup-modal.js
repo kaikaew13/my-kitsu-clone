@@ -5,10 +5,18 @@ import './signup-modal.css';
 const URL = process.env.REACT_APP_URL;
 
 const SignupModal = (props) => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState({
+    val: '',
+    touched: false,
+    validation: { minLength: 3, pass: false },
+  });
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+  const [password, setPassword] = useState({
+    val: '',
+    touched: false,
+    validation: { minLength: 5, pass: false },
+  });
+  console.log(password.validation.pass);
   return (
     <form className="modal-signup">
       <div className="modal-signup-items">
@@ -19,8 +27,18 @@ const SignupModal = (props) => {
           type="text"
           name="username"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={username.val}
+          onChange={(e) => {
+            let pass = false;
+            if (e.target.value.length >= username.validation.minLength)
+              pass = true;
+            setUsername((prevState) => ({
+              ...prevState,
+              touched: true,
+              val: e.target.value,
+              validation: { ...prevState.validation, pass: pass },
+            }));
+          }}
         />
       </div>
       <div className="modal-signup-items">
@@ -31,7 +49,7 @@ const SignupModal = (props) => {
         </p>
 
         <input
-          type="text"
+          type="email"
           name="email"
           placeholder="Email"
           value={email}
@@ -41,7 +59,7 @@ const SignupModal = (props) => {
       <div className="modal-signup-items">
         <h6>Think of a strong password.</h6>
         <p>
-          Your password should be at least 8 characters. You should also
+          Your password should be at least 5 characters. You should also
           consider mixing in numbers and special characters! This is to keep the
           bad guys from doing bad guy things with your account.
         </p>
@@ -50,11 +68,25 @@ const SignupModal = (props) => {
           type="password"
           name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={password.val}
+          onChange={(e) => {
+            let pass = false;
+            if (e.target.value.length >= password.validation.minLength)
+              pass = true;
+            setPassword((prevState) => ({
+              ...prevState,
+              touched: true,
+              val: e.target.value,
+              validation: { ...prevState.validation, pass: pass },
+            }));
+          }}
         />
       </div>
-      <button type="submit" className="modal-signup-submit" disabled>
+      <button
+        type="submit"
+        className="modal-signup-submit"
+        disabled={password.length < 5 || username.length < 3}
+      >
         Let's get some basic info first
       </button>
     </form>
