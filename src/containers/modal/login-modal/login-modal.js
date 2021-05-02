@@ -5,11 +5,30 @@ import './login-modal.css';
 import '../signup-modal/signup-modal.css';
 import '../auth-option-modal/auth-option-modal.css';
 
+const URL = process.env.REACT_APP_URL;
+
 const LoginModal = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   let btnClassName = 'modal-signup-submit';
   if (email.length && password.length) btnClassName += ' success';
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    const res = await fetch(URL + '/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    if (res.status !== 200) throw new Error('failed to login');
+    const data = await res.json();
+    console.log(data);
+  };
 
   return (
     <div className="modal-signup">
@@ -28,7 +47,7 @@ const LoginModal = (props) => {
           <button>Continue with Facebook</button>
         </div>
         <p>Or, sign in with:</p>
-        <form className="modal-login-form">
+        <form className="modal-login-form" onSubmit={(e) => loginHandler(e)}>
           <input
             type="email"
             placeholder="Email"
