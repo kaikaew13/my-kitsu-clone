@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import webGeneralReducer from './redux/reducer/web-general';
+import authReducer from './redux/reducer/auth';
 
-const store = createStore(webGeneralReducer);
+const rootReducer = combineReducers({
+  auth: authReducer,
+  webGeneral: webGeneralReducer,
+});
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>

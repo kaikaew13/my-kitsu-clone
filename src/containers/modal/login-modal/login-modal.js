@@ -27,7 +27,11 @@ const LoginModal = (props) => {
     });
     if (res.status !== 200) throw new Error('failed to login');
     const data = await res.json();
-    console.log(data);
+    const expireTime = new Date().getTime() + 1000 * 60 * 60;
+    localStorage.setItem('jwt', data.token);
+    localStorage.setItem('jwt-expire-time', expireTime);
+    props.setJWT(data.token, expireTime);
+    props.toggleModal();
   };
 
   return (
@@ -71,6 +75,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     switchToSignup: () =>
       dispatch({ type: 'OPEN_MODAL', which: 'signup-modal' }),
+    toggleModal: () => dispatch({ type: 'CLOSE_MODAL' }),
+    setJWT: (jwt, expireTime) =>
+      dispatch({ type: 'SET_JWT', jwt: jwt, expireTime: expireTime }),
   };
 };
 

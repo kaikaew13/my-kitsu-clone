@@ -26,7 +26,7 @@ const Modal = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    modalType: state.modalType,
+    modalType: state.webGeneral.modalType,
   };
 };
 
