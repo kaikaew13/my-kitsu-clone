@@ -32,6 +32,7 @@ const LoginModal = (props) => {
     localStorage.setItem('jwt-expire-time', new Date(expireTime).toISOString());
     props.setJWT(data.token, expireTime);
     props.toggleModal();
+    window.location.reload();
   };
 
   return (
