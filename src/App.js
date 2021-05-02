@@ -26,10 +26,13 @@ function App(props) {
     [logoutHandler]
   );
   useEffect(() => {
-    if (props.expireTime) {
-      setAutoLogout(props.expireTime);
+    const time = localStorage.getItem('jwt-expire-time');
+    console.log(typeof time === 'string');
+    console.log(new Date(time).getTime());
+    if (time) {
+      setAutoLogout(new Date(time).getTime());
     }
-  }, [props.expireTime, setAutoLogout]);
+  }, [setAutoLogout]);
 
   return (
     <div className="App">

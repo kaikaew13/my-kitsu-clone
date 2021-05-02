@@ -27,9 +27,9 @@ const LoginModal = (props) => {
     });
     if (res.status !== 200) throw new Error('failed to login');
     const data = await res.json();
-    const expireTime = new Date().getTime() + 1000 * 60 * 60;
+    const expireTime = new Date().getTime() + 1000 * 10;
     localStorage.setItem('jwt', data.token);
-    localStorage.setItem('jwt-expire-time', expireTime);
+    localStorage.setItem('jwt-expire-time', new Date(expireTime).toISOString());
     props.setJWT(data.token, expireTime);
     props.toggleModal();
   };
