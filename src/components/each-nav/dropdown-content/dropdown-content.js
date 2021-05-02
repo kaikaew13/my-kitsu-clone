@@ -3,9 +3,9 @@ import React from 'react';
 import '../../../containers/navigation/navigation.css';
 
 const DropdownContent = (props) => (
-  <a href={props.href} className="dropdown-content-items">
+  <p className="dropdown-content-items" onClick={props.clicked}>
     {props.children}
-  </a>
+  </p>
 );
 
 export default DropdownContent;

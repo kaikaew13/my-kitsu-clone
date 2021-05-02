@@ -9,6 +9,7 @@ const EachSection = (props) => (
       src={props.imageUrl}
       alt={props.imageUrl}
     />
+    <div className="add-to-library">Add To library</div>
   </div>
 );
 

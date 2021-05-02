@@ -11,8 +11,10 @@ export default function authReducer(state = initialState, action) {
         jwt: action.jwt,
         jwtExpire: action.expireTime,
       };
-    case 'RESET_JWT':
-      console.log('reseting');
+    case 'LOGOUT':
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('jwt-expire-time');
+      window.location.reload();
       return {
         ...state,
         jwt: null,

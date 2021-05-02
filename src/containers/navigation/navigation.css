@@ -83,10 +83,16 @@
   border-radius: 4px;
   z-index: 10;
 }
-.dropdown-content a {
+.dropdown-content p {
   height: 30px;
   padding: 5px 20px;
+  font-family: 'Asap', sans-serif;
+  font-size: 14px;
   text-align: left;
+  /* font-weight: bold; */
+}
+.dropdown-content p:hover {
+  cursor: pointer;
 }
 
 .for-profile {

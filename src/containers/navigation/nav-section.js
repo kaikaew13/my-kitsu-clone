@@ -11,9 +11,12 @@ const NavSection = (props) =>
         <EachNav
           dropdown={true}
           dropdownList={[
-            { name: 'View Profile', to: '/' },
-            { name: 'Settings', to: '/' },
-            { name: 'Logout', to: '/' },
+            { name: 'View Profile', clicked: () => {} },
+            { name: 'Settings', clicked: () => {} },
+            {
+              name: 'Logout',
+              clicked: props.logout,
+            },
           ]}
         >
           profile-pic
@@ -41,8 +44,8 @@ const NavSection = (props) =>
       <EachNav
         dropdown={true}
         dropdownList={[
-          { name: 'anime', to: '/' },
-          { name: 'manga', to: '/' },
+          { name: 'anime', clicked: () => {} },
+          { name: 'manga', clicked: () => {} },
         ]}
       >
         Browse
@@ -51,9 +54,9 @@ const NavSection = (props) =>
       <EachNav
         dropdown={true}
         dropdownList={[
-          { name: '/', to: '/' },
-          { name: '/', to: '/' },
-          { name: '/', to: '/' },
+          { name: '/', clicked: () => {} },
+          { name: '/', clicked: () => {} },
+          { name: '/', clicked: () => {} },
         ]}
       >
         Feedback
@@ -70,6 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleShowModal: (which) => dispatch({ type: 'OPEN_MODAL', which: which }),
+    logout: () => dispatch({ type: 'LOGOUT' }),
   };
 };
 

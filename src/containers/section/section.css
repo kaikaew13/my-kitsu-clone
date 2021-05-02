@@ -15,13 +15,42 @@
 }
 
 .section-items {
-  margin: 0 3.5px;
-  background-position: center;
-  flex: 0 0 auto;
+  margin: 0 2.5px;
+  height: 100%;
+  position: relative;
+}
+
+.section-items-container {
+  height: 100%;
+}
+
+.add-to-library {
+  display: none;
+  width: 80%;
+  position: absolute;
+
+  font-family: sans-serif;
+  font-size: 12px;
+  text-align: center;
+  color: white;
+  padding: 8px;
+  bottom: 10px;
+  left: 10%;
+  z-index: 5;
+  border-radius: 4px;
+}
+.section-items:hover > .add-to-library {
+  display: block;
+  background: rgb(24, 173, 144);
+  cursor: pointer;
+}
+.section-items:hover > .section-items-img {
+  filter: brightness(80%);
+  cursor: pointer;
 }
 
 .section-items-img {
-  height: 205px;
+  height: 210px;
   width: 150px;
   overflow: hidden;
   border-radius: 4px;

@@ -8,12 +8,10 @@ import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 
 function App(props) {
-  const { resetJWT, setJWT } = props;
+  const { logout, setJWT } = props;
   const logoutHandler = useCallback(() => {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('jwt-expire-time');
-    resetJWT();
-  }, [resetJWT]);
+    logout();
+  }, [logout]);
 
   const setAutoLogout = useCallback(
     (time) => {
@@ -64,9 +62,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleShowModal: () => dispatch({ type: 'CLOSE_MODAL' }),
-    resetJWT: () => dispatch({ type: 'RESET_JWT' }),
     setJWT: (jwt, expireTime) =>
       dispatch({ type: 'SET_JWT', jwt: jwt, expireTime: expireTime }),
+    logout: () => dispatch({ type: 'LOGOUT' }),
   };
 };
 

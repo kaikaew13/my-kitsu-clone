@@ -32,7 +32,7 @@ const EachNav = (props) => {
           <div className="dropdown-content for-profile">
             {props.dropdownList.map((each, index) => {
               return (
-                <DropdownContent key={index} href={each.to}>
+                <DropdownContent key={index} clicked={each.clicked}>
                   {each.name}
                 </DropdownContent>
               );
@@ -74,7 +74,7 @@ const EachNav = (props) => {
         <div className="dropdown-content">
           {props.dropdownList.map((each, index) => {
             return (
-              <DropdownContent key={index} href={each.to}>
+              <DropdownContent key={index} clicked={each.clicked}>
                 {each.name}
               </DropdownContent>
             );
