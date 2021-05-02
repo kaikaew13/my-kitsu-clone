@@ -32,8 +32,19 @@
   font-size: 14px;
   color: rgb(153, 153, 153);
 }
+
 .nav-a:hover {
   color: white;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+.profile-pic:hover {
+  cursor: pointer;
 }
 
 .logo {
@@ -76,6 +87,11 @@
   height: 30px;
   padding: 5px 20px;
   text-align: left;
+}
+
+.for-profile {
+  position: absolute;
+  left: -400%;
 }
 
 .dropdown-content-show + .dropdown-content {

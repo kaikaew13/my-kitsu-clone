@@ -13,6 +13,36 @@ const EachNav = (props) => {
     setDropdown((prevState) => !prevState);
   };
 
+  if (props.children === 'profile-pic') {
+    let profilePicClass = dropdown
+      ? props.children + ' dropdown-content-show'
+      : props.children;
+    return (
+      <React.Fragment>
+        {dropdown ? (
+          <Backdrop class="backdrop" clicked={dropdownHandler} />
+        ) : null}
+        <div className="nav-a dropdown">
+          <img
+            onClick={dropdownHandler}
+            className={profilePicClass}
+            src={URL + '/images/profile-pic.png'}
+            alt="/images/logo.png"
+          />
+          <div className="dropdown-content for-profile">
+            {props.dropdownList.map((each, index) => {
+              return (
+                <DropdownContent key={index} href={each.to}>
+                  {each.name}
+                </DropdownContent>
+              );
+            })}
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
+
   if (props.children === 'logo')
     return (
       <div className="nav-a">

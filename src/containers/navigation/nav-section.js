@@ -16,7 +16,7 @@ const NavSection = (props) =>
             { name: 'Logout', to: '/' },
           ]}
         >
-          Logout
+          profile-pic
         </EachNav>
       ) : (
         <React.Fragment>
