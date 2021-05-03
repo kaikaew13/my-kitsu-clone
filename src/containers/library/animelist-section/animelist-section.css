@@ -1,0 +1,64 @@
+.animelist-section-animelist {
+  display: flex;
+  flex-direction: column;
+}
+
+.animelist {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 860px;
+}
+
+.search-bar-wrapper {
+  padding: 10px 10px;
+  border: 1px solid rgb(229, 229, 229);
+  background: white;
+  border-radius: 4px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.search-bar-wrapper img {
+  height: 29px;
+  width: 29px;
+}
+
+.section-main-search-bar {
+  display: inline-block;
+  width: 80%;
+}
+
+.section-main-search-bar input {
+  outline: none;
+  border: none;
+  display: inline-block;
+  font-family: sans-serif;
+  font-weight: lighter;
+  width: 100%;
+  height: 50%;
+  font-size: 18px;
+}
+
+.section-items {
+  margin: 5px;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  background: rgb(51, 37, 50);
+  border-radius: 4px;
+}
+
+.section-items-container {
+  height: 100%;
+}
+
+.section-items-img {
+  height: 220px;
+  width: 160px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.progress {
+  height: 28px;
+}

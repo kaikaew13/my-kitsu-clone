@@ -8,6 +8,8 @@
 
 body {
   background: rgb(247, 247, 247);
+  width: 100vw;
+  height: 100vh;
 }
 
 button {

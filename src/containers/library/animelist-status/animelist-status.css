@@ -1,0 +1,76 @@
+.status {
+  margin-top: 20px;
+  height: 410px;
+  width: 300px;
+  border: 1px solid rgb(229, 229, 229);
+  padding: 20px;
+  margin-left: 20px;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.status-dropdown {
+  width: 100%;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.status-dropdown:focus {
+  border-color: #66afe9;
+}
+.status-dropdown:hover {
+  cursor: pointer;
+}
+.status-dropdown p {
+  font-family: sans-serif;
+  font-weight: lighter;
+  width: fit-content;
+  height: 50%;
+  font-size: 16px;
+  padding: 10px 10px;
+}
+.manage-library {
+  border-top: 1px solid rgb(204, 204, 204);
+  width: 100%;
+}
+.manage-library p {
+  padding-top: 10px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  width: 100%;
+  height: 50%;
+  font-size: 14px;
+  text-align: center;
+  color: #999;
+}
+.manage-library p:hover {
+  cursor: pointer;
+  color: #f75239;
+}
+
+.status-option {
+  display: flex;
+  flex-direction: column;
+}
+.status-option div {
+  height: 41px;
+  width: 100%;
+  background: chartreuse;
+  margin: 2px 0;
+}
+.status-option div:hover {
+  cursor: pointer;
+}
+.status-option div p {
+  font-family: 'Asap', sans-serif;
+  width: 100%;
+  height: 50%;
+  font-size: 16px;
+  color: white;
+  padding: 10px 10px;
+}

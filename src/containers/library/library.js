@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import LibraryHeader from './library-header/library-header';
+import AnimelistSection from './animelist-section/animelist-section';
+
 const URL = process.env.REACT_APP_URL;
 
 const Library = (props) => {
@@ -32,13 +35,12 @@ const Library = (props) => {
     <Redirect to="/" />
   ) : (
     <React.Fragment>
-      {animelist.map((each) => (
-        <div key={each.id}>{each.url}</div>
-      ))}
+      <LibraryHeader />
+      <AnimelistSection />
     </React.Fragment>
   );
 
-  return <div>{library}</div>;
+  return library;
 };
 
 const mapStateToProps = (state) => {
