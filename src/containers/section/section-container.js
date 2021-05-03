@@ -7,7 +7,7 @@ import './section.css';
 const URL = process.env.REACT_APP_URL;
 
 const SectionContainer = (props) => {
-  const [imageUrlArr, setImageUrlArr] = useState([]);
+  const [animeArr, setAnimeArr] = useState([]);
   useEffect(() => {
     fetch(URL + '/get-home', {
       headers: {
@@ -19,18 +19,23 @@ const SectionContainer = (props) => {
         return res.json();
       })
       .then((resData) => {
-        setImageUrlArr(resData.animeList.map((each) => URL + each.imageUrl));
+        setAnimeArr(
+          resData.animeList.map((each) => ({
+            url: URL + each.imageUrl,
+            id: each._id,
+          }))
+        );
       })
       .catch((err) => console.log(err));
   }, []);
   return (
     <div className="section-container-wrapper">
       <SearchBar url={URL}>Explore Anime</SearchBar>
-      <Section imageUrl={imageUrlArr}>Trending This Week</Section>
-      <Section imageUrl={imageUrlArr}>Top Airing Anime</Section>
-      <Section imageUrl={imageUrlArr}>Top Upcoming Anime</Section>
-      <Section imageUrl={imageUrlArr}>Highest Rated Anime</Section>
-      <Section imageUrl={imageUrlArr}>Most Popular Anime</Section>
+      <Section animeData={animeArr}>Trending This Week</Section>
+      <Section animeData={animeArr}>Top Airing Anime</Section>
+      <Section animeData={animeArr}>Top Upcoming Anime</Section>
+      <Section animeData={animeArr}>Highest Rated Anime</Section>
+      <Section animeData={animeArr}>Most Popular Anime</Section>
     </div>
   );
 };

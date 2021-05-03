@@ -41,6 +41,7 @@ const NavSection = (props) =>
   ) : (
     <nav className={props.navClass}>
       <EachNav dropdown={false}>logo</EachNav>
+      {props.loggedIn ? <EachNav dropdown={false}>Library</EachNav> : null}
       <EachNav
         dropdown={true}
         dropdownList={[

@@ -7,8 +7,8 @@ const Section = (props) => (
   <section>
     <h6>{props.children}</h6>
     <div className="section-container">
-      {props.imageUrl.map((each, index) => (
-        <EachSection key={index} imageUrl={each} />
+      {props.animeData.map((each) => (
+        <EachSection key={each.id} id={each.id} imageUrl={each.url} />
       ))}
     </div>
     <div className="section-view-more">

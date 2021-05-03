@@ -1,9 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import NavContainer from './containers/navigation/nav-container';
-import SectionContainer from './containers/section/section-container';
-import GenreContainer from './containers/genre/genre-container';
+import Home from './containers/home/home';
 import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 
@@ -44,14 +42,7 @@ function App(props) {
           <Backdrop class="backdrop-dark" clicked={props.toggleShowModal} />
         </React.Fragment>
       ) : null}
-
-      <NavContainer />
-      <div className="section-and-genre-wrapper">
-        <SectionContainer />
-        <div className="genre-wrapper">
-          <GenreContainer />
-        </div>
-      </div>
+      <Home />
     </div>
   );
 }
