@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import '../../containers/home/section/section.css';
+import '../../../containers/home/section/section.css';
 
 const URL = process.env.REACT_APP_URL;
 
