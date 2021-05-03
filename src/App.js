@@ -8,37 +8,70 @@ import Library from './containers/library/library';
 import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 
+const URL = process.env.REACT_APP_URL;
+
 function App(props) {
-  const { logout, setJWT, setLoading, unsetLoading } = props;
+  const {
+    logout,
+    setJWT,
+    setLoading,
+    unsetLoading,
+    setUser,
+    setAnimelist,
+    unsetUser,
+  } = props;
   const logoutHandler = useCallback(() => {
     logout();
+    unsetUser();
     unsetLoading();
-  }, [logout, unsetLoading]);
+  }, [logout, unsetLoading, unsetUser]);
 
-  // const getUser = async () => {
-  //   localStorage.getItem
-  // }
+  const getUser = useCallback(
+    async (time) => {
+      const jwt = localStorage.getItem('jwt');
+      const expireTime = localStorage.getItem('jwt-expire-time');
+      const res = await fetch(URL + '/user/get-user', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + jwt,
+        },
+      });
+      if (res.status !== 200) throw new Error('failed to fetch the user');
+      const resData = await res.json();
+      const user = resData.user;
+      setUser({
+        id: user._id,
+        username: user.username,
+        followers: user.followers,
+        following: user.following,
+        role: user.role,
+      });
+      const animelist = {};
+      user.animelist.forEach((each) => {
+        animelist[each.animeId._id.toString()] = each;
+      });
+      setAnimelist(animelist);
+      setJWT(jwt, expireTime);
+      unsetLoading();
+      setTimeout(() => {
+        logoutHandler();
+      }, time - new Date().getTime());
+    },
+    [setJWT, unsetLoading, logoutHandler, setUser, setAnimelist]
+  );
 
   const setAutoLogout = useCallback(
     (time) => {
       if (time > new Date().getTime()) {
-        // getUser();
-        setJWT(
-          localStorage.getItem('jwt'),
-          localStorage.getItem('jwt-expire-time')
-        );
-        unsetLoading();
-        setTimeout(() => {
-          logoutHandler();
-        }, time - new Date().getTime());
+        getUser(time);
       } else logoutHandler();
     },
-    [logoutHandler, setJWT, unsetLoading]
+    [logoutHandler, getUser]
   );
   useEffect(() => {
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
-    console.log(typeof time === 'string');
     console.log(new Date(time).getTime());
     if (time) {
       setAutoLogout(new Date(time).getTime());
@@ -77,6 +110,10 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => dispatch({ type: 'LOGOUT' }),
     setLoading: () => dispatch({ type: 'SET_LOADING' }),
     unsetLoading: () => dispatch({ type: 'UNSET_LOADING' }),
+    setUser: (user) => dispatch({ type: 'SET_USER', user: user }),
+    setAnimelist: (animelist) =>
+      dispatch({ type: 'SET_ANIMELIST', animelist: animelist }),
+    unsetUser: () => dispatch({ type: 'UNSET_USER' }),
   };
 };
 

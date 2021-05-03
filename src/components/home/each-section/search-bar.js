@@ -11,7 +11,7 @@ const SearchBar = (props) => (
         alt="/images/icons8-search-50.png"
       />
       <div className="section-main-search-bar">
-        <input type="text" placeholder="what are you searching for?" />
+        <input type="text" placeholder="What are you searching for?" />
       </div>
     </div>
     <div className="section-advanced-search">

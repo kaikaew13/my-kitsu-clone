@@ -60,15 +60,18 @@
 .status-option div {
   height: 41px;
   width: 100%;
-  background: chartreuse;
+  /* background: chartreuse; */
   margin: 2px 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 .status-option div:hover {
   cursor: pointer;
 }
 .status-option div p {
   font-family: 'Asap', sans-serif;
-  width: 100%;
+  width: fit-content;
   height: 50%;
   font-size: 16px;
   color: white;

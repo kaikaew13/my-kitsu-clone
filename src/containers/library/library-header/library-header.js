@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './library-header.css';
 import EachLibraryNav from '../../../components/library/each-library-nav';
@@ -7,7 +8,7 @@ const URL = process.env.REACT_APP_URL;
 
 const LibraryHeader = (props) => {
   const navList = [
-    { name: 'Activity', to: '/' },
+    { name: 'Activity', to: '/library' },
     { name: 'Library', to: '/library' },
     { name: 'Reactions', to: '/library' },
     { name: 'Followers', to: '/library' },
@@ -28,7 +29,7 @@ const LibraryHeader = (props) => {
           />
         </div>
         <div className="username-and-edit">
-          <h3>userame</h3>
+          <h3>{props.user.username}</h3>
           <button>Edit</button>
         </div>
       </div>
@@ -46,4 +47,10 @@ const LibraryHeader = (props) => {
   );
 };
 
-export default LibraryHeader;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user,
+  };
+};
+
+export default connect(mapStateToProps)(LibraryHeader);
