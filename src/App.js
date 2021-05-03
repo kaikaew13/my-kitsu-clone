@@ -46,8 +46,12 @@ function App(props) {
       ) : null}
 
       <NavContainer />
-      <SectionContainer />
-      <GenreContainer />
+      <div className="section-and-genre-wrapper">
+        <SectionContainer />
+        <div className="genre-wrapper">
+          <GenreContainer />
+        </div>
+      </div>
     </div>
   );
 }

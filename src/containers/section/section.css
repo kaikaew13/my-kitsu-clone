@@ -1,21 +1,25 @@
 .section-container-wrapper {
-  margin-left: 160px;
-  width: 60%;
+  /* margin-left: 160px; */
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   float: left;
   clear: left;
 }
 
 .section-container {
   margin: 20px auto;
-  height: 210px;
+  height: fit-content;
+  width: fit-content;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .section-items {
-  margin: 0 2.5px;
+  margin: 0 5px;
   height: 100%;
   position: relative;
 }
@@ -50,8 +54,8 @@
 }
 
 .section-items-img {
-  height: 210px;
-  width: 150px;
+  height: 220px;
+  width: 160px;
   overflow: hidden;
   border-radius: 4px;
 }

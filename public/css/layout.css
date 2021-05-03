@@ -57,4 +57,22 @@ ul {
 
 .App {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-and-genre-wrapper {
+  width: fit-content;
+  display: flex;
+}
+
+.genre-wrapper {
+  height: 100%;
+  width: 320px;
+}
+
+@media screen and (max-width: 1200px) {
+  .genre-wrapper {
+    display: none;
+  }
 }

@@ -1,5 +1,6 @@
 .nav-container {
   height: 42px;
+  width: 100%;
   background: #402f3f;
   display: flex;
   justify-content: space-between;
@@ -9,15 +10,17 @@
 }
 
 .nav-left {
-  margin-left: 140px;
+  margin-left: 8%;
   display: flex;
+  height: fit-content;
+  width: fit-content;
   flex-grow: 0.5;
   justify-content: flex-start;
   align-items: center;
 }
 .nav-right {
   display: flex;
-  margin-right: 100px;
+  margin-right: 8%;
   flex-grow: 0.1;
   justify-content: flex-end;
   align-items: center;
@@ -26,6 +29,13 @@
   font-size: 16px;
 }
 .nav-a {
+  margin: 0 10px;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 14px;
+  color: rgb(153, 153, 153);
+}
+.sidebar {
   margin: 0 10px;
   font-weight: lighter;
   text-align: center;
@@ -113,4 +123,13 @@
 
 .dropdown-content-items:hover {
   background: #eee;
+}
+
+@media screen and (max-width: 655px) {
+  .nav-left .nav-a {
+    display: none;
+  }
+  .nav-left .sidebar {
+    display: inline-block;
+  }
 }

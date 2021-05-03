@@ -45,7 +45,7 @@ const EachNav = (props) => {
 
   if (props.children === 'logo')
     return (
-      <div className="nav-a">
+      <div className="nav-a sidebar">
         <img
           className={props.children}
           src={URL + '/images/logo.png'}
