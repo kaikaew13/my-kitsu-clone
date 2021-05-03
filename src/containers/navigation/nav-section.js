@@ -48,7 +48,7 @@ const NavSection = (props) =>
           { name: 'manga', clicked: () => {} },
         ]}
       >
-        Browse
+        Browse ▾
       </EachNav>
       <EachNav dropdown={false}>Groups</EachNav>
       <EachNav
@@ -59,7 +59,7 @@ const NavSection = (props) =>
           { name: '/', clicked: () => {} },
         ]}
       >
-        Feedback
+        Feedback ▾
       </EachNav>
     </nav>
   );
