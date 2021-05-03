@@ -1,6 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
+import NavContainer from './containers/navigation/nav-container';
 import Home from './containers/home/home';
 import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
@@ -42,7 +44,10 @@ function App(props) {
           <Backdrop class="backdrop-dark" clicked={props.toggleShowModal} />
         </React.Fragment>
       ) : null}
-      <Home />
+      <NavContainer />
+      <Switch>
+        <Route path="/" exact component={Home} />
+      </Switch>
     </div>
   );
 }
