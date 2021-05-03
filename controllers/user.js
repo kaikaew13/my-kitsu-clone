@@ -23,12 +23,33 @@ exports.addToLibrary = async (req, res, next) => {
   }
 };
 
-exports.getAnimelist = async (req, res, next) => {
+// exports.getAnimelist = async (req, res, next) => {
+//   try {
+//     const user = await User.findById(req.userId).populate('animelist.animeId');
+//     if (!user) throw new Error('no user found');
+//     const message = 'fetched user animelist successfully';
+//     res.status(200).json({ message: message, animelist: user.animelist });
+//   } catch (err) {
+//     errorHandler(err, next);
+//   }
+// };
+
+exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId).populate('animelist.animeId');
     if (!user) throw new Error('no user found');
-    const message = 'fetched user animelist successfully';
-    res.status(200).json({ message: message, animelist: user.animelist });
+    const message = 'fetched user successfully';
+    res.status(200).json({
+      message: message,
+      user: {
+        _id: user._id,
+        animelist: user.animelist,
+        followers: user.followers,
+        following: user.following,
+        username: user.username,
+        role: user.role,
+      },
+    });
   } catch (err) {
     errorHandler(err, next);
   }

@@ -30,6 +30,7 @@ const userSchema = new Schema(
               'completed',
               'want to watch',
               'dropped',
+              'on hold',
             ],
             required: true,
           },
