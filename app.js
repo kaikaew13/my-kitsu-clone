@@ -8,6 +8,7 @@ const cors = require('cors');
 const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
 const websiteRouter = require('./routes/website');
+const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/admin', adminRouter);
 app.use('/auth', authRouter);
+app.use('/user', userRouter);
 app.use(websiteRouter);
 
 app.use((req, res, next) => {
