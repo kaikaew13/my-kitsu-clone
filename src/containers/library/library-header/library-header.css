@@ -26,6 +26,11 @@
   line-height: 21px;
   color: #9f9f9f;
   padding: 10px 20px;
+  font-family: sans-serif;
+}
+.library-nav-items:hover {
+  background: #f7f7f7;
+  color: #464646;
 }
 .animelist-section {
   display: flex;

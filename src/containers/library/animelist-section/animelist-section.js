@@ -26,7 +26,9 @@ const AnimelistSection = (props) => (
             src={URL + '/images/aot.jpeg'}
             alt={URL + '/images/aot.jpeg'}
           />
-          <div className="progress"></div>
+          <div className="progress">
+            <p>completed</p>
+          </div>
         </div>
         <div className="section-items">
           <img

@@ -62,3 +62,7 @@
 .progress {
   height: 28px;
 }
+.progress p {
+  color: white;
+  padding: 5px 10px;
+}
