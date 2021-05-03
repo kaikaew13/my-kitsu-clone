@@ -9,33 +9,41 @@ import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 
 function App(props) {
-  const { logout, setJWT } = props;
+  const { logout, setJWT, setLoading, unsetLoading } = props;
   const logoutHandler = useCallback(() => {
     logout();
-  }, [logout]);
+    unsetLoading();
+  }, [logout, unsetLoading]);
+
+  // const getUser = async () => {
+  //   localStorage.getItem
+  // }
 
   const setAutoLogout = useCallback(
     (time) => {
       if (time > new Date().getTime()) {
+        // getUser();
         setJWT(
           localStorage.getItem('jwt'),
           localStorage.getItem('jwt-expire-time')
         );
+        unsetLoading();
         setTimeout(() => {
           logoutHandler();
         }, time - new Date().getTime());
       } else logoutHandler();
     },
-    [logoutHandler, setJWT]
+    [logoutHandler, setJWT, unsetLoading]
   );
   useEffect(() => {
+    setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     console.log(typeof time === 'string');
     console.log(new Date(time).getTime());
     if (time) {
       setAutoLogout(new Date(time).getTime());
-    }
-  }, [setAutoLogout]);
+    } else unsetLoading();
+  }, [setAutoLogout, setLoading, unsetLoading]);
 
   return (
     <div className="App">
@@ -67,6 +75,8 @@ const mapDispatchToProps = (dispatch) => {
     setJWT: (jwt, expireTime) =>
       dispatch({ type: 'SET_JWT', jwt: jwt, expireTime: expireTime }),
     logout: () => dispatch({ type: 'LOGOUT' }),
+    setLoading: () => dispatch({ type: 'SET_LOADING' }),
+    unsetLoading: () => dispatch({ type: 'UNSET_LOADING' }),
   };
 };
 

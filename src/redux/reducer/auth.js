@@ -1,6 +1,7 @@
 const initialState = {
   jwt: null,
   jwtExpire: null,
+  user: null,
 };
 
 export default function authReducer(state = initialState, action) {
