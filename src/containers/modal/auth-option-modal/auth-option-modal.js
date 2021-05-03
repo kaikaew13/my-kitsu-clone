@@ -9,7 +9,9 @@ const AuthOptionModal = (props) => (
   <React.Fragment>
     <div
       className="modal-bg-img"
-      style={{ background: `url(${URL + '/images/bg-modal.png'})` }}
+      style={{
+        background: `url(${URL + '/images/bg-modal.png'})`,
+      }}
     ></div>
     <div className="modal-auth-option">
       <p>

@@ -3,7 +3,8 @@
   /* top: 43%; */
   left: 50%;
   width: 530px;
-  height: 600px;
+  /* height: 600px; */
+  height: fit-content;
   transform: translate(-50%, 6%);
   border-radius: 2px;
   background: #f7f7f7;
@@ -36,5 +37,11 @@
   to {
     top: 0;
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .modal {
+    width: 90%;
   }
 }
