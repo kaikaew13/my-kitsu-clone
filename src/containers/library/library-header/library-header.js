@@ -10,6 +10,18 @@ const LibraryHeader = (props) => (
       className="library-bg"
       style={{ background: `url(${URL}/images/bg-user.png)` }}
     ></div>
+    <div className="userprof">
+      <div className="prof-pic">
+        <img
+          src={URL + '/images/profile-pic.png'}
+          alt={URL + '/images/profile-pic.png'}
+        />
+      </div>
+      <div className="username-and-edit">
+        <h3>userame</h3>
+        <button>Edit</button>
+      </div>
+    </div>
     <div className="library-nav">
       <div className="library-nav-container">
         <a href="/library" className="library-nav-items">
