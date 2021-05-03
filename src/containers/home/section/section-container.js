@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Section from './section';
-import SearchBar from '../../components/each-section/search-bar';
+import SearchBar from '../../../components/each-section/search-bar';
 import './section.css';
 
 const URL = process.env.REACT_APP_URL;

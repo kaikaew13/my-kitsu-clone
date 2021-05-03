@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import NavContainer from './containers/navigation/nav-container';
 import Home from './containers/home/home';
+import Library from './containers/library/library';
 import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 
@@ -47,6 +48,7 @@ function App(props) {
       <NavContainer />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/library" exact component={Library} />
       </Switch>
     </div>
   );

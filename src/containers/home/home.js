@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SectionContainer from '../section/section-container';
-import GenreContainer from '../genre/genre-container';
+import SectionContainer from './section/section-container';
+import GenreContainer from './genre/genre-container';
 
 import './home.css';
 

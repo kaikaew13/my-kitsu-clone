@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import '../../containers/section/section.css';
+import '../../containers/home/section/section.css';
 
 const URL = process.env.REACT_APP_URL;
 
 const EachSection = (props) => {
   const addToLibrary = async (animeId, status) => {
-    const res = await fetch(URL + '/add-to-library', {
+    const res = await fetch(URL + '/user/add-to-library', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

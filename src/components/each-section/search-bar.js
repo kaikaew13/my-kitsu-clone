@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../containers/section/section.css';
+import '../../containers/home/section/section.css';
 
 const SearchBar = (props) => (
   <section>

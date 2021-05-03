@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import EachNav from '../../components/each-nav/each-nav';
 import './navigation.css';
 
-const NavSection = (props) =>
-  props.navClass === 'nav-right' ? (
+const NavSection = (props) => {
+  const history = useHistory();
+  return props.navClass === 'nav-right' ? (
     <nav className={props.navClass}>
       {props.loggedIn ? (
         <EachNav
@@ -40,8 +42,14 @@ const NavSection = (props) =>
     </nav>
   ) : (
     <nav className={props.navClass}>
-      <EachNav dropdown={false}>logo</EachNav>
-      {props.loggedIn ? <EachNav dropdown={false}>Library</EachNav> : null}
+      <EachNav dropdown={false} clicked={() => history.push('/')}>
+        logo
+      </EachNav>
+      {props.loggedIn ? (
+        <EachNav dropdown={false} clicked={() => history.push('/library')}>
+          Library
+        </EachNav>
+      ) : null}
       <EachNav
         dropdown={true}
         dropdownList={[
@@ -64,7 +72,7 @@ const NavSection = (props) =>
       </EachNav>
     </nav>
   );
-
+};
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.auth.jwt ? true : false,

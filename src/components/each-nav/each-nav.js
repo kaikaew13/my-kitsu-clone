@@ -47,6 +47,7 @@ const EachNav = (props) => {
     return (
       <div className="nav-a sidebar">
         <img
+          onClick={props.clicked}
           className={props.children}
           src={URL + '/images/logo.png'}
           alt="/images/logo.png"
@@ -84,7 +85,9 @@ const EachNav = (props) => {
     </React.Fragment>
   ) : (
     <div className="nav-a" onClick={props.clicked}>
-      <button className={btnClass}>{props.children}</button>
+      <button className={btnClass} onClick={props.clicked}>
+        {props.children}
+      </button>
     </div>
   );
 };
