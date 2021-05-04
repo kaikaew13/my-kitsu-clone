@@ -46,7 +46,10 @@ const NavSection = (props) => {
         logo
       </EachNav>
       {props.loggedIn ? (
-        <EachNav dropdown={false} clicked={() => history.push('/library')}>
+        <EachNav
+          dropdown={false}
+          clicked={() => history.push('/library/library')}
+        >
           Library
         </EachNav>
       ) : null}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
 
 import LibraryHeader from './library-header/library-header';
 import AnimelistSection from './animelist-section/animelist-section';
@@ -9,6 +9,7 @@ import AnimelistSection from './animelist-section/animelist-section';
 
 const Library = (props) => {
   // const [animelist, setAnimelist] = useState([]);
+  const { match } = props;
 
   // useEffect(() => {
   //   if (!props.loading) {
@@ -34,14 +35,42 @@ const Library = (props) => {
   // }, [props.jwt, props.loading]);
 
   let library = null;
-  console.log(props.match.url);
+  console.log(match);
   if (!props.loading) {
     library = !props.jwt ? (
       <Redirect to="/" />
     ) : (
       <React.Fragment>
-        <LibraryHeader />
-        <AnimelistSection />
+        <Switch>
+          <Route
+            path={match.url + '/library'}
+            exact
+            // component={AnimelistSection}
+            render={() => {
+              return (
+                <React.Fragment>
+                  <LibraryHeader linkName="Library" />
+                  <AnimelistSection />
+                </React.Fragment>
+              );
+            }}
+          />
+          <Route
+            path={match.url + '/aww'}
+            exact
+            render={() => (
+              <div
+                className="lol"
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  border: '1px solid black',
+                }}
+              ></div>
+            )}
+          />
+        </Switch>
+        {/* <AnimelistSection /> */}
       </React.Fragment>
     );
   }

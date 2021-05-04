@@ -89,7 +89,7 @@ function App(props) {
       <NavContainer />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/library" exact component={Library} />
+        <Route path="/library" component={Library} />
         <Redirect to="/" />
       </Switch>
     </div>

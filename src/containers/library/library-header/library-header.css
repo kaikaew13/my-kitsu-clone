@@ -14,6 +14,7 @@
   position: relative;
   top: 328px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  background: white;
 }
 .library-nav-container {
   margin-left: 8%;
@@ -30,6 +31,10 @@
   font-family: sans-serif;
 }
 .library-nav-items:hover {
+  background: #f7f7f7;
+  color: #464646;
+}
+.library-nav-items-active {
   background: #f7f7f7;
   color: #464646;
 }

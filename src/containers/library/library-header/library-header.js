@@ -8,13 +8,14 @@ const URL = process.env.REACT_APP_URL;
 
 const LibraryHeader = (props) => {
   const navList = [
-    { name: 'Activity', to: '/library' },
-    { name: 'Library', to: '/library' },
-    { name: 'Reactions', to: '/library' },
-    { name: 'Followers', to: '/library' },
-    { name: 'Following', to: '/library' },
-    { name: 'Groups', to: '/library' },
+    { name: 'Activity', to: '/library/activity' },
+    { name: 'Library', to: '/library/library' },
+    { name: 'Reactions', to: '/library/reactions' },
+    { name: 'Followers', to: '/library/followers' },
+    { name: 'Following', to: '/library/following' },
+    { name: 'Groups', to: '/library,groups' },
   ];
+  console.log(props);
   return (
     <React.Fragment>
       <div
@@ -36,7 +37,11 @@ const LibraryHeader = (props) => {
       <div className="library-nav">
         <div className="library-nav-container">
           {navList.map((each, index) => (
-            <EachLibraryNav key={index} href={each.to}>
+            <EachLibraryNav
+              key={index}
+              href={each.to}
+              active={props.linkName === each.name}
+            >
               {each.name}
             </EachLibraryNav>
           ))}
