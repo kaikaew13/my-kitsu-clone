@@ -11,14 +11,15 @@
 .library-nav {
   height: fit-content;
   width: 100%;
-  position: absolute;
-  top: 400px;
+  position: relative;
+  top: 328px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 }
 .library-nav-container {
   margin-left: 8%;
   height: fit-content;
   display: flex;
+  flex-wrap: wrap;
 }
 .library-nav-items {
   border: 1px solid #e5e5e5;
@@ -32,10 +33,7 @@
   background: #f7f7f7;
   color: #464646;
 }
-.animelist-section {
-  display: flex;
-  width: fit-content;
-}
+
 .padding {
   height: 380px;
 }

@@ -1,9 +1,13 @@
+.animelist-section {
+  display: flex;
+  width: 84%;
+  justify-content: center;
+}
+
 .animelist-section-animelist {
   display: flex;
   flex-direction: column;
-}
-.animelist-section-animelist section {
-  min-width: 860px;
+  width: inherit;
 }
 
 .animelist {

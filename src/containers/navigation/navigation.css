@@ -91,7 +91,7 @@
   box-shadow: 2px 2px 2px #ddd;
   width: 160px;
   border-radius: 4px;
-  z-index: 10;
+  z-index: 15;
 }
 .dropdown-content p {
   height: 30px;

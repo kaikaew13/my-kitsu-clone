@@ -12,26 +12,25 @@ const AnimelistStatus = (props) => {
   let holdCnt = 0;
   props.animelist.forEach((each) => {
     switch (each.status) {
-      case 'completed':
+      case 'Completed':
         completeCnt++;
         break;
-      case 'currently watching':
+      case 'Currently Watching':
         cwCnt++;
         break;
-      case 'on hold':
+      case 'On Hold':
         holdCnt++;
         break;
-      case 'dropped':
+      case 'Dropped':
         droppedCnt++;
         break;
-      case 'want to watch':
+      case 'Want to Watch':
         wtwCnt++;
         break;
       default:
         break;
     }
   });
-  console.log(completeCnt);
   return (
     <div className="status">
       <div className="status-dropdown">
