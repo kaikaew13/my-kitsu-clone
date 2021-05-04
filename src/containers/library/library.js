@@ -34,6 +34,7 @@ const Library = (props) => {
   // }, [props.jwt, props.loading]);
 
   let library = null;
+  console.log(props.match.url);
   if (!props.loading) {
     library = !props.jwt ? (
       <Redirect to="/" />

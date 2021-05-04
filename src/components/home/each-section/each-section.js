@@ -60,7 +60,7 @@ const EachSection = (props) => {
           // onClick={() => addToLibrary(props.id, 'completed')}
         >
           <div className={btnClass} onClick={dropdownHandler}>
-            Add To library
+            {props.inLibrary ? props.inLibrary : 'Add To library'}
           </div>
           <div className="dropdown-content lib-stat-drop-content">
             {dropdownList.map((each, index) => {

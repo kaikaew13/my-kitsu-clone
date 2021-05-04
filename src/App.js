@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import NavContainer from './containers/navigation/nav-container';
 import Home from './containers/home/home';
@@ -90,6 +90,7 @@ function App(props) {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/library" exact component={Library} />
+        <Redirect to="/" />
       </Switch>
     </div>
   );

@@ -26,7 +26,7 @@ const AnimelistSection = (props) => {
           </div>
         </section>
         <div className="animelist">
-          {Object.values(props.animelist).map((each) => (
+          {props.animelist.map((each) => (
             <AnimelistItem
               key={each.animeId._id}
               id={each.animeId._id}
@@ -43,7 +43,7 @@ const AnimelistSection = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    animelist: state.user.animelist,
+    animelist: Object.values(state.user.animelist),
   };
 };
 
