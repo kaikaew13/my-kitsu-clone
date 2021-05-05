@@ -3,11 +3,9 @@ import React from 'react';
 import '../../containers/each-anime/each-anime-body/each-anime-body.css';
 import '../../containers/library/follow/follow.css';
 
-const URL = process.env.REACT_APP_URL;
-
 const EachAnimePic = (props) => (
   <div className="each-anime-pic">
-    <img src={URL + '/images/aot.jpeg'} alt="" />
+    <img src={props.url} alt={props.url} />
     <div className="each-anime-info">
       <p>Update Library</p>
       <div className="follow-btn smaller">Completed</div>

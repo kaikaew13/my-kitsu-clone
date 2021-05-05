@@ -12,11 +12,15 @@ const EachAnimeDetails = (props) => (
     <ul className="anime-details-list">
       <li className="anime-details-list-items">
         <strong>English</strong>
-        <p>Attack on Titan</p>
+        <p>{props.title}</p>
       </li>
       <li className="anime-details-list-items">
         <strong>Score</strong>
-        <p>10</p>
+        <p>{props.score}</p>
+      </li>
+      <li className="anime-details-list-items">
+        <strong>Genre</strong>
+        <p>{props.genre.join(', ')}</p>
       </li>
     </ul>
   </div>

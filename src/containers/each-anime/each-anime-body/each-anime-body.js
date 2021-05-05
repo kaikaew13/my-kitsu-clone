@@ -7,9 +7,13 @@ import '../../library/animelist-section/animelist-section.css';
 
 const EachAnimeBody = (props) => (
   <div className="animelist-section">
-    <EachAnimePic />
-    <EachAnimeDescription />
-    <EachAnimeDetails />
+    <EachAnimePic url={props.url} />
+    <EachAnimeDescription title={props.title} description={props.description} />
+    <EachAnimeDetails
+      title={props.title}
+      score={props.score}
+      genre={props.genre}
+    />
   </div>
 );
 

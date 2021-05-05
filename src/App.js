@@ -93,7 +93,7 @@ function App(props) {
         <Route path="/" exact component={Home} />
         <Route path="/library" component={Library} />
         <Route path="/each-anime" component={EachAnime} />
-        <Redirect to="/" />
+        <Route render={() => <h1>404 Error</h1>} />
       </Switch>
     </div>
   );

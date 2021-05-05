@@ -121,6 +121,7 @@ const Library = (props) => {
           />
         </Switch>
         {/* <AnimelistSection /> */}
+        <Route render={() => <h1>404 Error</h1>} />
       </React.Fragment>
     );
   }
