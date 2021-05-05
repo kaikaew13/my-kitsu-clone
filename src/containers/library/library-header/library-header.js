@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import './library-header.css';
 import EachLibraryNav from '../../../components/library/each-library-nav';
@@ -15,7 +14,7 @@ const LibraryHeader = (props) => {
     { name: 'Following', to: '/library/following' },
     { name: 'Groups', to: '/library/groups' },
   ];
-  console.log(props);
+
   return (
     <React.Fragment>
       <div
@@ -30,7 +29,7 @@ const LibraryHeader = (props) => {
           />
         </div>
         <div className="username-and-edit">
-          <h3>{props.user.username}</h3>
+          <h3>{props.username}</h3>
           <button>Edit</button>
         </div>
       </div>
@@ -52,10 +51,4 @@ const LibraryHeader = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user.user,
-  };
-};
-
-export default connect(mapStateToProps)(LibraryHeader);
+export default LibraryHeader;

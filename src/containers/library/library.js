@@ -36,7 +36,6 @@ const Library = (props) => {
   // }, [props.jwt, props.loading]);
 
   let library = null;
-  console.log(match);
   if (!props.loading) {
     library = !props.jwt ? (
       <Redirect to="/" />
@@ -48,7 +47,10 @@ const Library = (props) => {
             exact
             render={() => (
               <React.Fragment>
-                <LibraryHeader linkName="Activity" />
+                <LibraryHeader
+                  username={props.user.username}
+                  linkName="Activity"
+                />
               </React.Fragment>
             )}
           />
@@ -58,7 +60,10 @@ const Library = (props) => {
             render={() => {
               return (
                 <React.Fragment>
-                  <LibraryHeader linkName="Library" />
+                  <LibraryHeader
+                    username={props.user.username}
+                    linkName="Library"
+                  />
                   <AnimelistSection />
                 </React.Fragment>
               );
@@ -69,7 +74,10 @@ const Library = (props) => {
             exact
             render={() => (
               <React.Fragment>
-                <LibraryHeader linkName="Reactions" />
+                <LibraryHeader
+                  username={props.user.username}
+                  linkName="Reactions"
+                />
               </React.Fragment>
             )}
           />
@@ -78,8 +86,11 @@ const Library = (props) => {
             exact
             render={() => (
               <React.Fragment>
-                <LibraryHeader linkName="Followers" />
-                <Follow />
+                <LibraryHeader
+                  username={props.user.username}
+                  linkName="Followers"
+                />
+                <Follow userlist={props.user.followers} />
               </React.Fragment>
             )}
           />
@@ -88,7 +99,11 @@ const Library = (props) => {
             exact
             render={() => (
               <React.Fragment>
-                <LibraryHeader linkName="Following" />
+                <LibraryHeader
+                  username={props.user.username}
+                  linkName="Following"
+                />
+                <Follow userlist={props.user.following} />
               </React.Fragment>
             )}
           />
@@ -97,7 +112,10 @@ const Library = (props) => {
             exact
             render={() => (
               <React.Fragment>
-                <LibraryHeader linkName="Groups" />
+                <LibraryHeader
+                  username={props.user.username}
+                  linkName="Groups"
+                />
               </React.Fragment>
             )}
           />
@@ -112,6 +130,7 @@ const Library = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user.user,
     jwt: state.auth.jwt,
     loading: state.webGeneral.loading,
   };
