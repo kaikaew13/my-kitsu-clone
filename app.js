@@ -63,11 +63,11 @@ app.use((err, req, res, next) => {
 
 (async () => {
   try {
-    await mongoose.connect(
-      'mongodb+srv://kaikaew_13:1J9ddERuWRi143ge@cluster0.r5crp.mongodb.net/kitsu?retryWrites=true&w=majority',
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
-    app.listen(6969);
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    app.listen(process.env.PORT || 3000);
   } catch (err) {
     console.log(err);
   }
