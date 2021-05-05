@@ -90,7 +90,7 @@ const Library = (props) => {
                   username={props.user.username}
                   linkName="Followers"
                 />
-                <Follow userlist={props.user.followers} />
+                <Follow userlist={props.user.followers} page="followers" />
               </React.Fragment>
             )}
           />
@@ -103,7 +103,7 @@ const Library = (props) => {
                   username={props.user.username}
                   linkName="Following"
                 />
-                <Follow userlist={props.user.following} />
+                <Follow userlist={props.user.following} page="following" />
               </React.Fragment>
             )}
           />

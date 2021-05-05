@@ -8,7 +8,6 @@ export default function userReducer(state = initialState, action) {
     case 'SET_USER':
       return { ...state, user: action.user };
     case 'SET_ANIMELIST':
-      console.log(action.animelist);
       return { ...state, animelist: action.animelist };
     case 'UNSET_USER':
       return { ...state, user: null, animelist: null };

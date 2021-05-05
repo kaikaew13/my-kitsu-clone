@@ -40,6 +40,7 @@ function App(props) {
       if (res.status !== 200) throw new Error('failed to fetch the user');
       const resData = await res.json();
       const user = resData.user;
+      // console.log(user);
       setUser({
         id: user._id,
         username: user.username,
