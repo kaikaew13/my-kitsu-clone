@@ -5,6 +5,7 @@ import { Redirect, Switch, Route } from 'react-router-dom';
 import LibraryHeader from './library-header/library-header';
 import AnimelistSection from './animelist-section/animelist-section';
 import Follow from './follow/follow';
+import Error404 from '../../components/UI/404';
 
 // const URL = process.env.REACT_APP_URL;
 
@@ -121,7 +122,7 @@ const Library = (props) => {
           />
         </Switch>
         {/* <AnimelistSection /> */}
-        <Route render={() => <h1>404 Error</h1>} />
+        <Route component={Error404} />
       </React.Fragment>
     );
   }

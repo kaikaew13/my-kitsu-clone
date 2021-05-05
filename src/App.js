@@ -8,6 +8,7 @@ import Library from './containers/library/library';
 import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 import EachAnime from './containers/each-anime/each-anime';
+import Error404 from './components/UI/404';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -93,7 +94,7 @@ function App(props) {
         <Route path="/" exact component={Home} />
         <Route path="/library" component={Library} />
         <Route path="/each-anime" component={EachAnime} />
-        <Route render={() => <h1>404 Error</h1>} />
+        <Route component={Error404} />
       </Switch>
     </div>
   );
