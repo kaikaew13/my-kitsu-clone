@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import DropdownContent from '../../each-nav/dropdown-content/dropdown-content';
 import Backdrop from '../../UI/backdrop';
@@ -50,11 +51,13 @@ const EachSection = (props) => {
         <Backdrop class="backdrop" clicked={dropdownHandler} />
       ) : null}
       <div className="section-items">
-        <img
-          className="section-items-img"
-          src={props.imageUrl}
-          alt={props.imageUrl}
-        />
+        <Link to="/library/library">
+          <img
+            className="section-items-img"
+            src={props.imageUrl}
+            alt={props.imageUrl}
+          />
+        </Link>
         <div
           className="add-to-library dropdown"
           // onClick={() => addToLibrary(props.id, 'completed')}

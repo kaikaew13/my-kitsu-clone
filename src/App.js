@@ -7,6 +7,7 @@ import Home from './containers/home/home';
 import Library from './containers/library/library';
 import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
+import EachAnime from './containers/each-anime/each-anime';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -91,6 +92,7 @@ function App(props) {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/library" component={Library} />
+        <Route path="/each-anime" component={EachAnime} />
         <Redirect to="/" />
       </Switch>
     </div>

@@ -1,0 +1,11 @@
+.each-anime-pic {
+  margin-top: -160px;
+  margin-right: 10px;
+  width: 195px;
+  border: 1px solid black;
+  z-index: 10;
+}
+.each-anime-pic img {
+  max-width: 195px;
+  border-radius: 4px;
+}
