@@ -15,3 +15,19 @@ exports.getHome = async (req, res, next) => {
     errorHandler(err, next);
   }
 };
+
+exports.getEachAnime = async (req, res, next) => {
+  const animeId = req.params.animeId;
+  try {
+    const anime = await Anime.findById(animeId);
+    if (!anime) {
+      const err = new Error('not a valid url');
+      err.statusCode(404);
+      throw err;
+    }
+    const message = 'fetched anime from db successfully';
+    res.status(200).json({ message: message, anime: anime });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
