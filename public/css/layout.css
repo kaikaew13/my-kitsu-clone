@@ -104,6 +104,9 @@ h4 {
   font-size: 24px;
   margin-bottom: 12px;
 }
+h5 {
+  font-size: 15px;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -124,6 +127,7 @@ section {
 ul {
   font-size: 12px;
   font-weight: 600;
+  list-style-type: none;
 }
 
 .nav-container {

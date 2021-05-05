@@ -42,6 +42,9 @@
 .padding {
   height: 380px;
 }
+.padding-smaller {
+  height: 330px;
+}
 
 .userprof {
   width: fit-content;

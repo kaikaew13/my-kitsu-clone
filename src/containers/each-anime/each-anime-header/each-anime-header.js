@@ -34,7 +34,7 @@ const EachAnimeHeader = (props) => {
           ))}
         </div>
       </div>
-      <div className="padding"></div>
+      <div className="padding-smaller"></div>
     </React.Fragment>
   );
 };
