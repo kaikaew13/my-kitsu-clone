@@ -26,11 +26,11 @@ const userSchema = new Schema(
           status: {
             type: String,
             enum: [
-              'currently watching',
-              'completed',
-              'want to watch',
-              'dropped',
-              'on hold',
+              'Currently Watching',
+              'Completed',
+              'Want to Watch',
+              'Dropped',
+              'On Hold',
             ],
             required: true,
           },

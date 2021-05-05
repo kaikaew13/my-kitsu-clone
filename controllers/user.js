@@ -9,8 +9,7 @@ exports.addToLibrary = async (req, res, next) => {
     const found = user.animelist.find(
       (each) => each.animeId.toString() === animeId
     );
-    if (found)
-      return res.status(200).json({ message: 'anime already in your library' });
+    if (found) throw new Error('anime already in your library');
     user.animelist.push({ animeId: animeId, status: status });
     const updatedUser = await user.save();
     const message = 'added anime to your library';
@@ -36,7 +35,10 @@ exports.addToLibrary = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
   try {
-    const user = await User.findById(req.userId).populate('animelist.animeId');
+    const user = await User.findById(req.userId)
+      .populate('animelist.animeId')
+      .populate('follower', ['username'])
+      .populate('following', ['username']);
     if (!user) throw new Error('no user found');
     const message = 'fetched user successfully';
     res.status(200).json({
@@ -53,4 +55,18 @@ exports.getUser = async (req, res, next) => {
   } catch (err) {
     errorHandler(err, next);
   }
+};
+
+exports.followUser = async (req, res, next) => {
+  targetUserId = req.body.targetUserId;
+  const user = await User.findById(req.userId);
+  if (!user) throw new Error('no user found');
+  const targetUser = await User.findById(targetUserId);
+  if (!targetUser) throw new Error('no user found');
+  user.following.push(targetUserId);
+  targetUser.followers.push(user);
+  await user.save();
+  await targetUser.save();
+  const message = 'target user followed';
+  res.status(200).json({ message: message });
 };
