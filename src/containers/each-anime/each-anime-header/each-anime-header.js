@@ -7,11 +7,11 @@ const URL = process.env.REACT_APP_URL;
 
 const EachAnimeHeader = (props) => {
   const navList = [
-    { name: 'Summary', to: '/each-anime/summary' },
-    { name: 'Episodes', to: '/each-anime/episodes' },
-    { name: 'Characters', to: '/each-anime/characters' },
-    { name: 'Reactions', to: '/each-anime/reactions' },
-    { name: 'Franchise', to: '/each-anime/franchise' },
+    { name: 'Summary', to: '/each-anime/' + props.id },
+    { name: 'Episodes', to: '/each-anime/' + props.id + '/episodes' },
+    { name: 'Characters', to: '/each-anime/' + props.id + '/characters' },
+    { name: 'Reactions', to: '/each-anime/' + props.id + '/reactions' },
+    { name: 'Franchise', to: '/each-anime/' + props.id + '/franchise' },
   ];
 
   return (

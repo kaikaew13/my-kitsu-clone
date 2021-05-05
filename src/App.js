@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import NavContainer from './containers/navigation/nav-container';
 import Home from './containers/home/home';
@@ -93,7 +93,7 @@ function App(props) {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/library" component={Library} />
-        <Route path="/each-anime" component={EachAnime} />
+        <Route path="/each-anime/:animeId" component={EachAnime} />
         <Route component={Error404} />
       </Switch>
     </div>

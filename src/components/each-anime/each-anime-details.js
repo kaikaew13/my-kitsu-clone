@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../containers/each-anime/each-anime-body/each-anime-body.css';
+import '../../containers/each-anime/each-anime-summary/each-anime-summary.css';
 import '../../containers/library/animelist-section/animelist-section.css';
 
 const EachAnimeDetails = (props) => (

@@ -1,4 +1,6 @@
 .nav-container {
+  position: sticky;
+  top: 0;
   height: 42px;
   width: 100%;
   background: #402f3f;
@@ -7,6 +9,7 @@
   padding: 0 10px;
   align-items: center;
   margin-bottom: 30px;
+  z-index: 10;
 }
 
 .nav-left {

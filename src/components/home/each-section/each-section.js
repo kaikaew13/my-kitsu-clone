@@ -25,7 +25,7 @@ const EachSection = (props) => {
   };
 
   const redirectHandler = () => {
-    history.push('/each-anime', { animeId: props.id });
+    history.push('/each-anime/' + props.id);
   };
 
   const addToLibrary = async (animeId, status) => {
