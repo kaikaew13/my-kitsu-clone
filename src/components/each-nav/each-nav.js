@@ -75,7 +75,13 @@ const EachNav = (props) => {
         <div className="dropdown-content">
           {props.dropdownList.map((each, index) => {
             return (
-              <DropdownContent key={index} clicked={each.clicked}>
+              <DropdownContent
+                key={index}
+                clicked={() => {
+                  each.clicked();
+                  dropdownHandler();
+                }}
+              >
                 {each.name}
               </DropdownContent>
             );

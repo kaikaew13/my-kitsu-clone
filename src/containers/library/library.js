@@ -4,6 +4,7 @@ import { Redirect, Switch, Route } from 'react-router-dom';
 
 import LibraryHeader from './library-header/library-header';
 import AnimelistSection from './animelist-section/animelist-section';
+import Follow from './follow/follow';
 
 // const URL = process.env.REACT_APP_URL;
 
@@ -43,9 +44,17 @@ const Library = (props) => {
       <React.Fragment>
         <Switch>
           <Route
+            path={match.url + '/activity'}
+            exact
+            render={() => (
+              <React.Fragment>
+                <LibraryHeader linkName="Activity" />
+              </React.Fragment>
+            )}
+          />
+          <Route
             path={match.url + '/library'}
             exact
-            // component={AnimelistSection}
             render={() => {
               return (
                 <React.Fragment>
@@ -56,17 +65,40 @@ const Library = (props) => {
             }}
           />
           <Route
-            path={match.url + '/aww'}
+            path={match.url + '/reactions'}
             exact
             render={() => (
-              <div
-                className="lol"
-                style={{
-                  width: '100px',
-                  height: '100px',
-                  border: '1px solid black',
-                }}
-              ></div>
+              <React.Fragment>
+                <LibraryHeader linkName="Reactions" />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path={match.url + '/followers'}
+            exact
+            render={() => (
+              <React.Fragment>
+                <LibraryHeader linkName="Followers" />
+                <Follow />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path={match.url + '/following'}
+            exact
+            render={() => (
+              <React.Fragment>
+                <LibraryHeader linkName="Following" />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path={match.url + '/groups'}
+            exact
+            render={() => (
+              <React.Fragment>
+                <LibraryHeader linkName="Groups" />
+              </React.Fragment>
             )}
           />
         </Switch>

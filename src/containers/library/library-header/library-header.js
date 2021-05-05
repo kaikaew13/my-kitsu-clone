@@ -13,7 +13,7 @@ const LibraryHeader = (props) => {
     { name: 'Reactions', to: '/library/reactions' },
     { name: 'Followers', to: '/library/followers' },
     { name: 'Following', to: '/library/following' },
-    { name: 'Groups', to: '/library,groups' },
+    { name: 'Groups', to: '/library/groups' },
   ];
   console.log(props);
   return (

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './animelist-section.css';
 import AnimelistStatus from '../animelist-status/animelist-status';
-import AnimelistItem from '../../../components/library/animelist-item';
+import AnimelistItem from '../../../components/library/animelist-item/animelist-item';
 
 const URL = process.env.REACT_APP_URL;
 

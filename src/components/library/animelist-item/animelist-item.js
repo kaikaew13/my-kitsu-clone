@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../containers/library/animelist-section/animelist-section.css';
+import '../../../containers/library/animelist-section/animelist-section.css';
 
 const AnimelistItem = (props) => (
   <div className="section-items">

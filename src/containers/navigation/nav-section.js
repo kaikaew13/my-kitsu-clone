@@ -56,7 +56,7 @@ const NavSection = (props) => {
       <EachNav
         dropdown={true}
         dropdownList={[
-          { name: 'anime', clicked: () => {} },
+          { name: 'anime', clicked: () => history.push('/') },
           { name: 'manga', clicked: () => {} },
         ]}
       >
