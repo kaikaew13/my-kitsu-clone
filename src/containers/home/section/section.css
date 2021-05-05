@@ -40,7 +40,7 @@
   /* padding: 8px; */
   bottom: 10px;
   left: 10%;
-  z-index: 5;
+  z-index: 15;
   border-radius: 4px;
 }
 .section-items:hover > .add-to-library {
@@ -62,6 +62,7 @@
   color: white;
   padding: 8px;
 }
+
 .lib-stat-drop-content p {
   height: 30px;
   padding: 5px 20px;
