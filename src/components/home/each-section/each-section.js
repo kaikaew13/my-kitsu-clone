@@ -29,6 +29,10 @@ const EachSection = (props) => {
   };
 
   const addToLibrary = async (animeId, status) => {
+    if (!props.jwt) {
+      props.toggleShowModal();
+      return;
+    }
     const res = await fetch(URL + '/user/add-to-library', {
       method: 'PUT',
       headers: {
@@ -93,4 +97,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(EachSection);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleShowModal: () =>
+      dispatch({ type: 'OPEN_MODAL', which: 'login-modal' }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EachSection);
