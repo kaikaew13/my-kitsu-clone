@@ -19,6 +19,7 @@ const EachSection = (props) => {
     'Want to Watch',
     'Dropped',
   ];
+  if (props.role === 'admin') dropdownList.push('Edit');
 
   const dropdownHandler = () => {
     setDropdown((prevState) => !prevState);
@@ -78,7 +79,11 @@ const EachSection = (props) => {
               return (
                 <DropdownContent
                   key={index}
-                  clicked={() => addToLibrary(props.id, each)}
+                  clicked={() =>
+                    each !== 'Edit'
+                      ? addToLibrary(props.id, each)
+                      : history.push(`/admin?${each}=${props.id}`)
+                  }
                 >
                   {each}
                 </DropdownContent>
@@ -94,6 +99,7 @@ const EachSection = (props) => {
 const mapStateToProps = (state) => {
   return {
     jwt: state.auth.jwt,
+    role: state.user.user ? state.user.user.role : null,
   };
 };
 

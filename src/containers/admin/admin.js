@@ -19,6 +19,8 @@ const GENRE = [
 
 const Admin = (props) => {
   const history = useHistory();
+  const { location } = props;
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [genre, setGenre] = useState(
@@ -32,24 +34,33 @@ const Admin = (props) => {
     form.append('image', imgFile);
     form.append('title', title);
     form.append('description', description);
-    const genreString = genre.reduce((prev, cur) => {
-      if (cur.checked) {
-        if (prev === '') return cur.genre;
-        prev += ' ' + cur.genre;
-        return prev;
-      }
-      return prev;
-    }, '');
-    form.append('genre', genreString);
+    let method = 'POST';
+    let url = URL + '/admin/post-anime';
+    const query =
+      location.search.length > 0 ? location.search.slice(1).split('=') : '';
+    if (query.length > 0 && query[0] === 'Edit') {
+      form.append('animeId', query[1]);
+      method = 'PUT';
+      url = URL + '/admin/put-anime';
+    }
 
-    const res = await fetch(URL + '/admin/post-anime', {
-      method: 'POST',
+    const genreArr = genre.reduce((prev, cur) => {
+      if (cur.checked) prev.push(cur.genre);
+      return prev;
+    }, []);
+    form.append('genre', genreArr);
+
+    const res = await fetch(url, {
+      method: method,
       headers: {
         Authorization: 'Bearer ' + props.jwt,
       },
       body: form,
     });
-    if (res.status !== 201) throw new Error('failed to add new anime');
+    if (method === 'POST' && res.status !== 201)
+      throw new Error('failed to add new anime');
+    if (method === 'PUT' && res.status !== 200)
+      throw new Error('failed to update an anime');
     await res.json();
     history.push('/');
   };

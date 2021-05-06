@@ -14,7 +14,7 @@ const SectionContainer = (props) => {
   const { match } = props;
 
   useEffect(() => {
-    fetch(URL + '/get-home', {
+    fetch(URL + '/get-home/5', {
       headers: {
         'Content-Type': 'application/json',
       },
