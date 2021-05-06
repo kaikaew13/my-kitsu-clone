@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import './admin.css';
 
@@ -18,6 +18,7 @@ const GENRE = [
 ];
 
 const Admin = (props) => {
+  const history = useHistory();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [genre, setGenre] = useState(
@@ -48,8 +49,9 @@ const Admin = (props) => {
       },
       body: form,
     });
-    const resData = await res.json();
-    console.log(resData);
+    if (res.status !== 201) throw new Error('failed to add new anime');
+    await res.json();
+    history.push('/');
   };
 
   let adminPage = null;

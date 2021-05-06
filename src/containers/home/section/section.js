@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import EachSection from '../../../components/home/each-section/each-section';
 import './section.css';
@@ -22,7 +23,7 @@ const Section = (props) => (
       ))}
     </div>
     <div className="section-view-more">
-      <a href="/">view more</a>
+      <Link to={'/explore/all-anime/' + props.children}>view more</Link>
     </div>
   </section>
 );

@@ -8,7 +8,7 @@ import './home.css';
 const Home = (props) => (
   <React.Fragment>
     <div className="section-and-genre-wrapper">
-      <SectionContainer />
+      <SectionContainer match={props.match} />
       <div className="genre-wrapper">
         <GenreContainer />
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import NavContainer from './containers/navigation/nav-container';
 import Home from './containers/home/home';
@@ -9,7 +9,6 @@ import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 import EachAnime from './containers/each-anime/each-anime';
 import Admin from './containers/admin/admin';
-import Error404 from './components/UI/404';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -92,11 +91,11 @@ function App(props) {
       ) : null}
       <NavContainer />
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/explore" component={Home} />
         <Route path="/library" component={Library} />
         <Route path="/each-anime/:animeId" component={EachAnime} />
         <Route path="/admin" exact component={Admin} />
-        <Route component={Error404} />
+        <Redirect to="/explore/home" />
       </Switch>
     </div>
   );
