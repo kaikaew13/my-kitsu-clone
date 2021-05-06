@@ -1,3 +1,6 @@
+const fs = require('fs/promises');
+const path = require('path');
+
 const jwt = require('jsonwebtoken');
 
 exports.errorHandler = (err, next) => {
@@ -26,4 +29,9 @@ exports.isAuth = (req, res, next) => {
   }
   req.userId = decodedToken.userId;
   next();
+};
+
+exports.clearImage = async (filePath) => {
+  filePath = path.join(__dirname, filePath);
+  await fs.unlink(filePath);
 };

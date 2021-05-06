@@ -3,9 +3,10 @@ const Anime = require('../models/anime');
 const User = require('../models/user');
 
 exports.getHome = async (req, res, next) => {
+  let limit = req.params.limit === 'no-limit' ? null : +req.params.limit;
   const status = 'none';
   try {
-    const animeList = await Anime.find({ status: status });
+    const animeList = await Anime.find({ status: status }).limit(limit);
     if (!animeList) {
       throw new Error('could not fetch from database');
     }
