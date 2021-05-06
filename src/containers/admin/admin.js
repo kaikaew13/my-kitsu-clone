@@ -28,7 +28,7 @@ const Admin = (props) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const form = new FormData();
-    form.append('imgFile', imgFile);
+    form.append('image', imgFile);
     form.append('title', title);
     form.append('description', description);
     const genreString = genre.reduce((prev, cur) => {
@@ -40,14 +40,16 @@ const Admin = (props) => {
       return prev;
     }, '');
     form.append('genre', genreString);
+
     const res = await fetch(URL + '/admin/post-anime', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + props.jwt,
       },
       body: form,
     });
+    const resData = await res.json();
+    console.log(resData);
   };
 
   let adminPage = null;
@@ -56,7 +58,11 @@ const Admin = (props) => {
       !props.jwt || props.user.role !== 'admin' ? (
         <Redirect to="/" />
       ) : (
-        <form className="add-anime" onSubmit={submitHandler}>
+        <form
+          className="add-anime"
+          onSubmit={submitHandler}
+          encType="multipart/form-data"
+        >
           <ul>
             <li className="flex-list-items">
               <label>Title</label>
@@ -101,7 +107,10 @@ const Admin = (props) => {
               <label>Image</label>
               <input
                 type="file"
-                onChange={(e) => setImgFile(e.target.files[0])}
+                name="image"
+                onChange={(e) => {
+                  setImgFile(e.target.files[0]);
+                }}
               />
             </li>
           </ul>
