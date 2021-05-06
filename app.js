@@ -14,8 +14,7 @@ const app = express();
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'images'),
-  filename: (req, file, cb) =>
-    cb(null, new Date().toISOString() + '-' + file.originalname),
+  filename: (req, file, cb) => cb(null, file.originalname),
 });
 const fileFilter = (req, file, cb) => {
   if (
@@ -35,13 +34,12 @@ const corsOptions = {
 };
 
 app.use(express.json());
-app.use(cors(corsOptions));
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// add middleware for CORS
+app.use(cors(corsOptions));
 
 app.use('/admin', adminRouter);
 app.use('/auth', authRouter);
