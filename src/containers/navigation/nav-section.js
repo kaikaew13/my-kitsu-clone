@@ -7,6 +7,7 @@ import './navigation.css';
 
 const NavSection = (props) => {
   const history = useHistory();
+
   return props.navClass === 'nav-right' ? (
     <nav className={props.navClass}>
       {props.loggedIn ? (
@@ -73,12 +74,18 @@ const NavSection = (props) => {
       >
         Feedback ▾
       </EachNav>
+      {props.role === 'admin' ? (
+        <EachNav dropdown={false} clicked={() => history.push('/admin')}>
+          Add Anime
+        </EachNav>
+      ) : null}
     </nav>
   );
 };
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.auth.jwt ? true : false,
+    role: state.user.user ? state.user.user.role : null,
   };
 };
 
