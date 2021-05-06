@@ -37,7 +37,7 @@ exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId)
       .populate('animelist.animeId')
-      .populate('follower', ['username'])
+      .populate('followers', ['username'])
       .populate('following', ['username']);
     if (!user) throw new Error('no user found');
     const message = 'fetched user successfully';
