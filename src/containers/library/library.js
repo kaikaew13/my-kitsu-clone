@@ -10,31 +10,16 @@ import Error404 from '../../components/UI/404';
 // const URL = process.env.REACT_APP_URL;
 
 const Library = (props) => {
-  // const [animelist, setAnimelist] = useState([]);
   const { match } = props;
 
-  // useEffect(() => {
-  //   if (!props.loading) {
-  //     props.jwt &&
-  //       (async () => {
-  //         const res = await fetch(URL + '/user/get-animelist', {
-  //           method: 'GET',
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //             Authorization: 'Bearer ' + props.jwt,
-  //           },
-  //         });
-  //         if (res.status !== 200) throw new Error('failed to fetch animelist');
-  //         const resData = await res.json();
-  //         setAnimelist(
-  //           resData.animelist.map((each) => ({
-  //             id: each.animeId._id,
-  //             url: URL + each.animeId.imageUrl,
-  //           }))
-  //         );
-  //       })();
-  //   }
-  // }, [props.jwt, props.loading]);
+  const navList = [
+    'activity',
+    'library',
+    'reactions',
+    'followers',
+    'following',
+    'groups',
+  ];
 
   let library = null;
   if (!props.loading) {
@@ -43,83 +28,30 @@ const Library = (props) => {
     ) : (
       <React.Fragment>
         <Switch>
-          <Route
-            path={match.url + '/activity'}
-            exact
-            render={() => (
-              <React.Fragment>
-                <LibraryHeader
-                  username={props.user.username}
-                  linkName="Activity"
-                />
-              </React.Fragment>
-            )}
-          />
-          <Route
-            path={match.url + '/library'}
-            exact
-            render={() => {
-              return (
-                <React.Fragment>
-                  <LibraryHeader
-                    username={props.user.username}
-                    linkName="Library"
-                  />
-                  <AnimelistSection />
-                </React.Fragment>
-              );
-            }}
-          />
-          <Route
-            path={match.url + '/reactions'}
-            exact
-            render={() => (
-              <React.Fragment>
-                <LibraryHeader
-                  username={props.user.username}
-                  linkName="Reactions"
-                />
-              </React.Fragment>
-            )}
-          />
-          <Route
-            path={match.url + '/followers'}
-            exact
-            render={() => (
-              <React.Fragment>
-                <LibraryHeader
-                  username={props.user.username}
-                  linkName="Followers"
-                />
-                <Follow userlist={props.user.followers} page="followers" />
-              </React.Fragment>
-            )}
-          />
-          <Route
-            path={match.url + '/following'}
-            exact
-            render={() => (
-              <React.Fragment>
-                <LibraryHeader
-                  username={props.user.username}
-                  linkName="Following"
-                />
-                <Follow userlist={props.user.following} page="following" />
-              </React.Fragment>
-            )}
-          />
-          <Route
-            path={match.url + '/groups'}
-            exact
-            render={() => (
-              <React.Fragment>
-                <LibraryHeader
-                  username={props.user.username}
-                  linkName="Groups"
-                />
-              </React.Fragment>
-            )}
-          />
+          {navList.map((each, index) => {
+            return (
+              <Route
+                key={index}
+                path={match.url + '/' + each}
+                exact
+                render={() => {
+                  return (
+                    <React.Fragment>
+                      <LibraryHeader
+                        username={props.user.username}
+                        linkName={each.charAt(0).toUpperCase() + each.slice(1)}
+                      />
+                      {each === 'library' ? (
+                        <AnimelistSection />
+                      ) : each === 'followers' || each === 'following' ? (
+                        <Follow userlist={props.user[each]} page={each} />
+                      ) : null}
+                    </React.Fragment>
+                  );
+                }}
+              />
+            );
+          })}
           <Route component={Error404} />
         </Switch>
       </React.Fragment>

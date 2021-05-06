@@ -8,13 +8,15 @@ import '../../home/section/section.css';
 const Follow = (props) =>
   props.userlist.length > 0 ? (
     <div className="animelist-section follow-section">
-      {props.userlist.map((each) => (
-        <FollowItem
-          key={each}
-          username={each.username}
-          buttonText={props.page === 'following' ? 'Unfollow' : 'Follow'}
-        />
-      ))}
+      {props.userlist.map((each) => {
+        return (
+          <FollowItem
+            key={each}
+            username={each.username}
+            buttonText={props.page === 'following' ? 'Unfollow' : 'Follow'}
+          />
+        );
+      })}
     </div>
   ) : (
     <div style={{ fontSize: '16px', fontFamily: 'sans-serif' }}>

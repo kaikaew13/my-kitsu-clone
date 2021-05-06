@@ -11,7 +11,14 @@ const URL = process.env.REACT_APP_URL;
 const EachAnime = (props) => {
   const [anime, setAnime] = useState(null);
   const { match } = props;
-  console.log(match);
+
+  const navList = [
+    'summary',
+    'episodes',
+    'characters',
+    'reactions',
+    'franchise',
+  ];
 
   useEffect(() => {
     (async () => {
@@ -30,72 +37,38 @@ const EachAnime = (props) => {
   return !loading ? (
     <React.Fragment>
       <Switch>
-        <Route
-          path={match.url}
-          exact
-          render={() => {
-            return (
-              <React.Fragment>
-                <EachAnimeHeader linkName="Summary" id={anime._id} />
-                <EachAnimeSummary
-                  title={anime.title}
-                  url={URL + anime.imageUrl}
-                  score={anime.score}
-                  description={anime.description}
-                  genre={anime.genre}
-                />
-              </React.Fragment>
-            );
-          }}
-        />
-        <Route
-          path={match.url + '/episodes'}
-          exact
-          render={() => {
-            return (
-              <React.Fragment>
-                <EachAnimeHeader linkName="Episodes" id={anime._id} />
-                <EachAnimeBody url={URL + anime.imageUrl} />
-              </React.Fragment>
-            );
-          }}
-        />
-        <Route
-          path={match.url + '/characters'}
-          exact
-          render={() => {
-            return (
-              <React.Fragment>
-                <EachAnimeHeader linkName="Characters" id={anime._id} />
-                <EachAnimeBody url={URL + anime.imageUrl} />
-              </React.Fragment>
-            );
-          }}
-        />
-        <Route
-          path={match.url + '/reactions'}
-          exact
-          render={() => {
-            return (
-              <React.Fragment>
-                <EachAnimeHeader linkName="Reactions" id={anime._id} />
-                <EachAnimeBody url={URL + anime.imageUrl} />
-              </React.Fragment>
-            );
-          }}
-        />
-        <Route
-          path={match.url + '/franchise'}
-          exact
-          render={() => {
-            return (
-              <React.Fragment>
-                <EachAnimeHeader linkName="Franchise" id={anime._id} />
-                <EachAnimeBody url={URL + anime.imageUrl} />
-              </React.Fragment>
-            );
-          }}
-        />
+        {navList.map((each, index) => {
+          return (
+            <Route
+              key={index}
+              path={
+                each === 'summary' ? match.url + '/' : match.url + '/' + each
+              }
+              exact
+              render={() => {
+                return (
+                  <React.Fragment>
+                    <EachAnimeHeader
+                      linkName={each.charAt(0).toUpperCase() + each.slice(1)}
+                      id={anime._id}
+                    />
+                    {each === 'summary' ? (
+                      <EachAnimeSummary
+                        title={anime.title}
+                        url={URL + anime.imageUrl}
+                        score={anime.score}
+                        description={anime.description}
+                        genre={anime.genre}
+                      />
+                    ) : (
+                      <EachAnimeBody url={URL + anime.imageUrl} />
+                    )}
+                  </React.Fragment>
+                );
+              }}
+            />
+          );
+        })}
         <Route component={Error404} />
       </Switch>
     </React.Fragment>
