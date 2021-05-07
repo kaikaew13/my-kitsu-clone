@@ -5,7 +5,6 @@ import '../../containers/each-anime/each-anime-summary/each-anime-summary.css';
 import '../../containers/library/follow/follow.css';
 
 const EachAnimePic = (props) => {
-  console.log(props.inLib);
   let libraryBox = (
     <React.Fragment>
       <p>Add to Library</p>

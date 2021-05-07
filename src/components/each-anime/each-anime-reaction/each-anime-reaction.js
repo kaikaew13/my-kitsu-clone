@@ -20,7 +20,7 @@ const EachAnimeReaction = (props) => {
       });
       if (res.status !== 200) throw new Error('failed to fetch reactions');
       const resData = await res.json();
-      console.log(resData);
+      // console.log(resData);
       setReactionlist(
         resData.reactions.map((each) => {
           return {

@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
+import { io } from 'socket.io-client';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ function App(props) {
     setUser,
     setAnimelist,
     unsetUser,
+    setSocket,
   } = props;
   const logoutHandler = useCallback(() => {
     logout();
@@ -76,13 +78,18 @@ function App(props) {
     [logoutHandler, getUser]
   );
   useEffect(() => {
+    const socket = io(URL);
+    setSocket(socket);
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     console.log(new Date(time).getTime());
     if (time) {
       setAutoLogout(new Date(time).getTime());
     } else unsetLoading();
-  }, [setAutoLogout, setLoading, unsetLoading]);
+    return () => {
+      socket.disconnect();
+    };
+  }, [setAutoLogout, setLoading, unsetLoading, setSocket]);
 
   return (
     <div className="App">
@@ -123,6 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     setAnimelist: (animelist) =>
       dispatch({ type: 'SET_ANIMELIST', animelist: animelist }),
     unsetUser: () => dispatch({ type: 'UNSET_USER' }),
+    setSocket: (socket) => dispatch({ type: 'SET_SOCKET', socket: socket }),
   };
 };
 
