@@ -55,7 +55,7 @@ function App(props) {
       });
       const animelist = {};
       user.animelist.forEach((each) => {
-        animelist[each.animeId._id.toString()] = each;
+        if (each.animeId) animelist[each.animeId._id.toString()] = each;
       });
       setAnimelist(animelist);
       setJWT(jwt, expireTime);

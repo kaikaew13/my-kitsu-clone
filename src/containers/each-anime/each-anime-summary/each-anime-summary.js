@@ -8,11 +8,14 @@ import '../../library/animelist-section/animelist-section.css';
 const EachAnimeSummary = (props) => {
   return (
     <div className="animelist-section">
-      <EachAnimePic url={props.url} id={props.id} />
-      <EachAnimeDescription
-        title={props.title}
-        description={props.description}
-      />
+      <EachAnimePic url={props.url} id={props.id} title={props.title} />
+      <div className="description-and-reaction-wrapper">
+        <EachAnimeDescription
+          title={props.title}
+          description={props.description}
+        />
+      </div>
+
       <EachAnimeDetails
         title={props.title}
         score={props.score}

@@ -1,3 +1,9 @@
+.description-and-reaction-wrapper {
+  margin-top: 20px;
+  min-height: 1500px;
+  width: 60%;
+}
+
 .each-anime-pic {
   position: sticky;
   top: 73px;

@@ -25,7 +25,17 @@ const EachAnimePic = (props) => {
             </span>
           </div>
           <div className="follow-btn smaller blue">Add Rating</div>
-          <div className="follow-btn smaller">Post Reaction</div>
+          <div
+            className="follow-btn smaller"
+            onClick={() =>
+              props.openReactionModal({
+                title: props.title,
+                id: props.id,
+              })
+            }
+          >
+            Post Reaction
+          </div>
           <div className="each-anime-info-status">
             <span className="link-edit-status">Edit Library Entry</span>
           </div>
@@ -48,4 +58,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(EachAnimePic);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openReactionModal: (payload) =>
+      dispatch({
+        type: 'OPEN_MODAL',
+        which: 'reaction-modal',
+        payload: payload,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EachAnimePic);

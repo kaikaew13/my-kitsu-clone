@@ -4,10 +4,7 @@ import '../../containers/each-anime/each-anime-summary/each-anime-summary.css';
 import '../../containers/library/animelist-section/animelist-section.css';
 
 const EachAnimeDescription = (props) => (
-  <div
-    className="animelist-section-animelist"
-    style={{ width: '60%', marginTop: '20px' }}
-  >
+  <div className="animelist-section-animelist" style={{ width: '100%' }}>
     <h3>{props.title}</h3>
     <p className="description">{props.description}</p>
   </div>
