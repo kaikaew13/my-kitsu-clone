@@ -20,7 +20,11 @@ const EachAnimeSummary = (props) => {
           title={props.title}
           description={props.description}
         />
-        <EachAnimeReaction />
+        <EachAnimeReaction
+          inLib={props.inLib}
+          title={props.title}
+          id={props.id}
+        />
       </div>
 
       <EachAnimeDetails

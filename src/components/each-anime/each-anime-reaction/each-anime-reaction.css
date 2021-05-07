@@ -32,6 +32,9 @@
 
 .upvote {
   color: rgb(153, 153, 153);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .gray {
   color: rgb(153, 153, 153);

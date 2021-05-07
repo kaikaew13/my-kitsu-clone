@@ -6,7 +6,7 @@ const Reaction = (props) => (
   <div className="reaction-items">
     <div className="upvote">
       <div className="gray">▲</div>
-      <div className="gray">13</div>
+      <div className="gray">{props.upvote}</div>
     </div>
     <div>
       <p
@@ -17,12 +17,9 @@ const Reaction = (props) => (
           fontSize: '13px',
         }}
       >
-        username
+        {props.username}
       </p>
-      <div className="reaction-message">
-        messages fasfas fjsjf dsjljjljsjfl sdjlfjdaslfjs lfjsdfjslfjsljf
-        fjsljsl;f jsjlj
-      </div>
+      <div className="reaction-message">{props.reactionMessage}</div>
     </div>
   </div>
 );

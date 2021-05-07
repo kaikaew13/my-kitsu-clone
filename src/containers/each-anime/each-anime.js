@@ -68,7 +68,7 @@ const EachAnime = (props) => {
                         inLib={inLib}
                       />
                     ) : (
-                      <EachAnimeBody url={URL + anime.imageUrl} />
+                      <EachAnimeBody url={URL + anime.imageUrl} inLib={inLib} />
                     )}
                   </React.Fragment>
                 );
