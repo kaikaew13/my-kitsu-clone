@@ -6,6 +6,7 @@ import EachAnimeSummary from './each-anime-summary/each-anime-summary';
 import EachAnimeHeader from './each-anime-header/each-anime-header';
 import Error404 from '../../components/UI/404';
 import EachAnimeBody from './each-anime-body/each-anime-body';
+import EachAnimeReactionContainer from './each-anime-reaction/each-anime-reaction';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -66,6 +67,13 @@ const EachAnime = (props) => {
                         genre={anime.genre}
                         id={anime._id}
                         inLib={inLib}
+                      />
+                    ) : each === 'reactions' ? (
+                      <EachAnimeReactionContainer
+                        url={URL + anime.imageUrl}
+                        inLib={inLib}
+                        title={anime.title}
+                        id={anime._id}
                       />
                     ) : (
                       <EachAnimeBody url={URL + anime.imageUrl} inLib={inLib} />

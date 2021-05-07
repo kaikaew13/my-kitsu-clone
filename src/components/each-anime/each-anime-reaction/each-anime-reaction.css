@@ -22,8 +22,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding-bottom: 10px;
-  margin-top: 10px;
+  padding-bottom: 15px;
+  margin: 15px 0;
   border-bottom: 1px solid rgb(234, 234, 234);
 }
 .reaction-items > div {

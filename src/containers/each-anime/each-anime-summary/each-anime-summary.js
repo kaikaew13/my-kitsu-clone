@@ -24,6 +24,7 @@ const EachAnimeSummary = (props) => {
           inLib={props.inLib}
           title={props.title}
           id={props.id}
+          viewmore={true}
         />
       </div>
 

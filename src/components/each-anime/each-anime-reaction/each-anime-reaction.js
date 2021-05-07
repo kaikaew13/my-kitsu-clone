@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import Reaction from './reaction';
 import './each-anime-reaction.css';
@@ -7,6 +8,7 @@ import './each-anime-reaction.css';
 const URL = process.env.REACT_APP_URL;
 
 const EachAnimeReaction = (props) => {
+  const history = useHistory();
   const [reactionlist, setReactionlist] = useState([]);
   useEffect(() => {
     (async () => {
@@ -61,7 +63,16 @@ const EachAnimeReaction = (props) => {
             upvote={each.upvote}
           />
         ))}
-        <div className="view-more-reaction">View More Reactions</div>
+        {props.viewmore && (
+          <div
+            className="view-more-reaction"
+            onClick={() =>
+              history.push('/each-anime/' + props.id + '/reactions')
+            }
+          >
+            View More Reactions
+          </div>
+        )}
       </div>
     </div>
   );
