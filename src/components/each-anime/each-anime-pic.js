@@ -5,6 +5,7 @@ import '../../containers/each-anime/each-anime-summary/each-anime-summary.css';
 import '../../containers/library/follow/follow.css';
 
 const EachAnimePic = (props) => {
+  console.log(props.inLib);
   let libraryBox = (
     <React.Fragment>
       <p>Add to Library</p>
@@ -13,49 +14,37 @@ const EachAnimePic = (props) => {
       <div className="follow-btn smaller purple">Started Watching</div>
     </React.Fragment>
   );
-  if (!props.loading) {
-    if (props.animelist && props.animelist[props.id])
-      libraryBox = (
-        <React.Fragment>
-          <p>Update Library</p>
-          <div className="each-anime-info-status upper">
-            <span>Saved in </span>
-            <span className="link-edit-status">
-              {props.animelist[props.id].status}
-            </span>
-          </div>
-          <div className="follow-btn smaller blue">Add Rating</div>
-          <div
-            className="follow-btn smaller"
-            onClick={() =>
-              props.openReactionModal({
-                title: props.title,
-                id: props.id,
-              })
-            }
-          >
-            Post Reaction
-          </div>
-          <div className="each-anime-info-status">
-            <span className="link-edit-status">Edit Library Entry</span>
-          </div>
-        </React.Fragment>
-      );
-  }
-  return props.loading ? (
-    <h1>Loading...</h1>
-  ) : (
+  if (props.inLib)
+    libraryBox = (
+      <React.Fragment>
+        <p>Update Library</p>
+        <div className="each-anime-info-status upper">
+          <span>Saved in </span>
+          <span className="link-edit-status">{props.inLib.status}</span>
+        </div>
+        <div className="follow-btn smaller blue">Add Rating</div>
+        <div
+          className="follow-btn smaller"
+          onClick={() =>
+            props.openReactionModal({
+              title: props.title,
+              id: props.id,
+            })
+          }
+        >
+          Post Reaction
+        </div>
+        <div className="each-anime-info-status">
+          <span className="link-edit-status">Edit Library Entry</span>
+        </div>
+      </React.Fragment>
+    );
+  return (
     <div className="each-anime-pic">
       <img src={props.url} alt={props.url} />
       <div className="each-anime-info">{libraryBox}</div>
     </div>
   );
-};
-const mapStateToProps = (state) => {
-  return {
-    animelist: state.user.animelist,
-    loading: state.webGeneral.loading,
-  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -69,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EachAnimePic);
+export default connect(null, mapDispatchToProps)(EachAnimePic);

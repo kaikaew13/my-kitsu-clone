@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import EachAnimeSummary from './each-anime-summary/each-anime-summary';
 import EachAnimeHeader from './each-anime-header/each-anime-header';
@@ -33,6 +34,11 @@ const EachAnime = (props) => {
     })();
   }, [match.params.animeId]);
   let loading = anime ? false : true;
+  let inLib = null;
+  if (!loading) {
+    if (props.animelist && props.animelist[match.params.animeId])
+      inLib = props.animelist[match.params.animeId];
+  }
   return !loading ? (
     <React.Fragment>
       <Switch>
@@ -59,6 +65,7 @@ const EachAnime = (props) => {
                         description={anime.description}
                         genre={anime.genre}
                         id={anime._id}
+                        inLib={inLib}
                       />
                     ) : (
                       <EachAnimeBody url={URL + anime.imageUrl} />
@@ -77,4 +84,21 @@ const EachAnime = (props) => {
   );
 };
 
-export default EachAnime;
+const mapStateToProps = (state) => {
+  return {
+    animelist: state.user.animelist,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openReactionModal: (payload) =>
+      dispatch({
+        type: 'OPEN_MODAL',
+        which: 'reaction-modal',
+        payload: payload,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EachAnime);
