@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -10,7 +10,25 @@ const URL = process.env.REACT_APP_URL;
 const EachAnimeReaction = (props) => {
   const history = useHistory();
   const [reactionlist, setReactionlist] = useState([]);
+
+  const addReactionList = useCallback(
+    (reaction) => {
+      const newReaction = {
+        userId: reaction.userId,
+        username: 'socket',
+        reactionMessage: reaction.reactionMessage,
+        upvote: reaction.upvote,
+        reactionId: reaction._id.toString(),
+      };
+      setReactionlist([...reactionlist, newReaction]);
+    },
+    [reactionlist]
+  );
+
   useEffect(() => {
+    props.socket.on('post-creation', (data) => {
+      addReactionList(data.reaction);
+    });
     (async () => {
       const res = await fetch(URL + '/get-reaction/' + props.id, {
         method: 'GET',
@@ -33,7 +51,7 @@ const EachAnimeReaction = (props) => {
         })
       );
     })();
-  }, [props.id]);
+  }, [props.id, props.socket, addReactionList]);
 
   return (
     <div className="reaction-container">
@@ -78,6 +96,12 @@ const EachAnimeReaction = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    socket: state.socket.socket,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     openReactionModal: (payload) =>
@@ -89,4 +113,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(EachAnimeReaction);
+export default connect(mapStateToProps, mapDispatchToProps)(EachAnimeReaction);

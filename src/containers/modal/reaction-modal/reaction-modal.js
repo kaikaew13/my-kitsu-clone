@@ -7,14 +7,12 @@ const URL = process.env.REACT_APP_URL;
 const WORD_LIMIT = 140;
 
 const ReactionModal = (props) => {
-  console.log(props.socket);
   const [reactionMessage, setReactionMessage] = useState('');
   let btnClass = 'reaction-post-button';
   if (reactionMessage.length > 0 && reactionMessage.length <= WORD_LIMIT)
     btnClass += ' success';
 
   const onClickHandler = async () => {
-    props.socket.emit('post-reaction', 'reaction!!');
     const res = await fetch(URL + '/user/post-reaction', {
       method: 'POST',
       headers: {

@@ -80,6 +80,7 @@ function App(props) {
   useEffect(() => {
     const socket = io(URL);
     setSocket(socket);
+    socket.on('post-reaction', (data) => console.log(data));
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     console.log(new Date(time).getTime());
