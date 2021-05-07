@@ -44,7 +44,9 @@ exports.getEachReaction = async (req, res, next) => {
     }
     const reactions = await Reaction.find({
       animeId: animeId,
-    }).populate('userId', ['username', '_id']);
+    })
+      .sort({ createdAt: -1 }) //sort by newest first
+      .populate('userId', ['username', '_id']);
     const message = 'fetched reaction successfully';
     res.status(200).json({ message: message, reactions: reactions });
   } catch (err) {

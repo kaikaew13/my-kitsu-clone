@@ -65,7 +65,17 @@ app.use((err, req, res, next) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    app.listen(process.env.PORT || 3000);
+    const server = app.listen(process.env.PORT || 3000);
+    const io = require('socket.io')(server, {
+      cors: {
+        origin: 'http://localhost:3000',
+        method: ['GET', 'POST'],
+      },
+    });
+    io.on('connection', (socket) => {
+      console.log('connected');
+      socket.on('post-reaction', (data) => console.log(data));
+    });
   } catch (err) {
     console.log(err);
   }
