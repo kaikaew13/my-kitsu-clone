@@ -1,8 +1,31 @@
-const Anime = require('../models/anime');
+const { validationResult } = require('express-validator');
 
+const Anime = require('../models/anime');
 const { errorHandler, clearImage } = require('../helper');
+const User = require('../models/user');
+
+exports.isAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (user.role !== 'admin') {
+      const err = new Error('not authorized');
+      err.statusCode = 401;
+      throw err;
+    }
+    next();
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
 
 exports.postAnime = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const err = new Error('invalid input');
+    err.data = errors.array();
+    err.statusCode = 403;
+    return next(err);
+  }
   const imageUrl = '/' + req.file.path;
   const { title, description, genre } = req.body;
   const anime = new Anime({
@@ -23,7 +46,14 @@ exports.postAnime = async (req, res, next) => {
 };
 
 exports.putAnime = async (req, res, next) => {
-  const imageUrl = req.file.path ? '/' + req.file.path : null;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const err = new Error('invalid input');
+    err.data = errors.array();
+    err.statusCode = 403;
+    return next(err);
+  }
+  const imageUrl = req.file ? '/' + req.file.path : null;
   const { title, description, genre, animeId } = req.body;
   try {
     const anime = await Anime.findById(animeId);
@@ -35,7 +65,7 @@ exports.putAnime = async (req, res, next) => {
     anime.title = title ? title : anime.title;
     anime.description = description ? description : anime.description;
     anime.genre = genre ? genre.split(',') : anime.genre;
-    if (imageUrl.length) {
+    if (imageUrl) {
       clearImage(anime.imageUrl);
       anime.imageUrl = imageUrl;
     }

@@ -10,7 +10,8 @@ exports.signup = async (req, res, next) => {
   if (!errors.isEmpty()) {
     const err = new Error('invalid input');
     err.data = errors.array();
-    return errorHandler(err, next);
+    err.statusCode = 403;
+    return next(err);
   }
   const { email, password, username } = req.body;
   const role = req.body.role ? req.body.role : 'user';
