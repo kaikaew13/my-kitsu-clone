@@ -13,4 +13,6 @@ router.get('/get-user', isAuth, userController.getUser);
 
 router.put('/follow-user', isAuth, userController.followUser);
 
+router.post('/post-reaction', isAuth, userController.postReaction);
+
 module.exports = router;

@@ -61,6 +61,15 @@ const userSchema = new Schema(
       enum: ['admin', 'user'],
       required: true,
     },
+    reactionlist: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Reaction',
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );

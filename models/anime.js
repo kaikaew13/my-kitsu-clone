@@ -50,6 +50,15 @@ const animeSchema = new Schema({
     type: String,
     required: true,
   },
+  reactionlist: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Reaction',
+      },
+    ],
+    default: [],
+  },
 });
 
 module.exports = mongoose.model('Anime', animeSchema);

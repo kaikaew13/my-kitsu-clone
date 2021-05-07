@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const { errorHandler } = require('../helper');
+const Anime = require('../models/anime');
+const Reaction = require('../models/reaction');
 
 exports.addToLibrary = async (req, res, next) => {
   const { animeId, status } = req.body;
@@ -69,4 +71,32 @@ exports.followUser = async (req, res, next) => {
   await targetUser.save();
   const message = 'target user followed';
   res.status(200).json({ message: message });
+};
+
+exports.postReaction = async (req, res, next) => {
+  const { animeId, reactionMessage } = req.body;
+  try {
+    const anime = await Anime.findById(animeId);
+    if (!anime) {
+      const err = new Error('invalid anime id');
+      err.statusCode = 404;
+      throw err;
+    }
+    const user = await User.findById(req.userId);
+    if (!user) throw new Error('no user found');
+    const reaction = new Reaction({
+      reactionMessage: reactionMessage,
+      userId: req.userId,
+      animeId: animeId,
+    });
+    const savedReaction = await reaction.save();
+    user.reactionlist.push(savedReaction);
+    await user.save();
+    anime.reactionlist.push(savedReaction);
+    await anime.save();
+    const message = 'posted reaction successfully';
+    res.status(201).json({ message: message, reaction: savedReaction });
+  } catch (err) {
+    errorHandler(err, next);
+  }
 };
