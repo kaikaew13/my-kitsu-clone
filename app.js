@@ -66,16 +66,7 @@ app.use((err, req, res, next) => {
       useUnifiedTopology: true,
     });
     const server = app.listen(process.env.PORT || 3000);
-    const io = require('socket.io')(server, {
-      cors: {
-        origin: 'http://localhost:3000',
-        method: ['GET', 'POST'],
-      },
-    });
-    io.on('connection', (socket) => {
-      console.log('connected');
-      socket.on('post-reaction', (data) => console.log(data));
-    });
+    const io = require('./socket').init(server);
   } catch (err) {
     console.log(err);
   }

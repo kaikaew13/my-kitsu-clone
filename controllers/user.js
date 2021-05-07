@@ -2,6 +2,7 @@ const User = require('../models/user');
 const { errorHandler } = require('../helper');
 const Anime = require('../models/anime');
 const Reaction = require('../models/reaction');
+const { getIo } = require('../socket');
 
 exports.addToLibrary = async (req, res, next) => {
   const { animeId, status } = req.body;
@@ -95,6 +96,9 @@ exports.postReaction = async (req, res, next) => {
     anime.reactionlist.push(savedReaction);
     await anime.save();
     const message = 'posted reaction successfully';
+    getIo().emit('post-reaction', {
+      reaction: savedReaction,
+    });
     res.status(201).json({ message: message, reaction: savedReaction });
   } catch (err) {
     errorHandler(err, next);
