@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import AuthOptionModal from './auth-option-modal/auth-option-modal';
 import SignupModal from './signup-modal/signup-modal';
 import LoginModal from './login-modal/login-modal';
+import ReactionModal from './reaction-modal/reaction-modal';
 import './modal.css';
 
 const Modal = (props) => {
   let className = 'modal';
   if (props.modalType === 'login-modal') className += ' login-modal-height';
+  if (props.modalType === 'reaction-modal') className += ' reaction-modal';
   const switchCaseHandler = () => {
     switch (props.modalType) {
       case 'auth-option-modal':
@@ -17,6 +19,8 @@ const Modal = (props) => {
         return <SignupModal />;
       case 'login-modal':
         return <LoginModal />;
+      case 'reaction-modal':
+        return <ReactionModal />;
       default:
         return null;
     }

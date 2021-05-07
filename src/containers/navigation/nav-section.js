@@ -34,7 +34,7 @@ const NavSection = (props) => {
           </EachNav>
           <EachNav
             dropdown={false}
-            clicked={() => props.toggleShowModal('login-modal')}
+            clicked={() => props.toggleShowModal('reaction-modal')}
           >
             Sign In
           </EachNav>

@@ -1,6 +1,7 @@
 .section-container-wrapper {
   /* margin-left: 160px; */
   width: fit-content;
+  max-width: 850px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

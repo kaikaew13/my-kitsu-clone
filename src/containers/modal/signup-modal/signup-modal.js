@@ -29,9 +29,9 @@ const SignupModal = (props) => {
       </button>
     );
 
-  const signupHandler = (e) => {
+  const signupHandler = async (e) => {
     e.preventDefault();
-    fetch(URL + '/auth/signup', {
+    const res = await fetch(URL + '/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,15 +41,10 @@ const SignupModal = (props) => {
         email: email,
         password: password.val,
       }),
-    })
-      .then((res) => {
-        if (res.status !== 201) throw new Error('failed to signup');
-        return res.json();
-      })
-      .then((resData) => {
-        // should bring up login modal
-        props.switchToLogin();
-      });
+    });
+    if (res.status !== 201) throw new Error('failed to signup');
+    await res.json();
+    props.switchToLogin();
   };
 
   return (

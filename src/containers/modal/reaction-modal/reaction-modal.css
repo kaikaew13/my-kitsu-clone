@@ -1,0 +1,75 @@
+.reaction-img {
+  width: 390px;
+  height: 390px;
+  filter: brightness(30%);
+}
+
+.reaction-info {
+  position: relative;
+  top: -40%;
+  width: 100%;
+  height: 40%;
+  padding: 0 10px 10px;
+}
+.reaction-info span {
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0 5px;
+}
+.reaction-info textarea {
+  min-height: 70px;
+  margin-top: 5px;
+  padding: 15px 0 0;
+  resize: none;
+  background-color: transparent;
+  color: #fff;
+  border: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  width: 100%;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22.5px;
+}
+.reaction-info textarea:focus {
+  outline: none;
+}
+
+.reaction-info-header {
+  width: 100%;
+  position: relative;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.left {
+  color: #ccc;
+}
+.far-right {
+  position: absolute;
+  right: 0;
+  color: #e74c3c;
+}
+.success.reaction-post-button {
+  background: rgb(24, 173, 144);
+}
+.success:hover {
+  background: rgb(58, 189, 163);
+}
+.reaction-post-button {
+  position: absolute;
+  top: 337px;
+  right: 0;
+  height: 106px;
+  width: 106px;
+  border: 3px solid white;
+  background: rgb(180, 180, 180);
+  border-radius: 50%;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: white;
+}
+.reaction-post-button:hover {
+  transform: scale(1.1);
+}

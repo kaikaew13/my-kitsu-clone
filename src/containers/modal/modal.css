@@ -17,6 +17,36 @@
 .login-modal-height {
   height: 430px;
 }
+.reaction-modal {
+  height: 390px;
+  width: 390px;
+  top: 10%;
+  -webkit-animation-name: animateBottomReaction;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateBottomReaction;
+  animation-duration: 0.6s;
+}
+@-webkit-keyframes animateBottomReaction {
+  from {
+    top: -500px;
+    opacity: 0;
+  }
+  to {
+    top: 10%;
+    opacity: 1;
+  }
+}
+
+@keyframes animateBottomReaction {
+  from {
+    top: -500px;
+    opacity: 0;
+  }
+  to {
+    top: 10%;
+    opacity: 1;
+  }
+}
 
 @-webkit-keyframes animateBottom {
   from {
