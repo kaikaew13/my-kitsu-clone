@@ -17,6 +17,14 @@
   margin-top: 20px;
   flex-direction: column;
   border: 1px solid rgb(234, 234, 234);
+  padding-bottom: 6px;
+}
+
+.each-anime-info span {
+  font-family: sans-serif;
+  font-size: 12px;
+  display: inline-block;
+  margin: 0 2px;
 }
 .each-anime-info p {
   margin-top: -8px;
@@ -29,6 +37,16 @@
   margin: 5px 0;
   font-size: 12px;
   padding: 8px 5px;
+}
+.each-anime-info-status {
+  width: 80%;
+  height: fit-content;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+}
+.upper {
+  border-bottom: 1px solid rgb(234, 234, 234);
 }
 .description {
   font-size: 16px;
@@ -62,4 +80,10 @@
 }
 .anime-details-list-items strong {
   width: 80px;
+}
+.link-edit-status {
+  color: rgb(247, 82, 57);
+}
+.link-edit-status:hover {
+  cursor: pointer;
 }

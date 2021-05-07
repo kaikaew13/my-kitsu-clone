@@ -5,16 +5,21 @@ import EachAnimeDescription from '../../../components/each-anime/each-anime-desc
 import EachAnimeDetails from '../../../components/each-anime/each-anime-details';
 import '../../library/animelist-section/animelist-section.css';
 
-const EachAnimeSummary = (props) => (
-  <div className="animelist-section">
-    <EachAnimePic url={props.url} />
-    <EachAnimeDescription title={props.title} description={props.description} />
-    <EachAnimeDetails
-      title={props.title}
-      score={props.score}
-      genre={props.genre}
-    />
-  </div>
-);
+const EachAnimeSummary = (props) => {
+  return (
+    <div className="animelist-section">
+      <EachAnimePic url={props.url} id={props.id} />
+      <EachAnimeDescription
+        title={props.title}
+        description={props.description}
+      />
+      <EachAnimeDetails
+        title={props.title}
+        score={props.score}
+        genre={props.genre}
+      />
+    </div>
+  );
+};
 
 export default EachAnimeSummary;

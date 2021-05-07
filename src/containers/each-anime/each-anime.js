@@ -32,7 +32,6 @@ const EachAnime = (props) => {
       setAnime(resData.anime);
     })();
   }, [match.params.animeId]);
-
   let loading = anime ? false : true;
   return !loading ? (
     <React.Fragment>
@@ -59,6 +58,7 @@ const EachAnime = (props) => {
                         score={anime.score}
                         description={anime.description}
                         genre={anime.genre}
+                        id={anime._id}
                       />
                     ) : (
                       <EachAnimeBody url={URL + anime.imageUrl} />

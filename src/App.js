@@ -39,7 +39,10 @@ function App(props) {
           Authorization: 'Bearer ' + jwt,
         },
       });
-      if (res.status !== 200) throw new Error('failed to fetch the user');
+      if (res.status !== 200) {
+        alert('failed to login');
+        return logoutHandler();
+      }
       const resData = await res.json();
       const user = resData.user;
       // console.log(user);
