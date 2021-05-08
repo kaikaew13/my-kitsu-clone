@@ -45,7 +45,7 @@ const Library = (props) => {
                       {each === 'library' ? (
                         <AnimelistSection />
                       ) : each === 'followers' || each === 'following' ? (
-                        <Follow userlist={props.user[each]} page={each} />
+                        <Follow user={props.user} page={each} />
                       ) : each === 'reactions' ? (
                         <UserReaction
                           user={props.user}

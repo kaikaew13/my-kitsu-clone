@@ -17,12 +17,28 @@ const MediaReaction = (props) => {
       const res = await fetch(
         URL + '/get-each-reaction/' + match.params.reactionId
       );
-      if (res.status !== 200) throw new Error('failed to fetch the reaction');
+      if (res.status !== 200) window.location.replace('/');
       const resData = await res.json();
       console.log(resData);
       setReaction(resData.reaction);
     })();
   }, [match.params.reactionId]);
+
+  const followHandler = async () => {
+    const res = await fetch(URL + '/user/follow-user', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + props.jwt,
+      },
+      body: JSON.stringify({
+        targetUserId: reaction.userId._id,
+      }),
+    });
+    if (res.status !== 200) throw new Error('failed to follow target user');
+    await res.json();
+    alert('followed the targeted user');
+  };
 
   let loading = reaction ? false : true;
   let self;
@@ -52,7 +68,11 @@ const MediaReaction = (props) => {
               src={URL + '/images/profile-pic.png'}
             />
           </div>
-          <button className="follow-btn small-center" disabled={self}>
+          <button
+            className="follow-btn small-center"
+            disabled={self}
+            onClick={followHandler}
+          >
             {self ? "Hey, that's you!" : 'Follow'}
           </button>
         </div>
@@ -64,6 +84,7 @@ const MediaReaction = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
+    jwt: state.auth.jwt,
   };
 };
 
