@@ -66,3 +66,21 @@ exports.getEachAnime = async (req, res, next) => {
 //     errorHandler(err, next);
 //   }
 // };
+
+exports.getEachReaction = async (req, res, next) => {
+  const reactionId = req.params.reactionId;
+  try {
+    const reaction = await Reaction.findById(reactionId)
+      .populate('animeId', ['title', 'imageUrl'])
+      .populate('userId', ['username']);
+    if (!reaction) {
+      const err = new Error('failed to fetch the reaction');
+      err.statusCode = 404;
+      throw err;
+    }
+    const message = 'fetched reaction successfully';
+    res.status(200).json({ message: message, reaction: reaction });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
