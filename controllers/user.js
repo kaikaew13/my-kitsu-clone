@@ -41,7 +41,8 @@ exports.getUser = async (req, res, next) => {
     const user = await User.findById(req.userId)
       .populate('animelist.animeId')
       .populate('followers', ['username'])
-      .populate('following', ['username']);
+      .populate('following', ['username'])
+      .populate('reactionlist', ['reactionMessage', 'upvote', 'animeId']);
     if (!user) throw new Error('no user found');
     const message = 'fetched user successfully';
     res.status(200).json({
@@ -53,6 +54,7 @@ exports.getUser = async (req, res, next) => {
         following: user.following,
         username: user.username,
         role: user.role,
+        reactionlist: user.reactionlist,
       },
     });
   } catch (err) {
@@ -99,6 +101,7 @@ exports.postReaction = async (req, res, next) => {
     getIo().emit('post-reaction', {
       reaction: savedReaction,
     });
+
     res.status(201).json({ message: message, reaction: savedReaction });
   } catch (err) {
     errorHandler(err, next);
