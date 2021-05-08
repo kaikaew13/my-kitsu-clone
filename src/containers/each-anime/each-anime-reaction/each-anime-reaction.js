@@ -7,7 +7,12 @@ import EachAnimeReaction from '../../../components/each-anime/each-anime-reactio
 
 const EachAnimeReactionContainer = (props) => (
   <div className="animelist-section">
-    <EachAnimePic url={props.url} inLib={props.inLib} title={props.title} />
+    <EachAnimePic
+      url={props.url}
+      inLib={props.inLib}
+      title={props.title}
+      id={props.id}
+    />
     <div
       className="fit-the-remaining"
       style={{ background: 'transparent', border: 'none' }}

@@ -1,14 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import Reaction from './reaction';
 import './each-anime-reaction.css';
 
-const URL = process.env.REACT_APP_URL;
-
 const EachAnimeReaction = (props) => {
-  console.log(props.reactionlist);
   const history = useHistory();
   // const [reactionlist, setReactionlist] = useState([]);
 
@@ -71,7 +68,7 @@ const EachAnimeReaction = (props) => {
             onClick={() =>
               props.openReactionModal({
                 title: props.title,
-                id: props.id,
+                id: props.id.toString(),
               })
             }
             className="new-reaction"
@@ -116,12 +113,6 @@ const EachAnimeReaction = (props) => {
   ) : null;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    socket: state.socket.socket,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     openReactionModal: (payload) =>
@@ -133,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EachAnimeReaction);
+export default connect(null, mapDispatchToProps)(EachAnimeReaction);

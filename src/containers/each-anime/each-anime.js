@@ -31,10 +31,10 @@ const EachAnime = (props) => {
       });
       if (res.status !== 200) throw new Error('not a valid url');
       const resData = await res.json();
-      // console.log(resData);
+      // console.log(resData.anime.reactionlist);
       setAnime(resData.anime);
     })();
-  }, [match.params.animeId]);
+  }, [match.params.animeId, props.socket]); // props.socket in dependency list cause re render ?
   let loading = anime ? false : true;
   let inLib = null;
   if (!loading) {
@@ -98,6 +98,7 @@ const EachAnime = (props) => {
 const mapStateToProps = (state) => {
   return {
     animelist: state.user.animelist,
+    socket: state.socket.socket,
   };
 };
 

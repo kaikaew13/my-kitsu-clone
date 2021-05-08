@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { io } from 'socket.io-client';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -14,6 +14,7 @@ import Admin from './containers/admin/admin';
 const URL = process.env.REACT_APP_URL;
 
 function App(props) {
+  const [socketStatus, setSocketStatus] = useState(false);
   const {
     logout,
     setJWT,
@@ -83,8 +84,9 @@ function App(props) {
     const socket = io(URL);
     setSocket(socket);
     console.log('rendering');
-    socket.on('post-reaction', ({ reaction }) => {
-      console.log(reaction);
+    socket.on('post-reaction', (data) => {
+      console.log(data);
+      setSocketStatus(!socketStatus);
     });
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
@@ -95,7 +97,7 @@ function App(props) {
     return () => {
       socket.disconnect();
     };
-  }, [setAutoLogout, setLoading, unsetLoading, setSocket]);
+  }, [setAutoLogout, setLoading, unsetLoading, setSocket, socketStatus]);
   return (
     <div className="App">
       {props.showModal ? (

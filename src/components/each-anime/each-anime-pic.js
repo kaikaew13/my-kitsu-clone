@@ -13,6 +13,7 @@ const EachAnimePic = (props) => {
       <div className="follow-btn smaller purple">Started Watching</div>
     </React.Fragment>
   );
+
   if (props.inLib)
     libraryBox = (
       <React.Fragment>
