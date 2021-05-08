@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import Reaction from './reaction';
 import './each-anime-reaction.css';
@@ -59,7 +59,7 @@ const EachAnimeReaction = (props) => {
   //     );
   //   })();
   // }, [props.id, props.socket]);
-  console.log(props.reactionlist);
+
   return props.reactionlist.length > 0 ? (
     <div className="reaction-container">
       <div className="reaction-header">

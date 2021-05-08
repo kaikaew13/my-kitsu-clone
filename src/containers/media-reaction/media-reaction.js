@@ -22,7 +22,7 @@ const MediaReaction = (props) => {
       console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, []);
+  }, [match.params.reactionId]);
 
   let loading = reaction ? false : true;
   let self;
@@ -41,12 +41,13 @@ const MediaReaction = (props) => {
       />
       <div className="m-r-user-container">
         <div style={{ position: 'relative' }}>
-          <img src={URL + '/images/bg-user.png'} />
+          <img src={URL + '/images/bg-user.png'} alt="" />
           <h4 className="user-username">{reaction.userId.username}</h4>
         </div>
         <div>
           <div className="profile-pic-wrapper">
             <img
+              alt=""
               className="profile-pic"
               src={URL + '/images/profile-pic.png'}
             />

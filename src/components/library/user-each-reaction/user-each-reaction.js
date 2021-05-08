@@ -15,7 +15,9 @@ const UserEachReaction = (props) => (
         <p className="user-reaction-title">
           {props.title} <span>TV</span>
         </p>
-        <p className="user-reaction-desc">{props.reactionMessage}</p>
+        <p className="user-reaction-desc" onClick={props.clicked}>
+          {props.reactionMessage}
+        </p>
       </div>
     </div>
     <img src={props.url} alt="" />

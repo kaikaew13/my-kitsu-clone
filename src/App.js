@@ -49,7 +49,6 @@ function App(props) {
       }
       const resData = await res.json();
       const user = resData.user;
-      console.log(user);
 
       setUser({
         id: user._id,
