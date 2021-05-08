@@ -3,6 +3,7 @@ const initialState = {
   modalType: null,
   loading: true,
   payload: null,
+  transparentNav: false,
 };
 
 export default function webGeneralReducer(state = initialState, action) {
@@ -20,6 +21,14 @@ export default function webGeneralReducer(state = initialState, action) {
       return { ...state, loading: true };
     case 'UNSET_LOADING':
       return { ...state, loading: false };
+    case 'SET_NAV':
+      return {
+        ...state,
+        transparentNav:
+          action.path !== 'explore' &&
+          action.path !== 'media-reaction' &&
+          action.path !== 'admin',
+      };
     default:
       return state;
   }

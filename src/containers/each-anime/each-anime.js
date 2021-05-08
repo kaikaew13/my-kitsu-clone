@@ -9,10 +9,11 @@ import EachAnimeBody from './each-anime-body/each-anime-body';
 import EachAnimeReactionContainer from './each-anime-reaction/each-anime-reaction';
 
 const URL = process.env.REACT_APP_URL;
+const PATH = 'each-anime';
 
 const EachAnime = (props) => {
   const [anime, setAnime] = useState(null);
-  const { match } = props;
+  const { match, setNav } = props;
 
   const navList = [
     'summary',
@@ -23,6 +24,7 @@ const EachAnime = (props) => {
   ];
 
   useEffect(() => {
+    setNav(PATH);
     (async () => {
       const res = await fetch(URL + '/get-each-anime/' + match.params.animeId, {
         headers: {
@@ -34,7 +36,7 @@ const EachAnime = (props) => {
       // console.log(resData.anime.reactionlist);
       setAnime(resData.anime);
     })();
-  }, [match.params.animeId, props.socket]); // props.socket in dependency list cause re render ?
+  }, [match.params.animeId, props.socket, setNav]); // props.socket in dependency list cause re render ?
   let loading = anime ? false : true;
   let inLib = null;
   if (!loading) {
@@ -110,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
         which: 'reaction-modal',
         payload: payload,
       }),
+    setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
   };
 };
 

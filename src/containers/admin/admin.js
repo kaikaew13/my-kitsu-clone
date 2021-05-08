@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 
 import './admin.css';
 
 const URL = process.env.REACT_APP_URL;
-
+const PATH = 'admin';
 const GENRE = [
   'comedy',
   'romance',
@@ -19,7 +19,7 @@ const GENRE = [
 
 const Admin = (props) => {
   const history = useHistory();
-  const { location } = props;
+  const { location, setNav } = props;
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -27,6 +27,10 @@ const Admin = (props) => {
     GENRE.map((each) => ({ genre: each, checked: false }))
   );
   const [imgFile, setImgFile] = useState(null);
+
+  useEffect(() => {
+    setNav(PATH);
+  }, [setNav]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -145,4 +149,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Admin);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

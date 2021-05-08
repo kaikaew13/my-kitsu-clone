@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Switch, Route } from 'react-router-dom';
 
@@ -9,9 +9,10 @@ import Error404 from '../../components/UI/404';
 import UserReaction from './user-reaction/user-reaction';
 
 // const URL = process.env.REACT_APP_URL;
+const PATH = 'library';
 
 const Library = (props) => {
-  const { match } = props;
+  const { match, setNav } = props;
 
   const navList = [
     'activity',
@@ -21,6 +22,10 @@ const Library = (props) => {
     'following',
     'groups',
   ];
+
+  useEffect(() => {
+    setNav(PATH);
+  }, [setNav]);
 
   let library = null;
   if (!props.loading) {
@@ -76,4 +81,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Library);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Library);

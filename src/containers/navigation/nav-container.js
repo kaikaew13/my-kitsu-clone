@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import NavSection from './nav-section';
 import './navigation.css';
@@ -6,7 +7,7 @@ import './navigation.css';
 const NavContainer = (props) => (
   <div
     className={
-      props.transparent ? 'nav-container transparent' : 'nav-container'
+      props.transparentNav ? 'nav-container transparent' : 'nav-container'
     }
   >
     <NavSection navClass="nav-left" />
@@ -14,4 +15,10 @@ const NavContainer = (props) => (
   </div>
 );
 
-export default NavContainer;
+const mapStateToProps = (state) => {
+  return {
+    transparentNav: state.webGeneral.transparentNav,
+  };
+};
+
+export default connect(mapStateToProps)(NavContainer);

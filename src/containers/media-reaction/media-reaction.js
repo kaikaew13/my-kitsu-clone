@@ -7,12 +7,14 @@ import '../library/follow/follow.css';
 import UserEachReaction from '../../components/library/user-each-reaction/user-each-reaction';
 
 const URL = process.env.REACT_APP_URL;
+const PATH = 'media-reaction';
 
 const MediaReaction = (props) => {
-  const { match } = props;
+  const { match, setNav } = props;
   const [reaction, setReaction] = useState(null);
 
   useEffect(() => {
+    setNav(PATH);
     (async () => {
       const res = await fetch(
         URL + '/get-each-reaction/' + match.params.reactionId
@@ -22,7 +24,7 @@ const MediaReaction = (props) => {
       console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, [match.params.reactionId]);
+  }, [match.params.reactionId, setNav]);
 
   const followHandler = async () => {
     const res = await fetch(URL + '/user/follow-user', {
@@ -43,6 +45,14 @@ const MediaReaction = (props) => {
   let loading = reaction ? false : true;
   let self;
   if (!loading) self = props.user && props.user.id === reaction.userId._id;
+  console.log(props);
+  let buttonText = 'Follow';
+  if (!loading && props.user && reaction) {
+    const found = props.user.following.find(
+      (eachUser) => eachUser._id.toString() === reaction.userId._id.toString()
+    );
+    if (props.page === 'following' || found) buttonText = 'Unfollow';
+  }
   return loading ? (
     <h1>Loading...</h1>
   ) : (
@@ -73,7 +83,7 @@ const MediaReaction = (props) => {
             disabled={self}
             onClick={followHandler}
           >
-            {self ? "Hey, that's you!" : 'Follow'}
+            {self ? "Hey, that's you!" : buttonText}
           </button>
         </div>
       </div>
@@ -88,4 +98,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(MediaReaction);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MediaReaction);

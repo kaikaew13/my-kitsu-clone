@@ -9,12 +9,10 @@ const Follow = (props) => {
   return props.user[props.page].length > 0 ? (
     <div className="animelist-section follow-section">
       {props.user[props.page].map((each) => {
-        console.log(each);
         let buttonText = 'Follow';
         const found = props.user.following.find(
           (eachUser) => eachUser._id.toString() === each._id.toString()
         );
-        console.log(found);
         if (props.page === 'following' || found) buttonText = 'Unfollow';
         return (
           <FollowItem
