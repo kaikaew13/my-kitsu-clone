@@ -6,6 +6,7 @@ import LibraryHeader from './library-header/library-header';
 import AnimelistSection from './animelist-section/animelist-section';
 import Follow from './follow/follow';
 import Error404 from '../../components/UI/404';
+import UserReaction from './user-reaction/user-reaction';
 
 // const URL = process.env.REACT_APP_URL;
 
@@ -45,6 +46,11 @@ const Library = (props) => {
                         <AnimelistSection />
                       ) : each === 'followers' || each === 'following' ? (
                         <Follow userlist={props.user[each]} page={each} />
+                      ) : each === 'reactions' ? (
+                        <UserReaction
+                          user={props.user}
+                          animelist={props.animelist}
+                        />
                       ) : null}
                     </React.Fragment>
                   );
@@ -57,7 +63,7 @@ const Library = (props) => {
       </React.Fragment>
     );
   }
-
+  console.log(props.animelist);
   return props.loading ? <h1>Loading...</h1> : library;
 };
 
@@ -66,6 +72,7 @@ const mapStateToProps = (state) => {
     user: state.user.user,
     jwt: state.auth.jwt,
     loading: state.webGeneral.loading,
+    animelist: state.user.animelist,
   };
 };
 

@@ -9,8 +9,16 @@
   padding: 0 10px;
   align-items: center;
   margin-bottom: 30px;
+  /* transition: all 3s; */
   z-index: 10;
 }
+/* .nav-container:hover {
+  background: #402f3f;
+  transition: all 0.1s;
+}
+.transparent {
+  background: transparent;
+} */
 
 .nav-left {
   margin-left: 8%;

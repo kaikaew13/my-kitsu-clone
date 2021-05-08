@@ -53,7 +53,7 @@ const EachAnimeReaction = (props) => {
     })();
   }, [props.id, props.socket, addReactionList]);
 
-  return (
+  return reactionlist.length > 0 ? (
     <div className="reaction-container">
       <div className="reaction-header">
         <h5>Reactions</h5>
@@ -93,7 +93,18 @@ const EachAnimeReaction = (props) => {
         )}
       </div>
     </div>
-  );
+  ) : props.reactionpage ? (
+    <div
+      style={{
+        textAlign: 'center',
+        fontFamily: 'sans-serif',
+        fontSize: '16px',
+        marginTop: '16px',
+      }}
+    >
+      This anime has no reactions
+    </div>
+  ) : null;
 };
 
 const mapStateToProps = (state) => {

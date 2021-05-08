@@ -48,12 +48,14 @@ function App(props) {
       const resData = await res.json();
       const user = resData.user;
       // console.log(user);
+
       setUser({
         id: user._id,
         username: user.username,
         followers: user.followers,
         following: user.following,
         role: user.role,
+        reactionlist: user.reactionlist,
       });
       const animelist = {};
       user.animelist.forEach((each) => {
@@ -80,7 +82,6 @@ function App(props) {
   useEffect(() => {
     const socket = io(URL);
     setSocket(socket);
-    socket.on('post-reaction', (data) => console.log(data));
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     console.log(new Date(time).getTime());

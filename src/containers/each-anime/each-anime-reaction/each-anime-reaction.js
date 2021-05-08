@@ -17,6 +17,7 @@ const EachAnimeReactionContainer = (props) => (
           inLib={props.inLib}
           title={props.title}
           id={props.id}
+          reactionpage={true}
         />
       </div>
     </div>
