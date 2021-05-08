@@ -13,6 +13,7 @@ const UserReaction = (props) => {
       <div className="user-reaction-container">
         {reactionlist.map((each) => (
           <UserEachReaction
+            self={true}
             key={each._id}
             upvote={each.upvote}
             reactionMessage={each.reactionMessage}

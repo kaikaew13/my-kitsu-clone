@@ -19,7 +19,9 @@ const Reaction = (props) => (
       >
         {props.username}
       </p>
-      <div className="reaction-message">{props.reactionMessage}</div>
+      <div className="reaction-message" onClick={props.clicked}>
+        {props.reactionMessage}
+      </div>
     </div>
   </div>
 );

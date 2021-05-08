@@ -7,6 +7,7 @@ import './each-anime-reaction.css';
 
 const EachAnimeReaction = (props) => {
   const history = useHistory();
+
   // const [reactionlist, setReactionlist] = useState([]);
 
   // const addReactionList = useCallback(
@@ -58,7 +59,7 @@ const EachAnimeReaction = (props) => {
   //     );
   //   })();
   // }, [props.id, props.socket]);
-
+  console.log(props.reactionlist);
   return props.reactionlist.length > 0 ? (
     <div className="reaction-container">
       <div className="reaction-header">
@@ -78,15 +79,19 @@ const EachAnimeReaction = (props) => {
         )}
       </div>
       <div className="reaction-content">
-        {props.reactionlist.map((each) => (
-          <Reaction
-            key={each._id.toString()}
-            id={each.userId}
-            username={each.username}
-            reactionMessage={each.reactionMessage}
-            upvote={each.upvote}
-          />
-        ))}
+        {props.reactionlist.map(
+          (each, index) =>
+            (!props.viewmore || index <= 5) && (
+              <Reaction
+                clicked={() => history.push('/media-reaction/' + each._id)}
+                key={each._id.toString()}
+                id={each.userId._id}
+                username={each.userId.username}
+                reactionMessage={each.reactionMessage}
+                upvote={each.upvote}
+              />
+            )
+        )}
         {props.viewmore && (
           <div
             className="view-more-reaction"

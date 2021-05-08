@@ -10,6 +10,7 @@ import Modal from './containers/modal/modal';
 import Backdrop from './components/UI/backdrop';
 import EachAnime from './containers/each-anime/each-anime';
 import Admin from './containers/admin/admin';
+import MediaReaction from './containers/media-reaction/media-reaction';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -48,7 +49,7 @@ function App(props) {
       }
       const resData = await res.json();
       const user = resData.user;
-      // console.log(user);
+      console.log(user);
 
       setUser({
         id: user._id,
@@ -83,9 +84,8 @@ function App(props) {
   useEffect(() => {
     const socket = io(URL);
     setSocket(socket);
-    console.log('rendering');
     socket.on('post-reaction', (data) => {
-      console.log(data);
+      // console.log(data);
       setSocketStatus(!socketStatus);
     });
     setLoading();
@@ -112,6 +112,7 @@ function App(props) {
         <Route path="/library" component={Library} />
         <Route path="/each-anime/:animeId" component={EachAnime} />
         <Route path="/admin" exact component={Admin} />
+        <Route path="/media-reaction/:reactionId" component={MediaReaction} />
         <Redirect to="/explore/home" />
       </Switch>
     </div>

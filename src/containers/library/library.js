@@ -63,7 +63,7 @@ const Library = (props) => {
       </React.Fragment>
     );
   }
-  console.log(props.animelist);
+
   return props.loading ? <h1>Loading...</h1> : library;
 };
 
