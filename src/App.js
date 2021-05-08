@@ -82,9 +82,13 @@ function App(props) {
   useEffect(() => {
     const socket = io(URL);
     setSocket(socket);
+    console.log('rendering');
+    socket.on('post-reaction', ({ reaction }) => {
+      console.log(reaction);
+    });
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
-    console.log(new Date(time).getTime());
+    // console.log(new Date(time).getTime());
     if (time) {
       setAutoLogout(new Date(time).getTime());
     } else unsetLoading();
@@ -92,7 +96,6 @@ function App(props) {
       socket.disconnect();
     };
   }, [setAutoLogout, setLoading, unsetLoading, setSocket]);
-
   return (
     <div className="App">
       {props.showModal ? (
@@ -117,6 +120,8 @@ const mapStateToProps = (state) => {
   return {
     showModal: state.webGeneral.showModal,
     expireTime: state.auth.jwtExpire,
+    user: state.user.user,
+    socket: state.socket.socket,
   };
 };
 

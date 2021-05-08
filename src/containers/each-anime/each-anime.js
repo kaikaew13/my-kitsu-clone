@@ -31,6 +31,7 @@ const EachAnime = (props) => {
       });
       if (res.status !== 200) throw new Error('not a valid url');
       const resData = await res.json();
+      // console.log(resData);
       setAnime(resData.anime);
     })();
   }, [match.params.animeId]);
@@ -67,6 +68,7 @@ const EachAnime = (props) => {
                         genre={anime.genre}
                         id={anime._id}
                         inLib={inLib}
+                        reactionlist={anime.reactionlist}
                       />
                     ) : each === 'reactions' ? (
                       <EachAnimeReactionContainer
@@ -74,6 +76,7 @@ const EachAnime = (props) => {
                         inLib={inLib}
                         title={anime.title}
                         id={anime._id}
+                        reactionlist={anime.reactionlist}
                       />
                     ) : (
                       <EachAnimeBody url={URL + anime.imageUrl} inLib={inLib} />

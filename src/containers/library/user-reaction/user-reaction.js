@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import './user-reaction.css';
 import UserEachReaction from '../../../components/library/user-each-reaction/user-each-reaction';
@@ -6,11 +7,26 @@ import UserEachReaction from '../../../components/library/user-each-reaction/use
 const URL = process.env.REACT_APP_URL;
 
 const UserReaction = (props) => {
-  console.log(props.user);
+  // console.log(props.socket);
+  const [reactionlist, setReactionlist] = useState(props.user.reactionlist);
+
+  // useEffect(() => {
+  //   props.socket.on('post-reaction', ({ reaction }) => {
+  //     const newReaction = {
+  //       userId: reaction.userId,
+  //       username: 'socket',
+  //       reactionMessage: reaction.reactionMessage,
+  //       upvote: reaction.upvote,
+  //       reactionId: reaction._id.toString(),
+  //     };
+  //     setReactionlist([...reactionlist, newReaction]);
+  //   });
+  // }, [props.socket, reactionlist]);
+
   return (
     <div className="reaction-section">
       <div className="user-reaction-container">
-        {props.user.reactionlist.map((each) => (
+        {reactionlist.map((each) => (
           <UserEachReaction
             key={each._id}
             upvote={each.upvote}
@@ -24,4 +40,10 @@ const UserReaction = (props) => {
   );
 };
 
-export default UserReaction;
+const mapStateToProps = (state) => {
+  return {
+    socket: state.socket.socket,
+  };
+};
+
+export default connect(mapStateToProps)(UserReaction);

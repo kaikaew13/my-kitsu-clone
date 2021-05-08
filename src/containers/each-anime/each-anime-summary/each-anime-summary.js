@@ -21,6 +21,7 @@ const EachAnimeSummary = (props) => {
           description={props.description}
         />
         <EachAnimeReaction
+          reactionlist={props.reactionlist}
           inLib={props.inLib}
           title={props.title}
           id={props.id}
