@@ -20,7 +20,20 @@ exports.getHome = async (req, res, next) => {
 exports.getEachAnime = async (req, res, next) => {
   const animeId = req.params.animeId;
   try {
-    const anime = await Anime.findById(animeId);
+    const anime = await Anime.findById(animeId)
+      .populate('reactionlist', ['reactionMessage', 'upvote'])
+      .populate({
+        path: 'reactionlist',
+        options: {
+          sort: { createdAt: -1 },
+        },
+        model: 'Reaction',
+        populate: {
+          path: 'userId',
+          model: 'User',
+          select: 'username',
+        }, // deep population
+      });
     if (!anime) {
       const err = new Error('not a valid url');
       err.statusCode(404);
@@ -33,23 +46,23 @@ exports.getEachAnime = async (req, res, next) => {
   }
 };
 
-exports.getEachReaction = async (req, res, next) => {
-  const animeId = req.params.animeId;
-  try {
-    const anime = await Anime.findById(animeId);
-    if (!anime) {
-      const err = new Error('not a valid url');
-      err.statusCode(404);
-      throw err;
-    }
-    const reactions = await Reaction.find({
-      animeId: animeId,
-    })
-      .sort({ createdAt: -1 }) //sort by newest first
-      .populate('userId', ['username', '_id']);
-    const message = 'fetched reaction successfully';
-    res.status(200).json({ message: message, reactions: reactions });
-  } catch (err) {
-    errorHandler(err, next);
-  }
-};
+// exports.getEachReaction = async (req, res, next) => {
+//   const animeId = req.params.animeId;
+//   try {
+//     const anime = await Anime.findById(animeId);
+//     if (!anime) {
+//       const err = new Error('not a valid url');
+//       err.statusCode(404);
+//       throw err;
+//     }
+//     const reactions = await Reaction.find({
+//       animeId: animeId,
+//     })
+//       .sort({ createdAt: -1 }) //sort by newest first
+//       .populate('userId', ['username', '_id']);
+//     const message = 'fetched reaction successfully';
+//     res.status(200).json({ message: message, reactions: reactions });
+//   } catch (err) {
+//     errorHandler(err, next);
+//   }
+// };
