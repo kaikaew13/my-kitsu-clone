@@ -24,7 +24,7 @@ const MediaReaction = (props) => {
       console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, [match.params.reactionId, setNav, props.socket]);
+  }, [match.params.reactionId, setNav]);
 
   const followHandler = async () => {
     const res = await fetch(URL + '/user/follow-user', {
@@ -95,7 +95,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.user,
     jwt: state.auth.jwt,
-    socket: state.socket.socket,
   };
 };
 

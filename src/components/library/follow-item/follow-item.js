@@ -10,7 +10,9 @@ const FollowItem = (props) => (
     <img src={process.env.REACT_APP_URL + '/images/profile-pic.png'} alt="" />
     <div className="follow-items-user">
       <h4>{props.username}</h4>
-      <div className="follow-btn">{props.buttonText}</div>
+      <div className="follow-btn" onClick={props.clicked}>
+        {props.buttonText}
+      </div>
     </div>
   </div>
 );
