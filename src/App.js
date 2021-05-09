@@ -86,19 +86,19 @@ function App(props) {
     setSocket(socket);
     socket.on('post-reaction', (data) => {
       // console.log(data);
-      setSocketStatus(!socketStatus);
+      setSocketStatus((prevState) => !prevState);
     });
     socket.on('follow-user-sender', (message) => {
-      setSocketStatus(!socketStatus);
+      setSocketStatus((prevState) => !prevState);
     });
     socket.on('follow-user-receiver', (message) => {
-      setSocketStatus(!socketStatus);
+      setSocketStatus((prevState) => !prevState);
     });
     socket.on('unfollow-user-sender', (message) =>
-      setSocketStatus(!socketStatus)
+      setSocketStatus((prevState) => !prevState)
     );
     socket.on('unfollow-user-receiver', (message) =>
-      setSocketStatus(!socketStatus)
+      setSocketStatus((prevState) => !prevState)
     );
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');

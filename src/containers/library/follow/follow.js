@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import FollowItem from '../../../components/library/follow-item/follow-item';
@@ -9,8 +9,11 @@ import '../../home/section/section.css';
 const URL = process.env.REACT_APP_URL;
 
 const Follow = (props) => {
+  const [preventDoubleClick, setPreventDoubleClick] = useState(false);
+
   const followHandler = async (targetUserId, buttonText) => {
     // console.log(targetUserId);
+    setPreventDoubleClick(true);
     const endpoint = buttonText === 'Follow' ? 'follow-user' : 'unfollow-user';
     const res = await fetch(URL + '/user/' + endpoint, {
       method: 'PUT',
@@ -38,7 +41,11 @@ const Follow = (props) => {
             key={each._id}
             username={each.username}
             buttonText={buttonText}
-            clicked={() => followHandler(each._id, buttonText)}
+            clicked={() =>
+              !preventDoubleClick
+                ? followHandler(each._id, buttonText)
+                : console.log('clicked')
+            }
           />
         );
       })}
