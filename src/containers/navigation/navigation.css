@@ -101,12 +101,13 @@
   background: #f9f9f9;
   box-shadow: 2px 2px 2px #ddd;
   width: 160px;
+  height: fit-content;
   border-radius: 4px;
   z-index: 15;
 }
 .dropdown-content p {
-  height: 30px;
-  padding: 5px 20px;
+  height: fit-content;
+  padding: 8px 20px;
   font-family: 'Asap', sans-serif;
   font-size: 14px;
   text-align: left;

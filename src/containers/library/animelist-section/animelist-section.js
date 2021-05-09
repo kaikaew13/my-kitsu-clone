@@ -26,14 +26,26 @@ const AnimelistSection = (props) => {
           </div>
         </section>
         <div className="animelist">
-          {props.animelist.map((each) => (
-            <AnimelistItem
-              key={each.animeId._id}
-              id={each.animeId._id}
-              url={URL + each.animeId.imageUrl}
-              status={each.status}
-            />
-          ))}
+          {props.animelist.length > 0 ? (
+            props.animelist.map((each) => (
+              <AnimelistItem
+                key={each.animeId._id}
+                id={each.animeId._id}
+                url={URL + each.animeId.imageUrl}
+                status={each.status}
+              />
+            ))
+          ) : (
+            <div
+              style={{
+                fontSize: '16px',
+                fontFamily: 'sans-serif',
+                margin: '0 auto',
+              }}
+            >
+              Your Library is Empty...
+            </div>
+          )}
         </div>
       </div>
       <AnimelistStatus />

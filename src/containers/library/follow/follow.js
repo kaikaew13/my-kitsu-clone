@@ -9,9 +9,10 @@ import '../../home/section/section.css';
 const URL = process.env.REACT_APP_URL;
 
 const Follow = (props) => {
-  const followHandler = async (targetUserId) => {
+  const followHandler = async (targetUserId, buttonText) => {
     // console.log(targetUserId);
-    const res = await fetch(URL + '/user/follow-user', {
+    const endpoint = buttonText === 'Follow' ? 'follow-user' : 'unfollow-user';
+    const res = await fetch(URL + '/user/' + endpoint, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -23,8 +24,6 @@ const Follow = (props) => {
     const resData = await res.json();
     console.log(resData);
   };
-
-  const unfollowHandler = () => {};
 
   return props.user[props.page].length > 0 ? (
     <div className="animelist-section follow-section">
@@ -39,11 +38,7 @@ const Follow = (props) => {
             key={each._id}
             username={each.username}
             buttonText={buttonText}
-            clicked={() =>
-              buttonText === 'Follow'
-                ? followHandler(each._id)
-                : unfollowHandler()
-            }
+            clicked={() => followHandler(each._id, buttonText)}
           />
         );
       })}

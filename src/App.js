@@ -94,6 +94,12 @@ function App(props) {
     socket.on('follow-user-receiver', (message) => {
       setSocketStatus(!socketStatus);
     });
+    socket.on('unfollow-user-sender', (message) =>
+      setSocketStatus(!socketStatus)
+    );
+    socket.on('unfollow-user-receiver', (message) =>
+      setSocketStatus(!socketStatus)
+    );
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     // console.log(new Date(time).getTime());
