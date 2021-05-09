@@ -76,12 +76,45 @@ exports.followUser = async (req, res, next) => {
     'follow-user-sender',
     `followed ${targetUserId}`
   );
-  getClientSockets()[targetUserId].emit(
-    'follow-user-receiver',
-    `${req.userId} is following`
-  );
+  if (getClientSockets()[targetUserId])
+    getClientSockets()[targetUserId].emit(
+      'follow-user-receiver',
+      `${req.userId} is following`
+    );
   const message = 'target user followed';
   res.status(200).json({ message: message });
+};
+
+exports.unfollowUser = async (req, res, next) => {
+  const targetUserId = req.body.targetUserId;
+  try {
+    const user = await User.findById(req.userId);
+    const targetUser = await User.findById(targetUserId);
+    if (!targetUser) throw new Error('db failed to fetch target user');
+    const updatedFollowingArray = user.following.filter(
+      (each) => each.toString() !== targetUserId.toString()
+    );
+    user.following = updatedFollowingArray;
+    const updatedFollowerArray = targetUser.followers.filter(
+      (each) => each.toString() !== req.userId.toString()
+    );
+    targetUser.followers = updatedFollowerArray;
+    await user.save();
+    await targetUser.save();
+    getClientSockets()[req.userId].emit(
+      'unfollow-user-sender',
+      `unfollowed ${targetUserId}`
+    );
+    if (getClientSockets()[targetUserId])
+      getClientSockets()[targetUserId].emit(
+        'unfollow-user-receiver',
+        `${req.userId} just unfollowed`
+      );
+    const message = 'unfollowed the target user successfully';
+    res.status(200).json({ message: message });
+  } catch (err) {
+    errorHandler(err, next);
+  }
 };
 
 exports.postReaction = async (req, res, next) => {

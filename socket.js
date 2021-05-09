@@ -19,11 +19,19 @@ exports.init = (server) => {
       // console.log('clientsID: ', clientsId);
     });
 
-    // socket.on('disconnect', () => {
-    //   console.log('Got disconnect!');
-    //   var i = allClients.indexOf(socket);
-    //   allClients.splice(i, 1);
-    // });
+    socket.on('disconnect', (s) => {
+      console.log('a client disconnect!');
+      // console.log('before deletion: ', Object.keys(clientsId).length);
+      // console.log('disconnected socket id : ', socket.id);
+      for (let i in clientsId) {
+        if (clientsId[i].id === socket.id) {
+          delete clientsId[i];
+          break;
+        }
+      }
+      console.log(`${Object.keys(clientsId).length} clients left`);
+      // console.log('after deletion: ', Object.keys(clientsId).length);
+    });
   });
 
   return io;

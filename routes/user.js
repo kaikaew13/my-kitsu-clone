@@ -12,6 +12,7 @@ router.put('/add-to-library', isAuth, userController.addToLibrary);
 router.get('/get-user', isAuth, userController.getUser);
 
 router.put('/follow-user', isAuth, userController.followUser);
+router.put('/unfollow-user', isAuth, userController.unfollowUser);
 
 router.post('/post-reaction', isAuth, userController.postReaction);
 
