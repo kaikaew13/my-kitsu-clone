@@ -72,7 +72,14 @@ exports.followUser = async (req, res, next) => {
   targetUser.followers.push(user);
   await user.save();
   await targetUser.save();
-  getClientSockets()[targetUserId].emit('message', 'testinggg');
+  getClientSockets()[req.userId].emit(
+    'follow-user-sender',
+    `followed ${targetUserId}`
+  );
+  getClientSockets()[targetUserId].emit(
+    'follow-user-receiver',
+    `${req.userId} is following`
+  );
   const message = 'target user followed';
   res.status(200).json({ message: message });
 };
