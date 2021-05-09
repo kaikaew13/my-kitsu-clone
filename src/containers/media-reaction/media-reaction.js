@@ -10,6 +10,7 @@ const URL = process.env.REACT_APP_URL;
 const PATH = 'media-reaction';
 
 const MediaReaction = (props) => {
+  console.log(props.socket);
   const { match, setNav } = props;
   const [reaction, setReaction] = useState(null);
 
@@ -95,6 +96,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.user,
     jwt: state.auth.jwt,
+    socket: state.socket.socket,
   };
 };
 

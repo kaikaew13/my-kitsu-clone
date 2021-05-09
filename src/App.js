@@ -33,7 +33,7 @@ function App(props) {
   }, [logout, unsetLoading, unsetUser]);
 
   const getUser = useCallback(
-    async (time) => {
+    async (time, socket) => {
       const jwt = localStorage.getItem('jwt');
       const expireTime = localStorage.getItem('jwt-expire-time');
       const res = await fetch(URL + '/user/get-user', {
@@ -58,6 +58,7 @@ function App(props) {
         role: user.role,
         reactionlist: user.reactionlist,
       });
+      socket.emit('setUserId', user._id);
       const animelist = {};
       user.animelist.forEach((each) => {
         if (each.animeId) animelist[each.animeId._id.toString()] = each;
@@ -73,9 +74,9 @@ function App(props) {
   );
 
   const setAutoLogout = useCallback(
-    (time) => {
+    (time, socket) => {
       if (time > new Date().getTime()) {
-        getUser(time);
+        getUser(time, socket);
       } else logoutHandler();
     },
     [logoutHandler, getUser]
@@ -87,11 +88,12 @@ function App(props) {
       // console.log(data);
       setSocketStatus(!socketStatus);
     });
+    socket.on('message', (data) => console.log(data));
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     // console.log(new Date(time).getTime());
     if (time) {
-      setAutoLogout(new Date(time).getTime());
+      setAutoLogout(new Date(time).getTime(), socket);
     } else unsetLoading();
     return () => {
       socket.disconnect();
