@@ -16,7 +16,7 @@ const Follow = (props) => {
         if (props.page === 'following' || found) buttonText = 'Unfollow';
         return (
           <FollowItem
-            key={each}
+            key={each._id}
             username={each.username}
             buttonText={buttonText}
           />

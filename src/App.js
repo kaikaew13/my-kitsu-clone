@@ -88,7 +88,12 @@ function App(props) {
       // console.log(data);
       setSocketStatus(!socketStatus);
     });
-    socket.on('message', (data) => console.log(data));
+    socket.on('follow-user-sender', (message) => {
+      setSocketStatus(!socketStatus);
+    });
+    socket.on('follow-user-receiver', (message) => {
+      setSocketStatus(!socketStatus);
+    });
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     // console.log(new Date(time).getTime());

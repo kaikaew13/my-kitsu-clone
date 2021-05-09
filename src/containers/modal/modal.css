@@ -4,7 +4,7 @@
   left: 50%;
   width: 530px;
   /* height: 600px; */
-  height: fit-content;
+  height: 600px;
   transform: translate(-50%, 6%);
   border-radius: 2px;
   background: #f7f7f7;

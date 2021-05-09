@@ -10,7 +10,6 @@ const URL = process.env.REACT_APP_URL;
 const PATH = 'media-reaction';
 
 const MediaReaction = (props) => {
-  console.log(props.socket);
   const { match, setNav } = props;
   const [reaction, setReaction] = useState(null);
 
@@ -25,7 +24,7 @@ const MediaReaction = (props) => {
       console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, [match.params.reactionId, setNav]);
+  }, [match.params.reactionId, setNav, props.socket]);
 
   const followHandler = async () => {
     const res = await fetch(URL + '/user/follow-user', {
