@@ -2,7 +2,7 @@ const User = require('../models/user');
 const { errorHandler } = require('../helper');
 const Anime = require('../models/anime');
 const Reaction = require('../models/reaction');
-const { getIo } = require('../socket');
+const { getIo, getClientSockets } = require('../socket');
 
 exports.addToLibrary = async (req, res, next) => {
   const { animeId, status } = req.body;
@@ -72,6 +72,7 @@ exports.followUser = async (req, res, next) => {
   targetUser.followers.push(user);
   await user.save();
   await targetUser.save();
+  getClientSockets()[targetUserId].emit('message', 'testinggg');
   const message = 'target user followed';
   res.status(200).json({ message: message });
 };
