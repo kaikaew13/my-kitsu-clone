@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './user-reaction.css';
 import UserEachReaction from '../../../components/library/user-each-reaction/user-each-reaction';
@@ -17,6 +18,13 @@ const UserReaction = (props) => {
           <UserEachReaction
             self={true}
             clicked={() => history.push('/media-reaction/' + each._id)}
+            editted={() =>
+              props.openModal({
+                title: props.animelist[each.animeId].animeId.title,
+                id: each._id,
+                reactionMessage: each.reactionMessage,
+              })
+            }
             key={each._id}
             upvote={each.upvote}
             reactionMessage={each.reactionMessage}
@@ -29,4 +37,15 @@ const UserReaction = (props) => {
   );
 };
 
-export default UserReaction;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: (payload) =>
+      dispatch({
+        type: 'OPEN_MODAL',
+        which: 'reaction-modal',
+        payload: payload,
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(UserReaction);

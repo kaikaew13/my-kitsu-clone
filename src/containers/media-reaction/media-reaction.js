@@ -25,7 +25,7 @@ const MediaReaction = (props) => {
       console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, [match.params.reactionId, setNav]);
+  }, [match.params.reactionId, setNav, props.socket]);
 
   const followHandler = async () => {
     setPreventDoubleClick(true);
@@ -60,7 +60,7 @@ const MediaReaction = (props) => {
   ) : (
     <div className="reaction-section" style={{ width: '65%', display: 'flex' }}>
       <UserEachReaction
-        clicked={() =>
+        editted={() =>
           props.openModal({
             title: reaction.animeId.title,
             id: reaction._id,
@@ -106,6 +106,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.user,
     jwt: state.auth.jwt,
+    socket: state.socket.socket,
   };
 };
 

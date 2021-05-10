@@ -88,6 +88,9 @@ function App(props) {
       // console.log(data);
       setSocketStatus((prevState) => !prevState);
     });
+    socket.on('put-reaction', (data) =>
+      setSocketStatus((prevState) => !prevState)
+    );
     socket.on('follow-user-sender', (message) => {
       setSocketStatus((prevState) => !prevState);
     });
