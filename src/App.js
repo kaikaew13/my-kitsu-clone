@@ -12,6 +12,7 @@ import EachAnime from './containers/each-anime/each-anime';
 import Admin from './containers/admin/admin';
 import MediaReaction from './containers/media-reaction/media-reaction';
 import onEvents from './socket';
+import OthersLibrary from './containers/others-library/others-library';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -130,6 +131,7 @@ function App(props) {
       <Switch>
         <Route path="/explore" component={Home} />
         <Route path="/library" component={Library} />
+        <Route path="/others-library/:otherUserId" component={OthersLibrary} />
         <Route path="/each-anime/:animeId" component={EachAnime} />
         <Route path="/admin" exact component={Admin} />
         <Route path="/media-reaction/:reactionId" component={MediaReaction} />

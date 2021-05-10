@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import './animelist-status.css';
 import '../animelist-section/animelist-section.css';
@@ -70,10 +69,10 @@ const AnimelistStatus = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    animelist: Object.values(state.user.animelist),
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     animelist: Object.values(state.user.animelist),
+//   };
+// };
 
-export default connect(mapStateToProps)(AnimelistStatus);
+export default AnimelistStatus;

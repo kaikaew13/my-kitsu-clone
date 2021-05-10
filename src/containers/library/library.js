@@ -44,11 +44,14 @@ const Library = (props) => {
                   return (
                     <React.Fragment>
                       <LibraryHeader
+                        path={PATH}
                         username={props.user.username}
                         linkName={each.charAt(0).toUpperCase() + each.slice(1)}
                       />
                       {each === 'library' ? (
-                        <AnimelistSection />
+                        <AnimelistSection
+                          animelist={Object.values(props.animelist)}
+                        />
                       ) : each === 'followers' || each === 'following' ? (
                         <Follow user={props.user} page={each} />
                       ) : each === 'reactions' ? (

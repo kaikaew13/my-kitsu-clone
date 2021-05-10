@@ -7,12 +7,12 @@ const URL = process.env.REACT_APP_URL;
 
 const LibraryHeader = (props) => {
   const navList = [
-    { name: 'Activity', to: '/library/activity' },
-    { name: 'Library', to: '/library/library' },
-    { name: 'Reactions', to: '/library/reactions' },
-    { name: 'Followers', to: '/library/followers' },
-    { name: 'Following', to: '/library/following' },
-    { name: 'Groups', to: '/library/groups' },
+    { name: 'Activity', to: '/' + props.path + '/activity' },
+    { name: 'Library', to: '/' + props.path + '/library' },
+    { name: 'Reactions', to: '/' + props.path + '/reactions' },
+    { name: 'Followers', to: '/' + props.path + '/followers' },
+    { name: 'Following', to: '/' + props.path + '/following' },
+    { name: 'Groups', to: '/' + props.path + '/groups' },
   ];
 
   return (

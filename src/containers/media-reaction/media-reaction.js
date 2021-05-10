@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import '../library/user-reaction/user-reaction.css';
 import './media-reaction.css';
@@ -11,6 +12,7 @@ const PATH = 'media-reaction';
 
 const MediaReaction = (props) => {
   const { match, setNav } = props;
+  const history = useHistory();
   const [reaction, setReaction] = useState(null);
   const [preventDoubleClick, setPreventDoubleClick] = useState(false);
 
@@ -92,7 +94,16 @@ const MediaReaction = (props) => {
       <div className="m-r-user-container">
         <div style={{ position: 'relative' }}>
           <img src={URL + '/images/bg-user.png'} alt="" />
-          <h4 className="user-username">{reaction.userId.username}</h4>
+          <h4
+            className="user-username"
+            onClick={() =>
+              history.push(
+                '/others-library/' + reaction.userId._id + '/library'
+              )
+            }
+          >
+            {reaction.userId.username}
+          </h4>
         </div>
         <div>
           <div className="profile-pic-wrapper">
