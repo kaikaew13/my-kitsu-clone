@@ -44,6 +44,20 @@ const MediaReaction = (props) => {
     alert('followed the targeted user');
   };
 
+  const deleteReactionHandler = async (reactionId) => {
+    const res = await fetch(URL + '/user/delete-reaction', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + props.jwt,
+      },
+      body: JSON.stringify({ reactionId: reactionId }),
+    });
+    if (res.status !== 200) throw new Error('failed to delete a reaction');
+    const resData = await res.json();
+    console.log(resData);
+  };
+
   let loading = reaction ? false : true;
   let self;
   if (!loading) self = props.user && props.user.id === reaction.userId._id;
@@ -67,6 +81,7 @@ const MediaReaction = (props) => {
             reactionMessage: reaction.reactionMessage,
           })
         }
+        deleted={() => deleteReactionHandler(reaction._id)}
         self={self}
         wider={true}
         upvote={reaction.upvote}
