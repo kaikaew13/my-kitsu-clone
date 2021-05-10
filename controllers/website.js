@@ -1,6 +1,7 @@
 const { errorHandler } = require('../helper');
 const Anime = require('../models/anime');
 const Reaction = require('../models/reaction');
+const User = require('../models/user');
 
 exports.getHome = async (req, res, next) => {
   let limit = req.params.limit === 'no-limit' ? null : +req.params.limit;
@@ -80,6 +81,33 @@ exports.getEachReaction = async (req, res, next) => {
     }
     const message = 'fetched reaction successfully';
     res.status(200).json({ message: message, reaction: reaction });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
+
+exports.getOtherUser = async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId)
+      .populate('animelist.animeId')
+      .populate('followers', ['username'])
+      .populate('following', ['username'])
+      .populate('reactionlist', ['reactionMessage', 'upvote', 'animeId']);
+    if (!user) throw new Error('no user found');
+    const message = 'fetched user successfully';
+    res.status(200).json({
+      message: message,
+      user: {
+        _id: user._id,
+        animelist: user.animelist,
+        followers: user.followers,
+        following: user.following,
+        username: user.username,
+        role: user.role,
+        reactionlist: user.reactionlist,
+      },
+    });
   } catch (err) {
     errorHandler(err, next);
   }

@@ -194,7 +194,7 @@ exports.deleteReaction = async (req, res, next) => {
     user.reactionlist = updatedUserReactionlist;
     await anime.save();
     await user.save();
-
+    getIo().emit('delete-reaction', 'user deleted a reaction');
     const message = 'deleted reaction successfully';
     res.status(200).json({ message: message });
   } catch (err) {
