@@ -11,6 +11,22 @@ const UserReaction = (props) => {
   const reactionlist = props.user.reactionlist;
   const history = useHistory();
 
+  const deleteReactionHandler = async (reactionId) => {
+    const res = await fetch(URL + '/user/delete-reaction', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + props.jwt,
+      },
+      body: JSON.stringify({
+        reactionId: reactionId,
+      }),
+    });
+    if (res.status !== 200) throw new Error('failed to delete the reaction');
+    const resData = await res.json();
+    console.log(resData);
+  };
+
   return (
     <div className="reaction-section">
       <div className="user-reaction-container">
@@ -25,6 +41,7 @@ const UserReaction = (props) => {
                 reactionMessage: each.reactionMessage,
               })
             }
+            deleted={() => deleteReactionHandler(each._id)}
             key={each._id}
             upvote={each.upvote}
             reactionMessage={each.reactionMessage}
@@ -35,6 +52,12 @@ const UserReaction = (props) => {
       </div>
     </div>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    jwt: state.auth.jwt,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -48,4 +71,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserReaction);
+export default connect(mapStateToProps, mapDispatchToProps)(UserReaction);

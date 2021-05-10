@@ -43,8 +43,8 @@ const ReactionModal = (props) => {
       throw new Error('failed to post a reaction');
     if (method === 'PUT' && res.status !== 200)
       throw new Error('failed to updat a reaction');
-    const resData = await res.json();
-    console.log(resData);
+    // const resData = await res.json();
+    // console.log(resData);
     props.closeModal();
   };
 

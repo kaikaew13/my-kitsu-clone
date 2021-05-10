@@ -33,7 +33,7 @@ const UserEachReaction = (props) => (
             dropdownList={[
               { name: 'Copy Link to Reaction', clicked: () => {} },
               { name: 'Edit Reaction', clicked: props.editted },
-              { name: 'Delete Reaction', clicked: () => {} },
+              { name: 'Delete Reaction', clicked: props.deleted },
             ]}
             mediaReaction={true}
           >
