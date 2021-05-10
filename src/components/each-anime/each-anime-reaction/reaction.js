@@ -16,6 +16,7 @@ const Reaction = (props) => (
           marginBottom: '5px',
           fontSize: '13px',
         }}
+        onClick={props.otherUser}
       >
         {props.username}
       </p>

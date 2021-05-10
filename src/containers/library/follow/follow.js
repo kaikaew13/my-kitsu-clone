@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import FollowItem from '../../../components/library/follow-item/follow-item';
@@ -9,7 +10,7 @@ import '../../home/section/section.css';
 const URL = process.env.REACT_APP_URL;
 
 const Follow = (props) => {
-  console.log(props.curUser);
+  const history = useHistory();
   const [preventDoubleClick, setPreventDoubleClick] = useState(false);
 
   const followHandler = async (targetUserId, buttonText) => {
@@ -56,6 +57,9 @@ const Follow = (props) => {
           <FollowItem
             key={each._id}
             username={each.username}
+            otherUser={() =>
+              history.push('/others-library/' + each._id + '/library')
+            }
             buttonText={buttonText}
             clicked={() =>
               !preventDoubleClick

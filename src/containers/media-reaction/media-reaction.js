@@ -108,6 +108,11 @@ const MediaReaction = (props) => {
         <div>
           <div className="profile-pic-wrapper">
             <img
+              onClick={() =>
+                history.push(
+                  '/others-library/' + reaction.userId._id + '/library'
+                )
+              }
               alt=""
               className="profile-pic"
               src={URL + '/images/profile-pic.png'}

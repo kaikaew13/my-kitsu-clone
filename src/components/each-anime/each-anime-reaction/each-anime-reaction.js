@@ -83,6 +83,11 @@ const EachAnimeReaction = (props) => {
           (each, index) =>
             (!props.viewmore || index <= 5) && (
               <Reaction
+                otherUser={() =>
+                  history.push(
+                    '/others-library/' + each.userId._id + '/library'
+                  )
+                }
                 clicked={() => history.push('/media-reaction/' + each._id)}
                 key={each._id.toString()}
                 id={each.userId._id}
