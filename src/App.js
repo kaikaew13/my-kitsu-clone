@@ -11,6 +11,7 @@ import Backdrop from './components/UI/backdrop';
 import EachAnime from './containers/each-anime/each-anime';
 import Admin from './containers/admin/admin';
 import MediaReaction from './containers/media-reaction/media-reaction';
+import onEvents from './socket';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -84,25 +85,29 @@ function App(props) {
   useEffect(() => {
     const socket = io(URL);
     setSocket(socket);
-    socket.on('post-reaction', (data) => {
-      // console.log(data);
-      setSocketStatus((prevState) => !prevState);
-    });
-    socket.on('put-reaction', (data) =>
-      setSocketStatus((prevState) => !prevState)
-    );
-    socket.on('follow-user-sender', (message) => {
-      setSocketStatus((prevState) => !prevState);
-    });
-    socket.on('follow-user-receiver', (message) => {
-      setSocketStatus((prevState) => !prevState);
-    });
-    socket.on('unfollow-user-sender', (message) =>
-      setSocketStatus((prevState) => !prevState)
-    );
-    socket.on('unfollow-user-receiver', (message) =>
-      setSocketStatus((prevState) => !prevState)
-    );
+    onEvents(socket, setSocketStatus);
+    // socket.on('post-reaction', (data) => {
+    //   // console.log(data);
+    //   setSocketStatus((prevState) => !prevState);
+    // });
+    // socket.on('put-reaction', (data) =>
+    //   setSocketStatus((prevState) => !prevState)
+    // );
+    // socket.on('delete-reaction', (message) =>
+    //   setSocketStatus((prevState) => !prevState)
+    // );
+    // socket.on('follow-user-sender', (message) => {
+    //   setSocketStatus((prevState) => !prevState);
+    // });
+    // socket.on('follow-user-receiver', (message) => {
+    //   setSocketStatus((prevState) => !prevState);
+    // });
+    // socket.on('unfollow-user-sender', (message) =>
+    //   setSocketStatus((prevState) => !prevState)
+    // );
+    // socket.on('unfollow-user-receiver', (message) =>
+    //   setSocketStatus((prevState) => !prevState)
+    // );
     setLoading();
     const time = localStorage.getItem('jwt-expire-time');
     // console.log(new Date(time).getTime());
