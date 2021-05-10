@@ -12,6 +12,7 @@ const PATH = 'media-reaction';
 const MediaReaction = (props) => {
   const { match, setNav } = props;
   const [reaction, setReaction] = useState(null);
+  const [preventDoubleClick, setPreventDoubleClick] = useState(false);
 
   useEffect(() => {
     setNav(PATH);
@@ -27,6 +28,7 @@ const MediaReaction = (props) => {
   }, [match.params.reactionId, setNav]);
 
   const followHandler = async () => {
+    setPreventDoubleClick(true);
     const res = await fetch(URL + '/user/follow-user', {
       method: 'PUT',
       headers: {
@@ -81,7 +83,9 @@ const MediaReaction = (props) => {
           <button
             className="follow-btn small-center"
             disabled={self}
-            onClick={followHandler}
+            onClick={() =>
+              !preventDoubleClick ? followHandler() : console.log('clicked')
+            }
           >
             {self ? "Hey, that's you!" : buttonText}
           </button>
