@@ -25,7 +25,7 @@
   padding: 8px 0;
   width: 35%;
   top: -53%;
-  left: 36%;
+  left: 120px;
   font-size: 12px;
 }
 .small-center:disabled {
@@ -38,8 +38,10 @@
 .user-username {
   color: white;
   position: relative;
+  width: 100px;
   top: -50%;
-  left: 36%;
+  left: 120px;
+  z-index: 1;
 }
 .user-username:hover {
   cursor: pointer;
@@ -58,4 +60,12 @@
   position: relative;
   top: -50px;
   left: 6%;
+}
+
+@media screen and (max-width: 1000px) {
+  .m-r-user-container {
+    width: 56%;
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
 }
