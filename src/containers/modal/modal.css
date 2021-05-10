@@ -8,7 +8,7 @@
   transform: translate(-50%, 6%);
   border-radius: 2px;
   background: #f7f7f7;
-  z-index: 15;
+  z-index: 20;
   -webkit-animation-name: animateBottom;
   -webkit-animation-duration: 0.4s;
   animation-name: animateBottom;

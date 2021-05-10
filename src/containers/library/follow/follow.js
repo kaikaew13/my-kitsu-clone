@@ -9,6 +9,7 @@ import '../../home/section/section.css';
 const URL = process.env.REACT_APP_URL;
 
 const Follow = (props) => {
+  console.log(props.curUser);
   const [preventDoubleClick, setPreventDoubleClick] = useState(false);
 
   const followHandler = async (targetUserId, buttonText) => {
@@ -35,7 +36,18 @@ const Follow = (props) => {
         const found = props.user.following.find(
           (eachUser) => eachUser._id.toString() === each._id.toString()
         );
-        if (props.page === 'following' || found) buttonText = 'Unfollow';
+        let found2 = false;
+        let self = false;
+        if (props.curUser) {
+          found2 = props.curUser.following.find(
+            (eachUser) => eachUser._id.toString() === each._id.toString()
+          );
+          if (each._id.toString() === props.curUser.id.toString()) self = true;
+        }
+
+        if (props.page === 'following' || found || found2)
+          buttonText = 'Unfollow';
+        if (self) buttonText = "Hey, that's you!";
         return (
           <FollowItem
             key={each._id}
@@ -46,6 +58,7 @@ const Follow = (props) => {
                 ? followHandler(each._id, buttonText)
                 : console.log('clicked')
             }
+            self={self}
           />
         );
       })}

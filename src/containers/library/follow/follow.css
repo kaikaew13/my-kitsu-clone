@@ -75,6 +75,11 @@
   padding: 10px 0;
   border-radius: 4px;
 }
+
+.follow-btn[disabled] {
+  pointer-events: none;
+  background-color: rgb(180, 180, 180);
+}
 .follow-btn:hover {
   cursor: pointer;
   background: #19b698;

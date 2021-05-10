@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
 import LibraryHeader from '../library/library-header/library-header';
@@ -82,7 +83,11 @@ const OthersLibrary = (props) => {
                           animelist={Object.values(animelist)}
                         />
                       ) : each === 'followers' || each === 'following' ? (
-                        <Follow user={user} page={each} />
+                        <Follow
+                          user={user}
+                          curUser={props.curUser}
+                          page={each}
+                        />
                       ) : each === 'reactions' ? (
                         <UserReaction user={user} animelist={animelist} />
                       ) : null}
@@ -98,7 +103,14 @@ const OthersLibrary = (props) => {
     );
   }
 
-  return loading ? <h1>Loading...</h1> : library;
+  return loading || props.curLoading ? <h1>Loading...</h1> : library;
 };
 
-export default OthersLibrary;
+const mapStateToProps = (state) => {
+  return {
+    curUser: state.user.user,
+    curLoading: state.webGeneral.loading,
+  };
+};
+
+export default connect(mapStateToProps)(OthersLibrary);

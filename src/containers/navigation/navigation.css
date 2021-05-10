@@ -10,7 +10,7 @@
   align-items: center;
   margin-bottom: 30px;
   transition: all 3s;
-  z-index: 10;
+  z-index: 13;
 }
 .nav-container:hover {
   background: #402f3f;
