@@ -103,7 +103,7 @@
   width: 160px;
   height: fit-content;
   border-radius: 4px;
-  z-index: 15;
+  z-index: 19;
 }
 .dropdown-content p {
   height: fit-content;

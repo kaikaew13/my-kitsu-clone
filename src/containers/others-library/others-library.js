@@ -23,10 +23,11 @@ const OthersLibrary = (props) => {
     'groups',
   ];
 
-  const { match } = props;
+  const { match, setNav } = props;
   const PATH = 'others-library/' + match.params.otherUserId;
 
   useEffect(() => {
+    setNav(PATH);
     (async () => {
       const res = await fetch(
         URL + '/get-other-user/' + match.params.otherUserId
@@ -50,7 +51,7 @@ const OthersLibrary = (props) => {
       setOtherAnimelist(animelist);
       setLoading(false);
     })();
-  }, [match.params.otherUserId]);
+  }, [match.params.otherUserId, setNav, PATH]);
 
   let library = null;
   let user = null;
@@ -86,6 +87,7 @@ const OthersLibrary = (props) => {
                         <Follow
                           user={user}
                           curUser={props.curUser}
+                          other={true}
                           page={each}
                         />
                       ) : each === 'reactions' ? (
@@ -113,4 +115,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(OthersLibrary);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OthersLibrary);

@@ -33,9 +33,13 @@ const Follow = (props) => {
     <div className="animelist-section follow-section">
       {props.user[props.page].map((each) => {
         let buttonText = 'Follow';
-        const found = props.user.following.find(
-          (eachUser) => eachUser._id.toString() === each._id.toString()
-        );
+        let found = false;
+        if (!props.other) {
+          found = props.user.following.find(
+            (eachUser) => eachUser._id.toString() === each._id.toString()
+          );
+        }
+
         let found2 = false;
         let self = false;
         if (props.curUser) {
@@ -45,7 +49,7 @@ const Follow = (props) => {
           if (each._id.toString() === props.curUser.id.toString()) self = true;
         }
 
-        if (props.page === 'following' || found || found2)
+        if ((props.page === 'following' && !props.other) || found || found2)
           buttonText = 'Unfollow';
         if (self) buttonText = "Hey, that's you!";
         return (
