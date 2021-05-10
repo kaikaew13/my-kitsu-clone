@@ -60,6 +60,13 @@ const MediaReaction = (props) => {
   ) : (
     <div className="reaction-section" style={{ width: '65%', display: 'flex' }}>
       <UserEachReaction
+        clicked={() =>
+          props.openModal({
+            title: reaction.animeId.title,
+            id: reaction._id,
+            reactionMessage: reaction.reactionMessage,
+          })
+        }
         self={self}
         wider={true}
         upvote={reaction.upvote}
@@ -105,6 +112,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
+    openModal: (payload) =>
+      dispatch({
+        type: 'OPEN_MODAL',
+        which: 'reaction-modal',
+        payload: payload,
+      }),
   };
 };
 

@@ -1,5 +1,6 @@
 .reaction-section {
   width: 84%;
+  z-index: 10;
 }
 
 .user-reaction-container {
@@ -42,8 +43,10 @@
 }
 .user-reaction-dropdown {
   color: #999;
+  z-index: 15;
 }
-.user-reaction-dropdown:hover {
+.user-reaction-dropdown:hover,
+.user-reaction-dropdown:focus {
   color: #f75239;
   cursor: pointer;
 }

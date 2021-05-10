@@ -7,7 +7,9 @@ const URL = process.env.REACT_APP_URL;
 const WORD_LIMIT = 140;
 
 const ReactionModal = (props) => {
-  const [reactionMessage, setReactionMessage] = useState('');
+  const [reactionMessage, setReactionMessage] = useState(
+    props.payload.reactionMessage ? props.payload.reactionMessage : ''
+  );
   let btnClass = 'reaction-post-button';
   if (reactionMessage.length > 0 && reactionMessage.length <= WORD_LIMIT)
     btnClass += ' success';

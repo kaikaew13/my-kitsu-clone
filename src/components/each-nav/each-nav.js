@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import DropdownContent from './dropdown-content/dropdown-content';
 import Backdrop from '../UI/backdrop';
 import '../../containers/navigation/navigation.css';
+import '../../containers/library/user-reaction/user-reaction.css';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -57,6 +58,7 @@ const EachNav = (props) => {
 
   let btnClass = 'drop-btn';
   if (dropdown) btnClass += ' dropdown-content-show';
+  if (props.mediaReaction) btnClass += ' user-reaction-dropdown';
 
   return props.dropdown ? (
     <React.Fragment>
@@ -72,7 +74,13 @@ const EachNav = (props) => {
         >
           {props.children}
         </button>
-        <div className="dropdown-content">
+        <div
+          className={
+            props.mediaReaction
+              ? 'dropdown-content for-reaction'
+              : 'dropdown-content'
+          }
+        >
           {props.dropdownList.map((each, index) => {
             return (
               <DropdownContent
