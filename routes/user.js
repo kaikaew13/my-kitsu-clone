@@ -15,5 +15,7 @@ router.put('/follow-user', isAuth, userController.followUser);
 router.put('/unfollow-user', isAuth, userController.unfollowUser);
 
 router.post('/post-reaction', isAuth, userController.postReaction);
+router.put('/put-reaction', isAuth, userController.putReaction);
+router.delete('/delete-reaction', isAuth, userController.deleteReaction);
 
 module.exports = router;

@@ -150,3 +150,54 @@ exports.postReaction = async (req, res, next) => {
     errorHandler(err, next);
   }
 };
+
+exports.putReaction = async (req, res, next) => {
+  const { reactionId, reactionMessage } = req.body;
+  try {
+    const reaction = await Reaction.findById(reactionId);
+    if (!reaction) {
+      throw new Error('invalid reaction id');
+    }
+    reaction.reactionMessage = reactionMessage;
+    const updatedReaction = await reaction.save();
+    getIo().emit('put-reaction', {
+      reaction: updatedReaction,
+    });
+    const message = 'updated reaction message successfully';
+    res.status(200).json({ message: message, reaction: updatedReaction });
+    // const anime = await Anime.findById(reaction.animeId.toString())
+    // if (!anime) throw new Error('invalid anime id');
+    // const user = await User.findById(req.userId)
+    // if (!user) throw new Error('no user found');
+    // const i = anime.reactionlist.findIndex(each => each.toString() === reactionId)
+    // if (i >= 0) anime.reactionlist[i] =
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
+
+exports.deleteReaction = async (req, res, next) => {
+  const reactionId = req.body.reactionId;
+  try {
+    const reaction = await Reaction.findByIdAndDelete(reactionId);
+    if (!reaction) throw new Error('failed to fetch reaction with this id');
+    const anime = await Anime.findById(reaction.animeId.toString());
+    if (!anime) throw new Error('failed to fetch anime with this id');
+    const user = await User.findById(req.userId);
+    const updatedAnimeReactionlist = anime.reactionlist.filter(
+      (each) => each.toString() !== reactionId
+    );
+    const updatedUserReactionlist = user.reactionlist.filter(
+      (each) => each.toString() !== reactionId
+    );
+    anime.reactionlist = updatedAnimeReactionlist;
+    user.reactionlist = updatedUserReactionlist;
+    await anime.save();
+    await user.save();
+
+    const message = 'deleted reaction successfully';
+    res.status(200).json({ message: message });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
