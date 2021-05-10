@@ -72,10 +72,11 @@ exports.followUser = async (req, res, next) => {
   targetUser.followers.push(user);
   await user.save();
   await targetUser.save();
-  getClientSockets()[req.userId].emit(
-    'follow-user-sender',
-    `followed ${targetUserId}`
-  );
+  if (getClientSockets()[req.userId])
+    getClientSockets()[req.userId].emit(
+      'follow-user-sender',
+      `followed ${targetUserId}`
+    );
   if (getClientSockets()[targetUserId])
     getClientSockets()[targetUserId].emit(
       'follow-user-receiver',
@@ -101,10 +102,11 @@ exports.unfollowUser = async (req, res, next) => {
     targetUser.followers = updatedFollowerArray;
     await user.save();
     await targetUser.save();
-    getClientSockets()[req.userId].emit(
-      'unfollow-user-sender',
-      `unfollowed ${targetUserId}`
-    );
+    if (getClientSockets()[req.userId])
+      getClientSockets()[req.userId].emit(
+        'unfollow-user-sender',
+        `unfollowed ${targetUserId}`
+      );
     if (getClientSockets()[targetUserId])
       getClientSockets()[targetUserId].emit(
         'unfollow-user-receiver',
