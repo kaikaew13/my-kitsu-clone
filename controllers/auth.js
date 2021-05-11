@@ -16,6 +16,20 @@ exports.signup = async (req, res, next) => {
   const { email, password, username } = req.body;
   const role = req.body.role ? req.body.role : 'user';
   try {
+    console.log(email);
+    let exist = await User.find({ email: email });
+    console.log(exist);
+    if (exist.length > 0) {
+      const err = new Error('email already exist');
+      err.statusCode = 409;
+      throw err;
+    }
+    exist = await User.find({ username: username });
+    if (exist.length > 0) {
+      const err = new Error('username already exist');
+      err.statusCode = 409;
+      throw err;
+    }
     const hasedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       email: email,
