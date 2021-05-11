@@ -20,79 +20,12 @@ const SectionContainer = (props) => {
   const [animeArr, setAnimeArr] = useState(null);
   const { match } = props;
 
-  // useEffect(() => {
-  //   let tmpAnimeArr = {};
-  //   STATUS.forEach((each) => {
-  //     fetch(URL + '/get-home/5/' + each, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     })
-  //       .then((res) => {
-  //         if (res.status === 500) throw new Error('failed to fetch');
-  //         return res.json();
-  //       })
-  //       .then((resData) => {
-  //         // setAnimeArr(
-  //         //   resData.animeList.map((each) => ({
-  //         //     url: URL + each.imageUrl,
-  //         //     id: each._id,
-  //         //   }))
-  //         console.log(resData);
-  //         if (resData.animelist)
-  //           tmpAnimeArr[each] = resData.animelist.map((each) => ({
-  //             url: URL + each.imageUrl,
-  //             id: each._id,
-  //           }));
-  //         console.log(tmpAnimeArr);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   });
-  //   setAnimeArr(tmpAnimeArr);
-  // }, []);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let tmpAnimeArr = {};
-  //     await STATUS.forEach(async (each) => {
-  //       const res = await fetch(URL + '/get-home/5/' + each);
-  //       if (res.status !== 200) throw new Error('failed to fetch home page');
-  //       const resData = await res.json();
-  //       tmpAnimeArr[each] = resData.animelist.map((eachAnime) => ({
-  //         url: URL + eachAnime.imageUrl,
-  //         id: eachAnime._id,
-  //       }));
-  //       console.log(tmpAnimeArr);
-  //     });
-  //     setAnimeArr(tmpAnimeArr);
-  //   })();
-  // }, []);
-
   useEffect(() => {
     let urls = [];
     let tmpAnimeArr = {};
     STATUS.forEach((each) => urls.push(URL + '/get-home/5/' + each));
-    Promise.all(
-      urls.map((u) => fetch(u))
-      // urls.map((u) =>
-      //   fetch(u)
-      //     .then((res) => res.json())
-      //     .then((res) => {
-      //       // console.log(res.animeList);
-      //       if (res.animeList) {
-      //         tmpAnimeArr[STATUS[i]] = res.animeList.map((each) => ({
-      //           url: URL + each.imageUrl,
-      //           id: each._id,
-      //         }));
-      //       }
-      //       i++;
-      //       return tmpAnimeArr;
-      //     })
-      // )
-    )
+    Promise.all(urls.map((u) => fetch(u)))
       .then((data) => {
-        // setAnimeArr(data);
-        // console.log(data);
         return Promise.all(data.map((d) => d.json()));
       })
       .then((data) => {
@@ -106,8 +39,6 @@ const SectionContainer = (props) => {
         });
         setAnimeArr(tmpAnimeArr);
       });
-
-    // console.log(tmpAnimeArr);
   }, []);
 
   const titleCase = (str) => {
@@ -118,7 +49,7 @@ const SectionContainer = (props) => {
     }
     return splitStr.join(' ');
   };
-  console.log(animeArr);
+  // console.log(animeArr);
   return (
     <div className="section-container-wrapper">
       <Switch>
@@ -138,18 +69,6 @@ const SectionContainer = (props) => {
                 ) : (
                   <h1>Loading...</h1>
                 )}
-                {/* {animeArr && Object.keys(animeArr).length > 0 ? (
-                  <Section animeData={animeArr['trending this week']}>
-                    Trending This Week
-                  </Section>
-                ) : (
-                  <h1>Loading</h1>
-                )} */}
-
-                {/* <Section animeData={animeArr}>Top Airing Anime</Section>
-                <Section animeData={animeArr}>Top Upcoming Anime</Section>
-                <Section animeData={animeArr}>Highest Rated Anime</Section>
-                <Section animeData={animeArr}>Most Popular Anime</Section> */}
               </React.Fragment>
             );
           }}

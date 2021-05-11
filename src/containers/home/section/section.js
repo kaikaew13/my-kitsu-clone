@@ -6,7 +6,6 @@ import EachSection from '../../../components/home/each-section/each-section';
 import './section.css';
 
 const Section = (props) => {
-  console.log(props);
   return (
     <section>
       <h6>{props.children}</h6>
