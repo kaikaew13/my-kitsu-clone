@@ -5,14 +5,20 @@ const User = require('../models/user');
 
 exports.getHome = async (req, res, next) => {
   let limit = req.params.limit === 'no-limit' ? null : +req.params.limit;
-  const status = 'none';
+  let status = req.params.status === 'all' ? null : req.params.status;
+  // console.log(status);
   try {
-    const animeList = await Anime.find({ status: status }).limit(limit);
+    const animeList = status
+      ? await Anime.find({ status: status }).limit(limit)
+      : await Anime.find().limit(limit);
     if (!animeList) {
       throw new Error('could not fetch from database');
     }
     const message = 'fetched anime from db successfully';
-    res.status(200).json({ message: message, animeList: animeList });
+    // console.log(animeList);
+    res
+      .status(200)
+      .json({ message: message, animeList: animeList, status: status });
   } catch (err) {
     errorHandler(err, next);
   }
