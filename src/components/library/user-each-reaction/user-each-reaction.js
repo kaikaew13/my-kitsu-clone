@@ -8,7 +8,14 @@ const UserEachReaction = (props) => (
   <div className="user-reaction-items" style={props.wider && { width: '56%' }}>
     <div className="user-reaction-reaction">
       <div className="user-reaction-header">
-        <div className="user-reaction-upvote">
+        <div
+          className={
+            props.disabledUpvote
+              ? 'user-reaction-upvote disabled-upvote-div'
+              : 'user-reaction-upvote'
+          }
+          onClick={props.upvoted}
+        >
           <span>▲</span> <span>{props.upvote}</span>
         </div>
         {props.self && (

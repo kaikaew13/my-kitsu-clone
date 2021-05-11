@@ -15,6 +15,7 @@ const MediaReaction = (props) => {
   const history = useHistory();
   const [reaction, setReaction] = useState(null);
   const [preventDoubleClick, setPreventDoubleClick] = useState(false);
+  const [upvote, setUpvote] = useState(null);
 
   useEffect(() => {
     setNav(PATH);
@@ -27,7 +28,46 @@ const MediaReaction = (props) => {
       // console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, [match.params.reactionId, setNav, props.socket]);
+  }, [match.params.reactionId, setNav, props.socket, upvote]);
+
+  const upvoteHandler = async (id) => {
+    setPreventDoubleClick(true);
+    if (props.upvotedlist[id]) {
+      const res = await fetch(URL + '/user/un-upvote', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + props.jwt,
+        },
+        body: JSON.stringify({
+          reactionId: id,
+        }),
+      });
+      if (res.status !== 200) throw new Error('failed to un-upvote');
+      const resData = await res.json();
+      // console.log(resData);
+      setUpvote(resData.upvote);
+    } else {
+      const res = await fetch(URL + '/user/upvote', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + props.jwt,
+        },
+        body: JSON.stringify({
+          reactionId: id,
+        }),
+      });
+      if (res.status !== 200) throw new Error('failed to upvote');
+      const resData = await res.json();
+      // console.log(resData);
+      setUpvote(resData.upvote);
+    }
+    setTimeout(() => {
+      // console.log('prevent off..');
+      setPreventDoubleClick(false);
+    }, 2000);
+  };
 
   const followHandler = async (targetUserId, buttonText) => {
     setPreventDoubleClick(true);
@@ -86,10 +126,22 @@ const MediaReaction = (props) => {
             reactionMessage: reaction.reactionMessage,
           })
         }
+        upvoted={() =>
+          !props.jwt
+            ? props.openModal()
+            : !preventDoubleClick
+            ? upvoteHandler(reaction._id)
+            : console.log('prevent double click...')
+        }
+        upvote={upvote !== null ? upvote : reaction.upvote}
+        disabledUpvote={
+          props.jwt && props.upvotedlist && props.upvotedlist[reaction._id]
+            ? true
+            : false
+        }
         deleted={() => deleteReactionHandler(reaction._id)}
         self={self}
         wider={true}
-        upvote={reaction.upvote}
         reactionMessage={reaction.reactionMessage}
         title={reaction.animeId.title}
         url={URL + reaction.animeId.imageUrl}
@@ -143,18 +195,22 @@ const mapStateToProps = (state) => {
     user: state.user.user,
     jwt: state.auth.jwt,
     socket: state.socket.socket,
+    upvotedlist: state.user.upvotedlist,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setNav: (path) => dispatch({ type: 'SET_NAV', path: path }),
-    openModal: (payload) =>
-      dispatch({
-        type: 'OPEN_MODAL',
-        which: 'reaction-modal',
-        payload: payload,
-      }),
+    openModal: (payload) => {
+      if (payload)
+        dispatch({
+          type: 'OPEN_MODAL',
+          which: 'reaction-modal',
+          payload: payload,
+        });
+      else dispatch({ type: 'OPEN_MODAL', which: 'login-modal' });
+    },
   };
 };
 

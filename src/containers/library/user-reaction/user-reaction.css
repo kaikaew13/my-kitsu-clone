@@ -62,6 +62,10 @@
   color: white;
   font-size: 13px;
 }
+.disabled-upvote-div {
+  background: #f75239;
+  border-color: #f75239;
+}
 .user-reaction-upvote:hover {
   border: 1px solid white;
   cursor: pointer;
