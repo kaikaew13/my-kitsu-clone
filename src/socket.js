@@ -21,5 +21,9 @@ const onEvents = (socket, setSocketStatus) => {
   socket.on('unfollow-user-receiver', (message) =>
     setSocketStatus((prevState) => !prevState)
   );
+  socket.on('upvote', (message) => setSocketStatus((prevState) => !prevState));
+  socket.on('un-upvote', (message) =>
+    setSocketStatus((prevState) => !prevState)
+  );
 };
 export default onEvents;

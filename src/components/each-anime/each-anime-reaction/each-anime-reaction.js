@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -9,6 +9,12 @@ const URL = process.env.REACT_APP_URL;
 
 const EachAnimeReaction = (props) => {
   const history = useHistory();
+
+  const [upvote, setUpvote] = useState(null);
+
+  useEffect(() => {
+    console.log('use effect...');
+  }, [upvote]);
 
   const upvoteHandler = async (id) => {
     if (props.upvotedlist[id]) {
@@ -25,6 +31,7 @@ const EachAnimeReaction = (props) => {
       if (res.status !== 200) throw new Error('failed to un-upvote');
       const resData = await res.json();
       console.log(resData);
+      setUpvote(resData.upvote);
     } else {
       const res = await fetch(URL + '/user/upvote', {
         method: 'PUT',
@@ -39,6 +46,7 @@ const EachAnimeReaction = (props) => {
       if (res.status !== 200) throw new Error('failed to upvote');
       const resData = await res.json();
       console.log(resData);
+      setUpvote(resData.upvote);
     }
   };
 
@@ -130,7 +138,7 @@ const EachAnimeReaction = (props) => {
                 id={each.userId._id}
                 username={each.userId.username}
                 reactionMessage={each.reactionMessage}
-                upvote={each.upvote}
+                upvote={upvote !== null ? upvote : each.upvote}
                 disabledUpvote={
                   props.jwt && props.upvotedlist[each._id] ? true : false
                 }
