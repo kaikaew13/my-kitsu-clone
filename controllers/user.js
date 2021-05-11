@@ -3,6 +3,7 @@ const { errorHandler } = require('../helper');
 const Anime = require('../models/anime');
 const Reaction = require('../models/reaction');
 const { getIo, getClientSockets } = require('../socket');
+const { findByIdAndUpdate } = require('../models/anime');
 
 exports.addToLibrary = async (req, res, next) => {
   const { animeId, status } = req.body;
@@ -198,6 +199,67 @@ exports.deleteReaction = async (req, res, next) => {
     getIo().emit('delete-reaction', 'user deleted a reaction');
     const message = 'deleted reaction successfully';
     res.status(200).json({ message: message });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
+
+exports.putUpvote = async (req, res, next) => {
+  const reactionId = req.body.reactionId;
+  try {
+    const reaction = await Reaction.findByIdAndUpdate(
+      reactionId,
+      {
+        $inc: {
+          upvote: 1,
+        },
+      },
+      { new: true }
+    );
+    if (!reaction) throw new Error('failed to find reaction with this id');
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      {
+        $push: {
+          upvotedlist: reactionId,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    const message = 'upvoted a reaction';
+    res.status(200).json({ message: message, user: user });
+  } catch (err) {
+    errorHandler(err, next);
+  }
+};
+
+exports.putUnUpvote = async (req, res, next) => {
+  const reactionId = req.body.reactionId;
+  console.log(reactionId);
+  try {
+    const reaction = await Reaction.findByIdAndUpdate(
+      reactionId,
+      {
+        $inc: {
+          upvote: -1,
+        },
+      },
+      { new: true }
+    );
+    if (!reaction) throw new Error('failed to find reaction with this id');
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      {
+        $pull: {
+          upvotedlist: reactionId,
+        },
+      },
+      { new: true }
+    );
+    const message = 'un-upvoted successfully';
+    res.status(200).json({ message: message, user: user });
   } catch (err) {
     errorHandler(err, next);
   }

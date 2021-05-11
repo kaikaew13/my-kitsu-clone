@@ -18,4 +18,7 @@ router.post('/post-reaction', isAuth, userController.postReaction);
 router.put('/put-reaction', isAuth, userController.putReaction);
 router.delete('/delete-reaction', isAuth, userController.deleteReaction);
 
+router.put('/upvote', isAuth, userController.putUpvote);
+router.put('/un-upvote', isAuth, userController.putUnUpvote);
+
 module.exports = router;
