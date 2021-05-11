@@ -17,6 +17,7 @@ const EachAnimeReaction = (props) => {
   useEffect(() => {}, [upvote]);
 
   const upvoteHandler = async (id) => {
+    console.log(id);
     setPreventDoubleClick(true);
     if (props.upvotedlist[id]) {
       const res = await fetch(URL + '/user/un-upvote', {
@@ -54,58 +55,6 @@ const EachAnimeReaction = (props) => {
       setPreventDoubleClick(false);
     }, 2000);
   };
-
-  // const [reactionlist, setReactionlist] = useState([]);
-
-  // const addReactionList = useCallback(
-  //   (reaction) => {
-  //     const newReaction = {
-  //       userId: reaction.userId,
-  //       username: 'socket',
-  //       reactionMessage: reaction.reactionMessage,
-  //       upvote: reaction.upvote,
-  //       reactionId: reaction._id.toString(),
-  //     };
-  //     setReactionlist([...reactionlist, newReaction]);
-  //   },
-  //   [reactionlist]
-  // );
-
-  // useEffect(() => {
-  //   props.socket.on('post-reaction', ({ reaction }) => {
-  //     // const newReaction = {
-  //     //   userId: reaction.userId,
-  //     //   username: 'socket',
-  //     //   reactionMessage: reaction.reactionMessage,
-  //     //   upvote: reaction.upvote,
-  //     //   reactionId: reaction._id.toString(),
-  //     // };
-  //     // setReactionlist([...reactionlist, newReaction]);
-  //   });
-
-  //   (async () => {
-  //     const res = await fetch(URL + '/get-reaction/' + props.id, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     if (res.status !== 200) throw new Error('failed to fetch reactions');
-  //     const resData = await res.json();
-  //     // console.log(resData);
-  //     setReactionlist(
-  //       resData.reactions.map((each) => {
-  //         return {
-  //           userId: each.userId._id.toString(),
-  //           username: each.userId.username,
-  //           reactionMessage: each.reactionMessage,
-  //           upvote: each.upvote,
-  //           reactionId: each._id.toString(),
-  //         };
-  //       })
-  //     );
-  //   })();
-  // }, [props.id, props.socket]);
 
   return props.reactionlist.length > 0 ? (
     <div className="reaction-container">
@@ -147,7 +96,8 @@ const EachAnimeReaction = (props) => {
                 id={each.userId._id}
                 username={each.userId.username}
                 reactionMessage={each.reactionMessage}
-                upvote={upvote !== null ? upvote : each.upvote}
+                // upvote={upvote !== null ? upvote : each.upvote}
+                upvote={each.upvote}
                 disabledUpvote={
                   props.jwt && props.upvotedlist && props.upvotedlist[each._id]
                     ? true
