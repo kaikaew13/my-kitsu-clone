@@ -228,8 +228,15 @@ exports.putUpvote = async (req, res, next) => {
         new: true,
       }
     );
+    if (getClientSockets()[req.userId])
+      getClientSockets()[req.userId].emit(
+        'upvote',
+        `upvoted a reaction ${reactionId}`
+      );
     const message = 'upvoted a reaction';
-    res.status(200).json({ message: message, user: user });
+    res
+      .status(200)
+      .json({ message: message, user: user, upvote: reaction.upvote });
   } catch (err) {
     errorHandler(err, next);
   }
@@ -258,8 +265,15 @@ exports.putUnUpvote = async (req, res, next) => {
       },
       { new: true }
     );
+    if (getClientSockets()[req.userId])
+      getClientSockets()[req.userId].emit(
+        'un-upvote',
+        `un-upvoted a reaction ${reactionId}`
+      );
     const message = 'un-upvoted successfully';
-    res.status(200).json({ message: message, user: user });
+    res
+      .status(200)
+      .json({ message: message, user: user, upvote: reaction.upvote });
   } catch (err) {
     errorHandler(err, next);
   }
