@@ -48,8 +48,9 @@ const EachSection = (props) => {
       }),
     });
     if (res.status !== 200) {
-      console.log(res);
-      throw new Error('failed to add to library');
+      // throw new Error('failed to add to library');
+      alert('action failed');
+      return;
     } else {
       await res.json();
       window.location.reload();
@@ -86,7 +87,7 @@ const EachSection = (props) => {
                       ? history.push(`/admin?${each}=${props.id}`)
                       : !preventDoubleClick
                       ? addToLibrary(props.id, each)
-                      : console.log('prevent double click')
+                      : null
                   }
                 >
                   {each}

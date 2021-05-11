@@ -25,7 +25,11 @@ const LoginModal = (props) => {
         password: password,
       }),
     });
-    if (res.status !== 200) throw new Error('failed to login');
+    if (res.status !== 200) {
+      // throw new Error('failed to login');
+      alert('failed to login');
+      return;
+    }
     const data = await res.json();
     const expireTime = new Date().getTime() + 1000 * 60 * 60;
     localStorage.setItem('jwt', data.token);

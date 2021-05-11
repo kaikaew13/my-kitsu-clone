@@ -32,8 +32,12 @@ const OthersLibrary = (props) => {
       const res = await fetch(
         URL + '/get-other-user/' + match.params.otherUserId
       );
-      if (res.status !== 200)
-        throw new Error('failed to fetch this user library');
+      if (res.status !== 200) {
+        // throw new Error('failed to fetch this user library');
+        alert('failed to fetch this user library');
+        window.location.replace('/');
+        return;
+      }
       const resData = await res.json();
       const user = resData.user;
       setOtherUser({

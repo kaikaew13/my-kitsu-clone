@@ -25,9 +25,13 @@ const Follow = (props) => {
       },
       body: JSON.stringify({ targetUserId: targetUserId }),
     });
-    if (res.status !== 200) throw new Error('failed to follow user');
-    const resData = await res.json();
-    console.log(resData);
+    if (res.status !== 200) {
+      // throw new Error('failed to follow user');
+      alert('action failed');
+      return;
+    }
+    await res.json();
+    // console.log(resData);
   };
 
   return props.user[props.page].length > 0 ? (
@@ -62,9 +66,7 @@ const Follow = (props) => {
             }
             buttonText={buttonText}
             clicked={() =>
-              !preventDoubleClick
-                ? followHandler(each._id, buttonText)
-                : console.log('prevent double click...')
+              !preventDoubleClick ? followHandler(each._id, buttonText) : null
             }
             self={self}
           />

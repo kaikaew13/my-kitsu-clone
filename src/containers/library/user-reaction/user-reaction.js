@@ -22,9 +22,13 @@ const UserReaction = (props) => {
         reactionId: reactionId,
       }),
     });
-    if (res.status !== 200) throw new Error('failed to delete the reaction');
-    const resData = await res.json();
-    console.log(resData);
+    if (res.status !== 200) {
+      // throw new Error('failed to delete a reaction');
+      alert('action failed');
+      return;
+    }
+    await res.json();
+    // console.log(resData);
   };
 
   return (

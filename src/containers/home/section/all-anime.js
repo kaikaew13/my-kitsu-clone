@@ -17,11 +17,15 @@ const AllAnime = (props) => {
       },
     })
       .then((res) => {
-        if (res.status !== 200) throw new Error('failed to fetch');
+        if (res.status !== 200) {
+          // throw new Error('failed fetch home page');
+          alert('failed to fetch from server please try again later...');
+          return;
+        }
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
+        // console.log(resData);
         setAnimeArr(
           resData.animeList.map((each) => ({
             url: URL + each.imageUrl,
@@ -29,7 +33,7 @@ const AllAnime = (props) => {
           }))
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert('failed to load please try again later'));
   }, []);
 
   return (

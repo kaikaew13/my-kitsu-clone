@@ -42,7 +42,11 @@ const SignupModal = (props) => {
         password: password.val,
       }),
     });
-    if (res.status !== 201) throw new Error('failed to signup');
+    if (res.status !== 201) {
+      // throw new Error('failed to signup');
+      alert('failed to signup (email or username may already exist)');
+      return;
+    }
     await res.json();
     props.switchToLogin();
   };

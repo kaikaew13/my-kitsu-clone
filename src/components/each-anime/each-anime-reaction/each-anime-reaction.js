@@ -17,7 +17,6 @@ const EachAnimeReaction = (props) => {
   useEffect(() => {}, [upvote]);
 
   const upvoteHandler = async (id) => {
-    console.log(id);
     setPreventDoubleClick(true);
     if (props.upvotedlist[id]) {
       const res = await fetch(URL + '/user/un-upvote', {
@@ -30,9 +29,12 @@ const EachAnimeReaction = (props) => {
           reactionId: id,
         }),
       });
-      if (res.status !== 200) throw new Error('failed to un-upvote');
+      if (res.status !== 200) {
+        // throw new Error('failed to un-upvote');
+        alert('action failed');
+        return;
+      }
       const resData = await res.json();
-      console.log(resData);
       setUpvote(resData.upvote);
     } else {
       const res = await fetch(URL + '/user/upvote', {
@@ -45,9 +47,13 @@ const EachAnimeReaction = (props) => {
           reactionId: id,
         }),
       });
-      if (res.status !== 200) throw new Error('failed to upvote');
+      if (res.status !== 200) {
+        // throw new Error('failed to upvote');
+        alert('action failed');
+        return;
+      }
       const resData = await res.json();
-      console.log(resData);
+      // console.log(resData);
       setUpvote(resData.upvote);
     }
     setTimeout(() => {
@@ -90,7 +96,7 @@ const EachAnimeReaction = (props) => {
                     ? props.openModal()
                     : !preventDoubleClick
                     ? upvoteHandler(each._id)
-                    : console.log('prevent double click...')
+                    : null
                 }
                 key={each._id.toString()}
                 id={each.userId._id}

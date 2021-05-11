@@ -31,7 +31,12 @@ const EachAnime = (props) => {
           'Content-Type': 'application/json',
         },
       });
-      if (res.status !== 200) throw new Error('not a valid url');
+      if (res.status !== 200) {
+        // throw new Error('invalid url');
+        alert('invalid url');
+        window.location.replace('/');
+        return;
+      }
       const resData = await res.json();
       // console.log(resData.anime.reactionlist);
       setAnime(resData.anime);

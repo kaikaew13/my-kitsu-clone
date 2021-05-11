@@ -61,10 +61,16 @@ const Admin = (props) => {
       },
       body: form,
     });
-    if (method === 'POST' && res.status !== 201)
-      throw new Error('failed to add new anime');
-    if (method === 'PUT' && res.status !== 200)
-      throw new Error('failed to update an anime');
+    if (method === 'POST' && res.status !== 201) {
+      // throw new Error('failed to add an anime');
+      alert('action failed');
+      return;
+    }
+    if (method === 'PUT' && res.status !== 200) {
+      // throw new Error('failed to update an anime');
+      alert('action failed');
+      return;
+    }
     await res.json();
     history.push('/');
   };

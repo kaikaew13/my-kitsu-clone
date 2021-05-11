@@ -43,7 +43,11 @@ const MediaReaction = (props) => {
           reactionId: id,
         }),
       });
-      if (res.status !== 200) throw new Error('failed to un-upvote');
+      if (res.status !== 200) {
+        // throw new Error('failed to un-upvote');
+        alert('action failed');
+        return;
+      }
       const resData = await res.json();
       // console.log(resData);
       setUpvote(resData.upvote);
@@ -58,7 +62,11 @@ const MediaReaction = (props) => {
           reactionId: id,
         }),
       });
-      if (res.status !== 200) throw new Error('failed to upvote');
+      if (res.status !== 200) {
+        // throw new Error('failed to un-upvote');
+        alert('action failed');
+        return;
+      }
       const resData = await res.json();
       // console.log(resData);
       setUpvote(resData.upvote);
@@ -82,7 +90,11 @@ const MediaReaction = (props) => {
         targetUserId: targetUserId,
       }),
     });
-    if (res.status !== 200) throw new Error('failed to follow target user');
+    if (res.status !== 200) {
+      // throw new Error('failed to follow user');
+      alert('action failed');
+      return;
+    }
     await res.json();
 
     alert(buttonText + ' the targeted user');
@@ -98,7 +110,11 @@ const MediaReaction = (props) => {
       },
       body: JSON.stringify({ reactionId: reactionId }),
     });
-    if (res.status !== 200) throw new Error('failed to delete a reaction');
+    if (res.status !== 200) {
+      // throw new Error('failed to delete a post');
+      alert('action failed');
+      return;
+    }
     await res.json();
     // console.log(resData);
   };
@@ -131,7 +147,7 @@ const MediaReaction = (props) => {
             ? props.openModal()
             : !preventDoubleClick
             ? upvoteHandler(reaction._id)
-            : console.log('prevent double click...')
+            : null
         }
         upvote={upvote !== null ? upvote : reaction.upvote}
         disabledUpvote={
@@ -179,7 +195,7 @@ const MediaReaction = (props) => {
             onClick={() =>
               !preventDoubleClick
                 ? followHandler(reaction.userId._id, buttonText)
-                : console.log('prevent double click')
+                : null
             }
           >
             {self ? "Hey, that's you!" : buttonText}
