@@ -55,6 +55,7 @@ exports.getUser = async (req, res, next) => {
         username: user.username,
         role: user.role,
         reactionlist: user.reactionlist,
+        upvotedlist: user.upvotedlist,
       },
     });
   } catch (err) {

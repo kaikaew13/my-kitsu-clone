@@ -70,6 +70,15 @@ const userSchema = new Schema(
       ],
       default: [],
     },
+    upvotedlist: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Reaction',
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );
