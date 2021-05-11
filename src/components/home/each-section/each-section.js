@@ -12,6 +12,7 @@ const URL = process.env.REACT_APP_URL;
 const EachSection = (props) => {
   const history = useHistory();
   const [dropdown, setDropdown] = useState(false);
+  const [preventDoubleClick, setPreventDoubleClick] = useState(false);
   const dropdownList = [
     'Completed',
     'On Hold',
@@ -34,6 +35,7 @@ const EachSection = (props) => {
       props.toggleShowModal();
       return;
     }
+    setPreventDoubleClick(true);
     const res = await fetch(URL + '/user/add-to-library', {
       method: 'PUT',
       headers: {
@@ -80,9 +82,11 @@ const EachSection = (props) => {
                 <DropdownContent
                   key={index}
                   clicked={() =>
-                    each !== 'Edit'
+                    each === 'Edit'
+                      ? history.push(`/admin?${each}=${props.id}`)
+                      : !preventDoubleClick
                       ? addToLibrary(props.id, each)
-                      : history.push(`/admin?${each}=${props.id}`)
+                      : console.log('prevent double click')
                   }
                 >
                   {each}

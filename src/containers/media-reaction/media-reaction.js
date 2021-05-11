@@ -24,26 +24,29 @@ const MediaReaction = (props) => {
       );
       if (res.status !== 200) window.location.replace('/');
       const resData = await res.json();
-      console.log(resData);
+      // console.log(resData);
       setReaction(resData.reaction);
     })();
   }, [match.params.reactionId, setNav, props.socket]);
 
-  const followHandler = async () => {
+  const followHandler = async (targetUserId, buttonText) => {
     setPreventDoubleClick(true);
-    const res = await fetch(URL + '/user/follow-user', {
+    const endpoint = buttonText === 'Follow' ? 'follow-user' : 'unfollow-user';
+    const res = await fetch(URL + '/user/' + endpoint, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + props.jwt,
       },
       body: JSON.stringify({
-        targetUserId: reaction.userId._id,
+        targetUserId: targetUserId,
       }),
     });
     if (res.status !== 200) throw new Error('failed to follow target user');
     await res.json();
-    alert('followed the targeted user');
+
+    alert(buttonText + ' the targeted user');
+    setTimeout(() => setPreventDoubleClick(false), 1000);
   };
 
   const deleteReactionHandler = async (reactionId) => {
@@ -56,14 +59,14 @@ const MediaReaction = (props) => {
       body: JSON.stringify({ reactionId: reactionId }),
     });
     if (res.status !== 200) throw new Error('failed to delete a reaction');
-    const resData = await res.json();
-    console.log(resData);
+    await res.json();
+    // console.log(resData);
   };
 
   let loading = reaction ? false : true;
   let self;
   if (!loading) self = props.user && props.user.id === reaction.userId._id;
-  console.log(props);
+  // console.log(props);
   let buttonText = 'Follow';
   if (!loading && props.user && reaction) {
     const found = props.user.following.find(
@@ -122,7 +125,9 @@ const MediaReaction = (props) => {
             className="follow-btn small-center"
             disabled={self}
             onClick={() =>
-              !preventDoubleClick ? followHandler() : console.log('clicked')
+              !preventDoubleClick
+                ? followHandler(reaction.userId._id, buttonText)
+                : console.log('prevent double click')
             }
           >
             {self ? "Hey, that's you!" : buttonText}

@@ -11,12 +11,13 @@ const EachAnimeReaction = (props) => {
   const history = useHistory();
 
   const [upvote, setUpvote] = useState(null);
+  const [preventDoubleClick, setPreventDoubleClick] = useState(false);
+  // console.log('prevent double click', preventDoubleClick);
 
-  useEffect(() => {
-    console.log('use effect...');
-  }, [upvote]);
+  useEffect(() => {}, [upvote]);
 
   const upvoteHandler = async (id) => {
+    setPreventDoubleClick(true);
     if (props.upvotedlist[id]) {
       const res = await fetch(URL + '/user/un-upvote', {
         method: 'PUT',
@@ -48,6 +49,10 @@ const EachAnimeReaction = (props) => {
       console.log(resData);
       setUpvote(resData.upvote);
     }
+    setTimeout(() => {
+      // console.log('prevent off..');
+      setPreventDoubleClick(false);
+    }, 2000);
   };
 
   // const [reactionlist, setReactionlist] = useState([]);
@@ -132,7 +137,11 @@ const EachAnimeReaction = (props) => {
                 }
                 clicked={() => history.push('/media-reaction/' + each._id)}
                 upvoted={() =>
-                  !props.jwt ? props.openModal() : upvoteHandler(each._id)
+                  !props.jwt
+                    ? props.openModal()
+                    : !preventDoubleClick
+                    ? upvoteHandler(each._id)
+                    : console.log('prevent double click...')
                 }
                 key={each._id.toString()}
                 id={each.userId._id}
@@ -140,7 +149,9 @@ const EachAnimeReaction = (props) => {
                 reactionMessage={each.reactionMessage}
                 upvote={upvote !== null ? upvote : each.upvote}
                 disabledUpvote={
-                  props.jwt && props.upvotedlist[each._id] ? true : false
+                  props.jwt && props.upvotedlist && props.upvotedlist[each._id]
+                    ? true
+                    : false
                 }
               />
             )

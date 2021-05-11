@@ -64,7 +64,7 @@ const Follow = (props) => {
             clicked={() =>
               !preventDoubleClick
                 ? followHandler(each._id, buttonText)
-                : console.log('clicked')
+                : console.log('prevent double click...')
             }
             self={self}
           />
