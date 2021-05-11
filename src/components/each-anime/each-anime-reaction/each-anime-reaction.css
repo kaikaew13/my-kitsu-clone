@@ -36,6 +36,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .gray {
   color: rgb(153, 153, 153);
 }
@@ -45,6 +46,9 @@
   color: #e74c3c;
 }
 .upvote:hover .gray {
+  color: rgb(70, 70, 70);
+}
+.disabled-upvote {
   color: rgb(70, 70, 70);
 }
 

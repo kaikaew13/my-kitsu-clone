@@ -4,9 +4,13 @@ import './each-anime-reaction.css';
 
 const Reaction = (props) => (
   <div className="reaction-items">
-    <div className="upvote">
-      <div className="gray">▲</div>
-      <div className="gray">{props.upvote}</div>
+    <div className="upvote" onClick={props.upvoted}>
+      <div className={props.disabledUpvote ? 'gray disabled-upvote' : 'gray'}>
+        ▲
+      </div>
+      <div className={props.disabledUpvote ? 'gray disabled-upvote' : 'gray'}>
+        {props.upvote}
+      </div>
     </div>
     <div>
       <p

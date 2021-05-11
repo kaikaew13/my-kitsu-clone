@@ -5,8 +5,42 @@ import { useHistory } from 'react-router-dom';
 import Reaction from './reaction';
 import './each-anime-reaction.css';
 
+const URL = process.env.REACT_APP_URL;
+
 const EachAnimeReaction = (props) => {
   const history = useHistory();
+
+  const upvoteHandler = async (id) => {
+    if (props.upvotedlist[id]) {
+      const res = await fetch(URL + '/user/un-upvote', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + props.jwt,
+        },
+        body: JSON.stringify({
+          reactionId: id,
+        }),
+      });
+      if (res.status !== 200) throw new Error('failed to un-upvote');
+      const resData = await res.json();
+      console.log(resData);
+    } else {
+      const res = await fetch(URL + '/user/upvote', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + props.jwt,
+        },
+        body: JSON.stringify({
+          reactionId: id,
+        }),
+      });
+      if (res.status !== 200) throw new Error('failed to upvote');
+      const resData = await res.json();
+      console.log(resData);
+    }
+  };
 
   // const [reactionlist, setReactionlist] = useState([]);
 
@@ -59,7 +93,7 @@ const EachAnimeReaction = (props) => {
   //     );
   //   })();
   // }, [props.id, props.socket]);
-  console.log(props.reactionlist);
+
   return props.reactionlist.length > 0 ? (
     <div className="reaction-container">
       <div className="reaction-header">
@@ -67,7 +101,7 @@ const EachAnimeReaction = (props) => {
         {props.inLib && (
           <h5
             onClick={() =>
-              props.openReactionModal({
+              props.openModal({
                 title: props.title,
                 id: props.id.toString(),
               })
@@ -89,11 +123,17 @@ const EachAnimeReaction = (props) => {
                   )
                 }
                 clicked={() => history.push('/media-reaction/' + each._id)}
+                upvoted={() =>
+                  !props.jwt ? props.openModal() : upvoteHandler(each._id)
+                }
                 key={each._id.toString()}
                 id={each.userId._id}
                 username={each.userId.username}
                 reactionMessage={each.reactionMessage}
                 upvote={each.upvote}
+                disabledUpvote={
+                  props.jwt && props.upvotedlist[each._id] ? true : false
+                }
               />
             )
         )}
@@ -123,15 +163,25 @@ const EachAnimeReaction = (props) => {
   ) : null;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    openReactionModal: (payload) =>
-      dispatch({
-        type: 'OPEN_MODAL',
-        which: 'reaction-modal',
-        payload: payload,
-      }),
+    jwt: state.auth.jwt,
+    upvotedlist: state.user.upvotedlist,
   };
 };
 
-export default connect(null, mapDispatchToProps)(EachAnimeReaction);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: (payload) => {
+      if (payload)
+        dispatch({
+          type: 'OPEN_MODAL',
+          which: 'reaction-modal',
+          payload: payload,
+        });
+      else dispatch({ type: 'OPEN_MODAL', which: 'login-modal' });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EachAnimeReaction);
