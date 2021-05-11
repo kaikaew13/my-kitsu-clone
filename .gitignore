@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # dependencies
 /node_modules
@@ -22,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+=======
+node_modules
+nodemon.json
+>>>>>>> 65df9df6a70b020fb0b39b941417dae34d4748f6
