@@ -27,6 +27,7 @@ function App(props) {
     setAnimelist,
     unsetUser,
     setSocket,
+    setUpvotedlist,
   } = props;
   const logoutHandler = useCallback(() => {
     logout();
@@ -51,6 +52,7 @@ function App(props) {
       }
       const resData = await res.json();
       const user = resData.user;
+      console.log(resData);
 
       setUser({
         id: user._id,
@@ -66,13 +68,18 @@ function App(props) {
         if (each.animeId) animelist[each.animeId._id.toString()] = each;
       });
       setAnimelist(animelist);
+      const upvotedlist = {};
+      user.upvotedlist.forEach((each) => {
+        upvotedlist[each.toString()] = each.toString();
+      });
+      setUpvotedlist(upvotedlist);
       setJWT(jwt, expireTime);
       unsetLoading();
       setTimeout(() => {
         logoutHandler();
       }, time - new Date().getTime());
     },
-    [setJWT, unsetLoading, logoutHandler, setUser, setAnimelist]
+    [setJWT, unsetLoading, logoutHandler, setUser, setAnimelist, setUpvotedlist]
   );
 
   const setAutoLogout = useCallback(
@@ -161,6 +168,8 @@ const mapDispatchToProps = (dispatch) => {
     setUser: (user) => dispatch({ type: 'SET_USER', user: user }),
     setAnimelist: (animelist) =>
       dispatch({ type: 'SET_ANIMELIST', animelist: animelist }),
+    setUpvotedlist: (upvotedlist) =>
+      dispatch({ type: 'SET_UPVOTEDLIST', upvotedlist: upvotedlist }),
     unsetUser: () => dispatch({ type: 'UNSET_USER' }),
     setSocket: (socket) => dispatch({ type: 'SET_SOCKET', socket: socket }),
   };

@@ -59,7 +59,7 @@ const EachAnimeReaction = (props) => {
   //     );
   //   })();
   // }, [props.id, props.socket]);
-
+  console.log(props.reactionlist);
   return props.reactionlist.length > 0 ? (
     <div className="reaction-container">
       <div className="reaction-header">
