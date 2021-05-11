@@ -11,16 +11,17 @@ const AllAnime = (props) => {
   const [animeArr, setAnimeArr] = useState([]);
 
   useEffect(() => {
-    fetch(URL + '/get-home/no-limit', {
+    fetch(URL + '/get-home/no-limit/all', {
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((res) => {
-        if (res.status === 500) throw new Error('failed to fetch');
+        if (res.status !== 200) throw new Error('failed to fetch');
         return res.json();
       })
       .then((resData) => {
+        console.log(resData);
         setAnimeArr(
           resData.animeList.map((each) => ({
             url: URL + each.imageUrl,
