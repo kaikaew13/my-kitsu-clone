@@ -51,7 +51,7 @@ npm i
 REACT_APP_URL=http://localhost:<your port number>
 ```
 
-**note:** make sure your server and client PORT are not the same
+**note:** make sure your **server** and **client** PORT are not the same
 
 ### run the application :
 
