@@ -34,7 +34,6 @@ exports.postAnime = async (req, res, next) => {
     score: 10,
     genre: genre.split(','),
     imageUrl: imageUrl,
-    status: 'top upcoming anime',
   });
   try {
     await anime.save();
