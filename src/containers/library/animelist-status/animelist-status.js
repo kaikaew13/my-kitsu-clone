@@ -4,6 +4,7 @@ import './animelist-status.css';
 import '../animelist-section/animelist-section.css';
 
 const AnimelistStatus = (props) => {
+  // console.log(typeof props.all);
   let completeCnt = 0;
   let cwCnt = 0;
   let wtwCnt = 0;
@@ -33,31 +34,34 @@ const AnimelistStatus = (props) => {
   return (
     <div className="status">
       <div className="status-dropdown">
-        <p>User's Anime</p>
+        <p>{props.username}'s Anime</p>
         <p className="dropdown-arrow">▾</p>
       </div>
       <div className="status-option">
-        <div style={{ background: '#402f3f' }}>
+        <div style={{ background: '#402f3f' }} onClick={props.all}>
           <p>All Anime</p>
           <p>{props.animelist.length > 0 && props.animelist.length}</p>
         </div>
-        <div style={{ background: '#2c3e50' }}>
+        <div
+          style={{ background: '#2c3e50' }}
+          onClick={props.currentlyWatching}
+        >
           <p>Currently Watching</p>
           <p>{cwCnt > 0 && cwCnt}</p>
         </div>
-        <div style={{ background: '#2980b9' }}>
+        <div style={{ background: '#2980b9' }} onClick={props.wantToWatch}>
           <p>Want to Watch</p>
           <p>{wtwCnt > 0 && wtwCnt}</p>
         </div>
-        <div style={{ background: '#27ae60' }}>
+        <div style={{ background: '#27ae60' }} onClick={props.completed}>
           <p>Completed</p>
           <p>{completeCnt > 0 && completeCnt}</p>
         </div>
-        <div style={{ background: '#f39c12' }}>
+        <div style={{ background: '#f39c12' }} onClick={props.onHold}>
           <p>On Hold</p>
           <p>{holdCnt > 0 && holdCnt}</p>
         </div>
-        <div style={{ background: '#a12f31' }}>
+        <div style={{ background: '#a12f31' }} onClick={props.dropped}>
           <p>Dropped</p>
           <p>{droppedCnt > 0 && droppedCnt}</p>
         </div>

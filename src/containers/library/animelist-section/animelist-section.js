@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './animelist-section.css';
 import AnimelistStatus from '../animelist-status/animelist-status';
@@ -7,9 +7,44 @@ import AnimelistItem from '../../../components/library/animelist-item/animelist-
 const URL = process.env.REACT_APP_URL;
 
 const AnimelistSection = (props) => {
-  //   const animelist = [];
-  //   for (let i = 0; i < 6; i++)
-  //     animelist.push({ url: URL + '/images/aot.jpeg', status: 'Completed' });
+  const [animelist, setAnimelist] = useState(props.animelist);
+
+  const viewByStatus = {
+    all: () => {
+      setAnimelist(props.animelist);
+    },
+    currentlyWatching: () => {
+      const tmpAnimelist = props.animelist.filter(
+        (each) => each.status === 'Currently Watching'
+      );
+      setAnimelist(tmpAnimelist);
+    },
+    wantToWatch: () => {
+      const tmpAnimelist = props.animelist.filter(
+        (each) => each.status === 'Want to Watch'
+      );
+      setAnimelist(tmpAnimelist);
+    },
+    completed: () => {
+      const tmpAnimelist = props.animelist.filter(
+        (each) => each.status === 'Completed'
+      );
+      setAnimelist(tmpAnimelist);
+    },
+    onHold: () => {
+      const tmpAnimelist = props.animelist.filter(
+        (each) => each.status === 'On Hold'
+      );
+      setAnimelist(tmpAnimelist);
+    },
+    dropped: () => {
+      const tmpAnimelist = props.animelist.filter(
+        (each) => each.status === 'Dropped'
+      );
+      setAnimelist(tmpAnimelist);
+    },
+  };
+
   return (
     <div className="animelist-section">
       <div className="animelist-section-animelist">
@@ -25,8 +60,8 @@ const AnimelistSection = (props) => {
           </div>
         </section>
         <div className="animelist">
-          {props.animelist.length > 0 ? (
-            props.animelist.map((each) => (
+          {animelist.length > 0 ? (
+            animelist.map((each) => (
               <AnimelistItem
                 key={each.animeId._id}
                 id={each.animeId._id}
@@ -47,7 +82,11 @@ const AnimelistSection = (props) => {
           )}
         </div>
       </div>
-      <AnimelistStatus animelist={props.animelist} />
+      <AnimelistStatus
+        username={props.username}
+        animelist={props.animelist}
+        {...viewByStatus}
+      />
     </div>
   );
 };

@@ -50,6 +50,7 @@ const Library = (props) => {
                       />
                       {each === 'library' ? (
                         <AnimelistSection
+                          username={props.user.username}
                           animelist={Object.values(props.animelist)}
                         />
                       ) : each === 'followers' || each === 'following' ? (
