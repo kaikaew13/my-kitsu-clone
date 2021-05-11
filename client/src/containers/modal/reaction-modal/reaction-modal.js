@@ -10,12 +10,14 @@ const ReactionModal = (props) => {
   const [reactionMessage, setReactionMessage] = useState(
     props.payload.reactionMessage ? props.payload.reactionMessage : ''
   );
+  const [preventDoubleClick, setPreventDoubleClick] = useState(false);
 
   let btnClass = 'reaction-post-button';
   if (reactionMessage.length > 0 && reactionMessage.length <= WORD_LIMIT)
     btnClass += ' success';
 
   const onClickHandler = async (btnText) => {
+    setPreventDoubleClick(true);
     let endpoint = 'post-reaction';
     let method = 'POST';
     let body = {
@@ -46,6 +48,7 @@ const ReactionModal = (props) => {
     // const resData = await res.json();
     // console.log(resData);
     props.closeModal();
+    // setTimeout(() => setPreventDoubleClick(false), 1000);
   };
 
   let btnText = props.payload.reactionMessage ? 'Edit' : 'Post';
@@ -72,7 +75,7 @@ const ReactionModal = (props) => {
         disabled={
           reactionMessage.length === 0 || reactionMessage.length > WORD_LIMIT
         }
-        onClick={() => onClickHandler(btnText)}
+        onClick={() => (!preventDoubleClick ? onClickHandler(btnText) : null)}
       >
         {btnText}
       </button>

@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-
 import React, { useState } from 'react';
+
 import './signup-modal.css';
 
 const URL = process.env.REACT_APP_URL;
 
 const SignupModal = (props) => {
+  const [preventDoubleClick, setPreventDoubleClick] = useState(false);
   const [username, setUsername] = useState({
     val: '',
     touched: false,
@@ -31,6 +32,7 @@ const SignupModal = (props) => {
 
   const signupHandler = async (e) => {
     e.preventDefault();
+    setPreventDoubleClick(true);
     const res = await fetch(URL + '/auth/signup', {
       method: 'POST',
       headers: {
@@ -50,9 +52,15 @@ const SignupModal = (props) => {
     await res.json();
     props.switchToLogin();
   };
+  const blank = (e) => {
+    e.preventDefault();
+  };
 
   return (
-    <form className="modal-signup" onSubmit={signupHandler}>
+    <form
+      className="modal-signup"
+      onSubmit={!preventDoubleClick ? signupHandler : blank}
+    >
       <div className="modal-signup-items">
         <h6>What should we call you?</h6>
         <p>Your username should be original, being witty is optional.</p>

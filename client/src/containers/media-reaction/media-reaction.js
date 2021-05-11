@@ -74,7 +74,7 @@ const MediaReaction = (props) => {
     setTimeout(() => {
       // console.log('prevent off..');
       setPreventDoubleClick(false);
-    }, 2000);
+    }, 1000);
   };
 
   const followHandler = async (targetUserId, buttonText) => {

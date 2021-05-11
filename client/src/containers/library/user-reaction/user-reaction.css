@@ -20,6 +20,7 @@
   position: absolute;
   top: 0;
   width: 100%;
+  /* max-width: 230px; */
   height: 323px;
   object-fit: cover;
   border-radius: 4px;
@@ -29,6 +30,7 @@
 .user-reaction-reaction {
   position: relative;
   width: 100%;
+  /* max-width: 230px; */
   height: 323px;
   padding: 20px;
   z-index: 3;
