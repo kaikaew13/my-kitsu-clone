@@ -28,7 +28,7 @@ const MediaReaction = (props) => {
       // console.log(resData);
       setReaction(resData.reaction);
     })();
-  }, [match.params.reactionId, setNav, props.socket, upvote]);
+  }, [match.params.reactionId, setNav, upvote]);
 
   const upvoteHandler = async (id) => {
     setPreventDoubleClick(true);
@@ -69,6 +69,7 @@ const MediaReaction = (props) => {
       }
       const resData = await res.json();
       // console.log(resData);
+      console.log(resData);
       setUpvote(resData.upvote);
     }
     setTimeout(() => {
