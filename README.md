@@ -3,7 +3,7 @@
 A web app I made for practice using NodeJS and ReactJS, my first ever project.
 Built using MERN stack.
 
-**note:** I am still new to HTML + CSS, so this current version would not work on small screens.
+**note:** WIP, not responsive
 
 ### screenshots :
 
