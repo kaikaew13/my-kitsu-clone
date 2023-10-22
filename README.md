@@ -3,8 +3,6 @@
 A web app I made for practice using NodeJS and ReactJS, my first ever project.
 Built using MERN stack.
 
-**note:** WIP, not responsive
-
 ### screenshots :
 
 <img width="1432" alt="Screen Shot 2564-05-11 at 22 43 23" src="https://user-images.githubusercontent.com/77256757/117850422-79f43300-b2af-11eb-9719-d6428a2f3cfa.png">
